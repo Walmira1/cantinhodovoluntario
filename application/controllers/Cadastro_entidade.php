@@ -10,6 +10,7 @@ class Cadastro_entidade extends CI_Controller {
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
 		$this->load->model('entidade', 'entidade');
+                $this->load->model('Vaga', 'vaga');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 $this->load->library('upload');
                         
@@ -38,7 +39,9 @@ class Cadastro_entidade extends CI_Controller {
                     $this->load->view('home');
                     $this->load->view('includes/html_rodape_voluntario');
                 }
+               $this->load->view('includes/html_menu_entidade');
                $this->load->view('inicio_entidade',$data);
+               $this->load->view('includes/html_rodape_voluntario');
                
                                 
 	}
@@ -52,6 +55,7 @@ class Cadastro_entidade extends CI_Controller {
                 $dados = array(
                  "alerta" => $alerta
                 );
+                $dados['cidades'] = $this->db->get('cidades')->result();
                 $this->load->view('cadastro_entidade',$dados);
                 $this->load->view('includes/html_rodape_voluntario');
                                 
@@ -153,11 +157,10 @@ class Cadastro_entidade extends CI_Controller {
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
                 $this->load->view('cadastro_entidade');
-                $this->load->view('includes/html_rodape_voluntario');
-            
-                 redirect('cadastro_entidade/cadastro');
+                $this->load->view('includes/html_rodape_entidade');
+                redirect('cadastro_entidade/cadastro');
                  
-             }
+            }
             if ($this->form_validation->run('login_entidade_form')== TRUE) {
                  $email = $this->input->post('email_login');
                  $senha = $this->input->post('senha');
@@ -165,7 +168,7 @@ class Cadastro_entidade extends CI_Controller {
                 if ($this->entidade->do_login($email, $senha) == TRUE):
                     $query = $this->entidade->get_byemail($email)->row();
                     $dados = array(
-				'user_id' => $query->id_entidade,
+				'id_entidade' => $query->id_entidade,
 				'logotipo_entidade' => $query->logotipo_entidade,
                                 'upload_foto' => $query->upload_foto,
                                 'site_entidade' => $query->site_entidade,
@@ -173,7 +176,14 @@ class Cadastro_entidade extends CI_Controller {
 				'user_logado' => TRUE
                     );
                     $this->session->set_userdata($dados);
-                    redirect('cadastro_entidade/index/3');
+                    $id_entidade = null;
+                    $id_entidade = $query->id_entidade;
+                    $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                   // redirect('cadastro_entidade/index/3');
+                    $this->load->view('includes/html_header');
+                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('inicio_entidade',$data);
+                    $this->load->view('includes/html_rodape_entidade');
                 else:
                     $query = $this->entidade->get_byemail($email)->row();
                     if (empty($query)):
@@ -202,37 +212,32 @@ class Cadastro_entidade extends CI_Controller {
 				
 				//set_msg('errologin', 'Erro desconhecido, contate o desenvolvedor', 'erro');
                             endif;
+                     $dados = array(
+                     "alerta" => $alerta
+                    );
+                    $this->load->view('includes/html_header');
+                
+                    $this->load->view('cadastro_entidade',$dados);
+                    $this->load->view('includes/html_rodape_voluntario');   
                 endif;                
                  
              }
-             else{
+            else{
                   // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
                  $alerta = array(
                     "class"=>"danger",
                     "mensagem" => "Atenção falha na validação do formulário<br>" . validation_errors()
-                    ); 
-             }
-             // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
-             $dados = array(
+                    );
+                 $dados = array(
                  "alerta" => $alerta
              );
              $this->load->view('includes/html_header');
                 
             $this->load->view('cadastro_entidade',$dados);
             $this->load->view('includes/html_rodape_voluntario');
-            
-       // $data = $this->entidade->get_entidade_by_email($this->input->post('email'));
-        //echo $data['mensagem'];
-        /*    if ($data['senha'] == md5($this->input->post('senha'))){
-                if ($data['upload_foto'] == null){
-                         $data['upload_foto'] = "img/doutores_da_alegria_2.jpg";
-                }
-                redirect('cadastro_entidade/index/1');
-            }else{
-                redirect('cadastro_entidade/cadastro/1');
-                 
-            } */   
-            
+             }
+             // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
+             
 	}
        
         function do_upload() {
@@ -256,6 +261,7 @@ class Cadastro_entidade extends CI_Controller {
                 }
             
         }
+         
         
         
 }

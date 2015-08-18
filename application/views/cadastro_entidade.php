@@ -1,13 +1,12 @@
-
 <div class="container">
-    <div class="row clearfix" style="background-color: #ccc;" >
-        <div class="col-md-2 column">
-            <a href="index.html">
-            <img  alt="" src="<?= base_url(); ?>assets/img/cantinho.png" class="logo_cantinho">
+    <div class="row clearfix topo "  >
+        <div class="col-md-2 column logo">
+            <a href="<?= base_url(); ?>inicio">
+            <img  class="img-responsive" alt="" src="<?= base_url(); ?>assets/img/cantinho.png" >
             </a>
 	</div>
 	<div class="col-md-8 column">
-			<h3 id="logo">
+			<h3 id="logo_entidade">
 				Cantinho do Voluntário
 			</h3>
 	</div>
@@ -90,7 +89,12 @@
                     <div class="box">
                             <h4>Cidade:</h4>
                              <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
-                            <input type="text" name="cidade" required="" value ="<?php echo set_value('cidade');?>"/>
+                            <select id="cidade"  name="cidade" required="" />
+                                <option value="0"> ---- </option>
+                                <?php foreach($cidades as $cidade) {?>
+                                <option value="<?= $cidade->identificador?>"> <?= $cidade->cidade; ?></option>
+                                <?php }?>
+                            </select>
                     </div>
                     <div class="box">
                            <h4>CEP:</h4>

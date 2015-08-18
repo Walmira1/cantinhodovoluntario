@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row clearfix">
             <div class="col-md-2 column nosso_logo    ">
-            <a href="index.html">
-            <img  alt="" src="<?= base_url(); ?>assets/img/cantinho.png" class="logo_cantinho">
+            <a href="<?= base_url(); ?>/inicio">
+            <img  class="img-responsive" alt="" src="<?= base_url(); ?>assets/img/cantinho.png" >
             </a>
             </div>
             <div class="col-md-6 column">
@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-4 column">
 			<div class="login" >
-				<a href="<?= base_url(); ?>cadastro_voluntario/cadastro" >
+				<a href="<?= base_url(); ?>login" >
 					Faça Login ou
 				</a> 
 				<a href="<?= base_url(); ?>cadastro_voluntario/cadastro" ><button type="button" class="btn btn-primary btn-sm">

@@ -24,6 +24,8 @@ class Cadastro_entidade extends CI_Controller {
                 
                 $this->load->view('inicio_entidade');
                 
+                $this->load->view('includes/html_rodape_entidade');
+                
                                 
 	}
         

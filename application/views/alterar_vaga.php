@@ -23,11 +23,7 @@
          
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <?php if($alerta["mensagem"] != null) {?>
-                <div class="alert alert-danger">
-                    <?php  echo $alerta["mensagem"]; ?>
-                </div>    
-                <?php  }?> 
+                
                 <div id="cadastros_vagas">
                     <form  method="post"  action="cadastrar">
                      <!-- tenho uma variavel escondida na qual coloco de onde eu vim para saber ...-->
@@ -35,47 +31,55 @@
                     <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
                     <input type="hidden" name="captcha"/>   
 		<!-- [INI][/INI] -->
-                    <h2 style="margin-left: 15px;">Criar oportunidade de Voluntáriado</h2>
+                    <h2 style="margin-left: 15px;">Alterar oportunidade de Voluntáriado</h2>
                         <div class="incluir">
                         	Tipo de Voluntáriado:
                             <br />
+                            <?php
+                            $area = null;
+                            switch($vaga->atividade_id_area){
+                            case 1: $area = "Educação";break;
+                            case 2: $area = "Solidariedade Social";break;
+                            case 7: $area = "Ambiente";break;
+                            case 3: $area = "Cultura e Artes";break;
+                            case 4: $area = "Desporto e Laser";break;
+                            case 5: $area = "Novas Tecnologias";break;
+                            case 6: $area = "Saúde";break;
+                            }
+                            ?>
                             <?php echo form_error('area','<div class="erro">','</div>'); ?>
-                            <select name ="area">
-				<option value= "1">Educação</option>
-				<option value= "2">Solidariedade Social</option>
-				<option value= "7">Ambiente</option>
-				<option value= "3">Cultura e Artes</option>
-				<option value= "4">Desporto e Laser</option>
-				<option value= "5">Novas Tecnologias</option>
-				<option value= "6">Saúde</option>
-                            </select>
+                            <input type="text" name="area" required="" value ="<?php echo $area;?>" />
                         </div>	
                         <div class="incluir">
                             Pessoas afetadas:
+                            <?php
+                            switch($vaga->atividade_id_atividade_projeto){
+                            case 1: $atividade= "Adultos";break;
+                            case 19: $atividade = "Animais";break;
+                            case 2: $atividade = "Crianças e Jovens";break;
+                            case 3: $atividade = "Crianças e Jovens com Deficiência";break;
+                            case 7: $atividade = "Jovens";break;
+                            case 3: $atividade = "Cultura e Artes";break;
+                            case 4: $atividade = "Crianças e Jovens em Situação de Risco";break;
+                            case 5: $atividade = "Família e Comunidade em Geral";break;
+                            case 6: $atividade = "Grávidas, Mães Adolescentes, Bebes";break;
+                            case 8: $atividade = "Mães Solteiras";break;
+                            case 9: $atividade = "Mulheres Grávidas";break;
+                            case 10: $atividade = "Mães Solteiras";break;
+                            case 11: $atividade = "Outros";break;
+                            case 12: $atividade = "Pessoas Adultas com Deficiência";break;
+                            case 13: $atividade = "Pessoas com doenças Psiquiatricas";break;
+                            case 14: $atividade = "Pessoas Toxico-Dependentes";break;
+                            case 15: $atividade = "Pessoas dependentes(acamados)";break;
+                            case 16: $atividade = "Pessoas idosas";break;
+                            case 17: $atividade = "Pessoas sem Abrigo";break;
+                            case 18: $atividade = "Presos";break;
+                            case 20: $atividade = "Sozinho em Casa";break;
+                            }
+                            ?>
                            <?php echo form_error('atividade','<div class="erro">','</div>'); ?>
                             <br />
-                            <select id="incluir_pessoas" name="atividade">
-                                    <option value= "1">Adultos</option>
-                                    <option value= "19">Animais</option>
-                                    <option value= "2">Crianças e Jovens</option>
-                                    <option value= "3">Crianças e Jovens com Deficiência</option>
-                                    <option value= "4">Crianças e Jovens em Situação de Risco</option>
-                                    <option value= "5">Família e Comunidade em Geral</option>
-                                    <option value= "6">Grávidas, Mães Adolescentes, Bebes</option>
-                                    <option value= "7">Jovens</option>
-                                    <option value= "8">Mães Solteiras</option>
-                                    <option value= "9">Mulheres Grávidas</option>
-                                    <option value= "10">Mães Solteiras</option>
-                                    <option value= "11">Outros</option>
-                                    <option value= "12">Pessoas Adultas com Deficiência</option>
-                                    <option value= "13">Pessoas com doenças Psiquiatricas</option>
-                                    <option value= "14">Pessoas Toxico-Dependentes</option>
-                                    <option value= "15">Pessoas dependentes(acamados)</option>
-                                    <option value= "16">Pessoas idosas</option>
-                                    <option value= "17">Pessoas sem Abrigo </option>
-                                    <option value= "18">Presos</option>
-                                    <option value= "20">Sozinho em Casa</option>
-                            </select>
+                            <input type="text" name="atividade" required="" value ="<?php echo $atividade;?>" />
                         </div>
                         <div class="incluir">
                             Tempo disponivel:
@@ -98,7 +102,7 @@
                             Vaga de:
                             <br />
                             <?php echo form_error('vaga_de','<div class="erro">','</div>'); ?>
-                            <input type="text" name="vaga_de" required="" value ="<?php echo set_value('vaga_de');?>" autofocus/>
+                            <input type="text" name="vaga_de" required="" value ="<?php echo $vaga->vaga_de;?>" autofocus/>
                         </div> 
                         <div class="incluir">
                             Tipo de compromisso
@@ -113,13 +117,13 @@
                             Número de vagas:
                             <br />
                             <?php echo form_error('numero_vagas','<div class="erro">','</div>'); ?>
-                            <input type="text" name="numero_vagas" required="" value ="<?php echo set_value('numero_vagas');?>" />
+                            <input type="text" name="numero_vagas" required="" value ="<?php echo $vaga->numero_vagas;?>" />
                         </div>
                         <div class="incluir">
                             Número de horas:
                             <br />
                             <?php echo form_error('numero_horas','<div class="erro">','</div>'); ?>
-                            <input type="text" name="numero_horas" value ="<?php echo set_value('numero_horas');?>"/>
+                            <input type="text" name="numero_horas" value ="<?php echo $vaga->numero_horas;?>"/>
                         </div>
                         <div class="incluir">
                             Comprometimento:
@@ -137,19 +141,19 @@
                             Data Inicio:
                             <br />
                             <?php echo form_error('data_inicio','<div class="erro">','</div>'); ?>
-                            <input type="date" min="2015-08-01" name="data_inicio" required="" value ="<?php echo set_value('data_inicio');?>" />
+                            <input type="date" min="2015-08-01" name="data_inicio" required="" value ="<?php echo $vaga->data_inicio;?>" />
                         </div>
                         <div class="incluir">
                             Data Fim:
                             <br />
                             <?php echo form_error('data_fim','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_fim" required="" value ="<?php echo set_value('data_fim');?>"/>
+                            <input type="date" name="data_fim" required="" value ="<?php echo $vaga->data_fim;?>"/>
                         </div>
                         <div class="incluir" >
                             Data de postagem:
                             <br />
                             <?php echo form_error('data_postagem','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_postagem" required="" value ="<?php echo set_value('data_postagem');?>"/>
+                            <input type="date" name="data_postagem" required="" value ="<?php echo $vaga->data_postagem;?>"/>
                         </div>
                     <div id="margem_tabela">
                          <?php echo form_error('dias_semana','<div class="erro">','</div>'); ?>
@@ -183,6 +187,7 @@
                                 <td >Manhã</td>
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="turno[]" value="seg_manha">
+                                    <!--checked -->
                                 </td>
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="turno[]" value="ter_manha">
@@ -257,17 +262,18 @@
                             Tudo sobre a Oportunidade:
                             <br />
                             <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao"  ></textarea>
+                        <?php echo '<textarea style="width: 96%; min-height: 120px" name="descricao"
+                            class="editar">'.$vaga->descricao.'></textarea>'?>
                     </div>
                     <div style="margin-left: 2%; margin-top: 15px;">
                             Perfil do Candidato:
                             <br />
                             <?php echo form_error('perfil_voluntario','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="perfil_voluntario"  >
-                            </textarea>
+                            <?php echo '<textarea style="width: 96%; min-height: 120px" name="perfil_voluntario" 
+                                      class="editar">'.$vaga->perfil_voluntario.'</textarea>'?>
                     </div>   
                     <div style="margin-top: 20px; margin-left: 65%;">
-                         <input type="submit" class="btn btn-primary btn-lg "  value="Incluir Vaga" name="entrar"  />  
+                         <input type="submit" class="btn btn-primary btn-lg "  value="Alterar Vaga" name="entrar"  />  
                     </div>
                 
                 </form>

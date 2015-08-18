@@ -1,5 +1,5 @@
 <?php
-
+class Voluntario extends CI_Model {
 function insert()
 {
   $data = $_POST;
@@ -42,5 +42,6 @@ function delete($id)
    {
       return false;
    }
+}
 }
 

@@ -2,81 +2,97 @@
 
 class Vaga extends CI_Model {
 
-    public function cadastrar($dados=NULL, $dados_ent=NULL){
+    public function cadastrar($dados=NULL){
+        
         if ($dados != NULL){
             
-            $this->db->insert('entidade_has_atividade', $dados_ent);
-            
-            if ($this->db->affected_rows()>0){
-                   $this->db->insert('vaga', $dados);  
+            $this->db->insert('vaga', $dados);  
       /*  Verifica se mais de zero linhas foi afetadas no banco de dados, se sim ouve alteração no banco e consequentemente é
           sinal que funcionou o insert
       */
-                    if ($this->db->affected_rows()>0){
-                
+            if ($this->db->affected_rows()> 0){
         //retorna ok
-                 
-                        return TRUE;
-                    }else{
-                        return FALSE; 
-                    }
+                return TRUE;
             }else{
-        //return false
-                return FALSE;
+                return FALSE; 
             }
-        }else{
-              return FALSE;
         }
     }
     public function get_id(){
         $query = $this->db->select_max('id_vaga','vaga');
         return $query;
     }
-    public function get_vaga_by_entidades_id_entidades($id_entidade){
-        //Busca com condição
-        echo "vou pesquisar o email ", $id_entidade;
-        $query = $this->db->get_where('vaga', array('entidades_id_entidades' => $id_entidade));
-       
-          if ($query->num_rows > 0)
-           {
-                 $data['id_vaga'] = $query->row()->id_vaga;
-                 $data['vaga_de'] = $query->row()->vaga_de;
-                 $data['descricao'] = $query->row()->descricao;
-                 $data['data_inicio'] = $query->row()->data_inicio;
-                 $data['data_fim'] = $query->row()->data_fim;
-                 $data['numero_horas'] = $query->row()->numero_horas;
-                 $data['tipo_carga_horaria'] = $query->row()->tipo_carga_horaria;
-                 $data['data_postagem'] = $query->row()->data_postagem;
-                 $data['numero_vagas'] = $query->row()->numero_vagas;
-                 $data['dias_semana'] = $query->row()->dia_semana;
-                 $data['entidades_id_entidades'] = $query->row()->entidades_id_entidades;
-                 $data['atividades_id_area'] = $query->row()->atividades_id_area;
-                 $data['atividades_id_projeto'] = $query->row()->atividades_id_projeto;
-                 $data['perfil_voluntario'] = $query->row()->perfil_voluntario;
-                 echo $data['id_entidades'] ;
-                 echo $data['nome'] ;
-                 echo $data['endereco'] ;
-                 echo $data['bairro'] ;
-                 echo $data['cidade'] ;
-                 echo $data['telefone'] ;
-                 echo $data['estado'] ;
-                 echo $data['cep'] ;
-                 echo $data['email'] ;
-                 echo $data['descricao'] ;
-                 echo $data['logotipo_entidade'] ;
-                 echo $data['upload_foto'] ;
-                 echo $data['autoriza_endereco'];
-                 echo $data['autoriza_foto'] ;
-                 echo $data['video_youtube'] ;
-                 echo $data['site_entidade'] ;
-                 echo $data['senha'] ;
-                 echo $data['nivel'] ;
+     public function get_atividade($id_area=NULL,$id_atividade_projeto=NULL){
+        if ($id_area != NULL){
+            $this->db->where('id_area', $id_area);
+            $this->db->where('id_atividade_projeto', $id_atividade_projeto);
+            $query = $this->db->get('atividade');
+            if ($query->num_rows > 0):
+                    return TRUE;
+            else:
+                    return FALSE;
+            endif;
+        }else {
+            return FALSE;
+        }
+        
+    }
+    public function get_entidade_has_atividade($id_entidade=NULL,$id_area=NULL,$id_atividade_projeto=NULL){
+        if ($id_entidade != NULL){
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            $this->db->where('atividade_id_area', $id_area);
+            $this->db->where('atividade_id_atividade_projeto', $id_atividade_projeto);
+            $query = $this->db->get('entidade_has_atividade');
+            if ($query->num_rows == 0):
+                    return TRUE;
+            else:
+                return FALSE;
+            endif;
+        }  
+        
+    }
+    public function insert_entidade_has_atividade($dados_ent){
+        if ($dados_ent != NULL){
+            $this->db->insert('entidade_has_atividade', $dados_ent);
+            if ($this->db->affected_rows()>0){
+               return TRUE;     
             }else{
-              $data['mensagem'] = "Registro não encontrado";
+        //return false
+                return FALSE;
             }
-
-        //row_object() retorna direto o objeto produto e não um array
-        return $data;
+        } 
+    }
+    public function get_vaga_by_entidade_id_entidade($id_entidade=NULL){
+        //Busca com condição
+        if ($id_entidade != NULL){
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            return $this->db->get('vaga')->result();
+            
+        }
+        
+    }
+    public function delete_vaga($id_vaga=NULL){
+        //Busca com condição
+        if ($id_vaga != NULL){
+            $this->db->delete('vaga', array('id_vaga' => $id_vaga));
+            if ($this->db->affected_rows()>0){
+               return TRUE;     
+            }else{
+        //return false
+                return FALSE;
+            }
+            
+            
+        }
+        
+    }
+    public function select_vaga($id_vaga=NULL){
+        //Busca com condição
+        if ($id_vaga != NULL){
+            $this->db->where('id_vaga', $id_vaga);
+            return  $this->db->get('vaga');
+        }
+        
     }
    
 }

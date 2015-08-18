@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Cadastro_voluntario extends CI_Controller {
+class Login extends CI_Controller {
         public function __construct(){
                 parent::__construct();
                 $this->load->helper(array('form','url'));
@@ -16,24 +16,11 @@ class Cadastro_voluntario extends CI_Controller {
                         
          }
 	
-         public function index($indice=null)
+         public function index()
 	{       
 		$this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_voluntario');
-                if ($indice==1){
-                    
-                   $data['msg'] = "Voluntário Cadastrado com Sucesso";
-                   $this->load->view('includes/msg_sucesso',$data); 
-                }else if($indice==2){
-                   $data['msg'] = "Não foi possivel cadastrar o voluntário"; 
-                   $this->load->view('includes/msg_erro',$data); 
-                }else {
-                    $this->load->view('includes/html_header');
-                    $this->load->view('cadastro_voluntario');
-                    $this->load->view('includes/html_rodape_voluntario');
-                }
-               $this->load->view('home');
-               $this->load->view('includes/html_rodape_voluntario');
+                $this->load->view('login_voluntario');
+                $this->load->view('includes/html_rodape_voluntario');
                                 
 	}
         public function cadastro()
