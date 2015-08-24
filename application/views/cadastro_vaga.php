@@ -25,7 +25,18 @@
             <div class="col-md-12 column">
                 <?php if($alerta["mensagem"] != null) {?>
                 <div class="alert alert-danger">
-                    <?php  echo $alerta["mensagem"]; ?>
+                    <?php  echo $alerta["mensagem"];?> 
+                    
+                </div>    
+                <?php  }?> 
+                <?php if($mensagem != null) {?>
+                <div class="alert alert-success">
+                    <?php  echo $mensagem;?> 
+                    
+                </div>  
+                <div>
+                    <a href="<?= base_url(); ?>cadastro_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>
+                    
                 </div>    
                 <?php  }?> 
                 <div id="cadastros_vagas">
@@ -133,23 +144,24 @@
                                    <option value= "5">Fins de semana</option>
                             </select>
                         </div>
+                        <?php date_default_timezone_set('America/Sao_Paulo');?>
                         <div class="incluir">
                             Data Inicio:
                             <br />
                             <?php echo form_error('data_inicio','<div class="erro">','</div>'); ?>
-                            <input type="date" min="2015-08-01" name="data_inicio" required="" value ="<?php echo set_value('data_inicio');?>" />
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="data_inicio" required="" value ="<?php echo set_value('data_inicio');?>" />
                         </div>
                         <div class="incluir">
                             Data Fim:
                             <br />
                             <?php echo form_error('data_fim','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_fim" required="" value ="<?php echo set_value('data_fim');?>"/>
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="data_fim" required="" value ="<?php echo set_value('data_fim');?>"/>
                         </div>
                         <div class="incluir" >
                             Data de postagem:
                             <br />
                             <?php echo form_error('data_postagem','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_postagem" required="" value ="<?php echo set_value('data_postagem');?>"/>
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="data_postagem" required="" value ="<?php echo set_value('data_postagem');?>"/>
                         </div>
                     <div id="margem_tabela">
                          <?php echo form_error('dias_semana','<div class="erro">','</div>'); ?>
@@ -182,73 +194,73 @@
                             <tr id="tabela_turno">
                                 <td >Manhã</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="seg_manha">
+                                    <input type="checkbox" name="seg[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="ter_manha">
+                                    <input type="checkbox" name="terca[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qua_manha">
+                                    <input type="checkbox" name="quarta[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qui_manha">
+                                    <input type="checkbox" name="quinta[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="sex_manha">
+                                    <input type="checkbox" name="sexta[]" value="1">
                                 </td>
                                 <td style="text-align: center;">
-                                    <input type="checkbox" name="turno[]" value="sab_manha">
+                                    <input type="checkbox" name="sab[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="dom_manha">
+                                    <input type="checkbox" name="dom[]" value="1">
                                 </td>
                             </tr>
                             <tr id="tabela_turno">
                                 <td >Tarde</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="seg_tarde">
+                                    <input type="checkbox" name="seg[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="ter_tarde">
+                                    <input type="checkbox" name="terca[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qua_tarde">
+                                    <input type="checkbox" name="quarta[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qui_tarde">
+                                    <input type="checkbox" name="quinta[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="sex_tarde">
+                                    <input type="checkbox" name="sexta[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="sab_tarde">
+                                    <input type="checkbox" name="sab[]" value="2">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="dom_tarde">
+                                    <input type="checkbox" name="dom[]" value="2">
                                 </td>
                             </tr>
                             <tr id="tabela_turno">
                                 <td >Noite</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="seg_noite">
+                                    <input type="checkbox" name="seg[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="ter_noite">
+                                    <input type="checkbox" name="terca[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qua_noite">
+                                    <input type="checkbox" name="quarta[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="qui_noite">
+                                    <input type="checkbox" name="quinta[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="sex_noite">
+                                    <input type="checkbox" name="sexta[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="sab_noite">
+                                    <input type="checkbox" name="sab[]" value="3">
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="dom_noite">
+                                    <input type="checkbox" name="dom[]" value="3">
                                 </td>
                             </tr>
                         </table>

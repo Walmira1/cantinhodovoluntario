@@ -184,9 +184,10 @@
                                 </td>
                             </tr>
                             <tr id="tabela_turno">
+                               
                                 <td >Manhã</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="turno[]" value="seg_manha">
+                                    <input type="checkbox" name="turno[]" value="seg_manha"
                                     <!--checked -->
                                 </td>
                                 <td class="tabela_turno">
@@ -207,6 +208,7 @@
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="turno[]" value="dom_manha">
                                 </td>
+                             
                             </tr>
                             <tr id="tabela_turno">
                                 <td >Tarde</td>

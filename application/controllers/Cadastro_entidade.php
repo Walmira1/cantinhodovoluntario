@@ -12,7 +12,7 @@ class Cadastro_entidade extends CI_Controller {
 		$this->load->model('entidade', 'entidade');
                 $this->load->model('Vaga', 'vaga');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
-                $this->load->library('upload');
+                
                         
          }	
         public function index($indice=null)
@@ -32,6 +32,9 @@ class Cadastro_entidade extends CI_Controller {
                     $this->load->view('includes/html_rodape_voluntario');
                 }else if($indice==3){
                     $data['msg'] = NULL;
+                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('inicio_entidade',$data);
+                    $this->load->view('includes/html_rodape_voluntario');
                 }else{
                     $data['msg'] = "Não foi possivel cadastrar a Entidade"; 
                     $this->load->view('includes/html_menu_voluntario');
@@ -39,9 +42,7 @@ class Cadastro_entidade extends CI_Controller {
                     $this->load->view('home');
                     $this->load->view('includes/html_rodape_voluntario');
                 }
-               $this->load->view('includes/html_menu_entidade');
-               $this->load->view('inicio_entidade',$data);
-               $this->load->view('includes/html_rodape_voluntario');
+               
                
                                 
 	}
@@ -91,7 +92,7 @@ class Cadastro_entidade extends CI_Controller {
                    "alerta" => $alerta   );
                 $this->load->view('includes/html_header');
                 $this->load->view('cadastro_entidade',$dados);
-                $this->load->view('includes/html_rodape_voluntario');
+                $this->load->view('includes/html_rodape_entidade');
             }else{
                 //Upload do arquivo
              //   $upload = $this->do_upload($this->input->post('userfile'));
@@ -121,18 +122,20 @@ class Cadastro_entidade extends CI_Controller {
                 
                 if ($this->entidade->cadastrar($data) == TRUE){
                    $query = $this->entidade->get_entidade_by_email($data['email']);
+                   
                    // redirect recarrega a página ou seja perdi o array dados  
                    // para não perder os dados crio uma variavel de sessão
                    $dados = array(
-                            'user_id' => $query->id_entidade,
-                            'logotipo_entidade' => $query->logotipo_entidade,
-                            'upload_foto' => $query->upload_foto,
-                            'site_entidade' => $query->site_entidade,
-                            'user_nome' => $query->nome,
+                            'user_id' => $query[0]['id_entidade'],
+                            'logotipo_entidade' => $query[0]['logotipo_entidade'],
+                            'upload_foto' => $query[0]['upload_foto'],
+                            'site_entidade' => $query[0]['site_entidade'],
+                            'user_nome' => $query[0]['nome'],
                             'user_logado' => TRUE
                     );
                    
-                   redirect('cadastro_entidade/index/1');
+                   //redirect('cadastro_entidade/index/1');
+                   $this->load->view('upload_form');
                } else{
                     
                    redirect('cadastro_entidade/index/2');
@@ -240,27 +243,8 @@ class Cadastro_entidade extends CI_Controller {
              
 	}
        
-        function do_upload() {
-            $config['upload_path'] = "./images/";
-            $config['allowed_types'] = 'jpeg|jpg|gif|png';
-            
-
-            
-            $this->load->library('upload', $config);
-            
-            
-             if ( ! $this->upload->do_upload())
-                {
-                        $error = array('error' => $this->upload->display_errors());
-
-                }
-                else
-                {
-                        $data = array('upload_data' => $this->upload->data());
-
-                }
-            
-        }
+        
+    
          
         
         

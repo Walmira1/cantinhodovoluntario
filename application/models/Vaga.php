@@ -19,15 +19,30 @@ class Vaga extends CI_Model {
         }
     }
     public function get_id(){
-        $query = $this->db->select_max('id_vaga','vaga');
+    //    $query = $this->db->select_max('id_vaga');
+            $this->db->select('id_vaga');
+            $this->db->order_by("id_vaga", "desc"); 
+            $this->db->limit(1);
+            $query = $this->db->get('vaga')->row();
         return $query;
+    }
+    public function get_max_vaga_by_entidade($id_entidade){
+        if ($id_entidade != NULL){
+            $this->db->select('id_vaga');
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            $this->db->order_by("id_vaga", "desc"); 
+            $this->db->limit(1);
+            return $this->db->get('vaga')->row();
+        }else {
+            return FALSE;
+        }
     }
      public function get_atividade($id_area=NULL,$id_atividade_projeto=NULL){
         if ($id_area != NULL){
             $this->db->where('id_area', $id_area);
             $this->db->where('id_atividade_projeto', $id_atividade_projeto);
             $query = $this->db->get('atividade');
-            if ($query->num_rows > 0):
+            if ($query->num_rows == 1):
                     return TRUE;
             else:
                     return FALSE;
@@ -35,6 +50,7 @@ class Vaga extends CI_Model {
         }else {
             return FALSE;
         }
+         exit;
         
     }
     public function get_entidade_has_atividade($id_entidade=NULL,$id_area=NULL,$id_atividade_projeto=NULL){

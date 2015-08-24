@@ -55,7 +55,7 @@
                                 <td ><?= $vag->vaga_de;?></td>
                                 <td ><?= $vag->data_inicio;?></td>
                                 <td ><?= $vag->data_fim;?></td>
-                                <td> <a href="<?= base_url(); ?>cadastro_vaga/delete/<?= $vag->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Excluir</button></a> </td>
+                                <td> <a href="<?= base_url(); ?>cadastro_vaga/delete/<?= $vag->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" onclick=" return confirma()" style="float: right;">Excluir</button></a> </td>
                                 <td><a href="<?= base_url(); ?>cadastro_vaga/altera_vaga/<?= $vag->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
                             </tr>
                             <?php }?>
