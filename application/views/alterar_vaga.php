@@ -14,8 +14,8 @@
              <div class="col-md-12 column">
                 <div id="breadcrump">
                   <a href="<?= base_url(); ?>inicio">Home ></a>
-                   <a href="inicio_instituicao">Instituição ></a>
-                           <a href="#">Incluir Nova Vaga</a>
+                   <a href="<?= base_url(); ?>inicio_instituicao/<?php$this->session->userdata('id_entidade')?>">Instituição ></a>
+                           <a href="#">Alterar Vaga</a>
                 </div>  
              </div>
         <!-- [FIM]BreadCrump[/FIM] -->
@@ -23,9 +23,24 @@
          
         <div class="row clearfix">
             <div class="col-md-12 column">
-                
+                <?php if($alerta["mensagem"] != null) {?>
+                <div class="alert alert-danger">
+                    <?php  echo $alerta["mensagem"];?> 
+                    
+                </div>    
+                <?php  }?> 
+                <?php if($mensagem != null) {?>
+                <div class="alert alert-success">
+                    <?php  echo $mensagem;?> 
+                    
+                </div>  
+                <div>
+                    <a href="<?= base_url(); ?>cadastro_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>
+                    
+                </div>    
+                <?php  }?> 
                 <div id="cadastros_vagas">
-                    <form  method="post"  action="cadastrar">
+                    <form  method="post"  action="<?= base_url(); ?>altera_vaga/altera">
                      <!-- tenho uma variavel escondida na qual coloco de onde eu vim para saber ...-->
                     <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
                     <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
@@ -48,7 +63,7 @@
                             }
                             ?>
                             <?php echo form_error('area','<div class="erro">','</div>'); ?>
-                            <input type="text" name="area" required="" value ="<?php echo $area;?>" />
+                            <input type="text" name="area" required="" value ="<?php echo $area;?>"  readonly="true"/>
                         </div>	
                         <div class="incluir">
                             Pessoas afetadas:
@@ -79,7 +94,7 @@
                             ?>
                            <?php echo form_error('atividade','<div class="erro">','</div>'); ?>
                             <br />
-                            <input type="text" name="atividade" required="" value ="<?php echo $atividade;?>" />
+                            <input type="text" name="atividade" required="" value ="<?php echo $atividade;?>"  readonly="true" />
                         </div>
                         <div class="incluir">
                             Tempo disponivel:
@@ -275,7 +290,7 @@
                                       class="editar">'.$vaga->perfil_voluntario.'</textarea>'?>
                     </div>   
                     <div style="margin-top: 20px; margin-left: 65%;">
-                         <input type="submit" class="btn btn-primary btn-lg "  value="Alterar Vaga" name="entrar"  />  
+                        <input type="submit" class="btn btn-primary btn-lg " value="Alterar Vaga" name="entrar" />  
                     </div>
                 
                 </form>
@@ -283,4 +298,3 @@
          </div>
             
     </div>
-	

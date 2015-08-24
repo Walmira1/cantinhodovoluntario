@@ -13,9 +13,8 @@
         <!-- [INI]BreadCrump[/INI] -->
         <div class="col-md-12 column">
             <div id="breadcrump">
-               <a href="index.html">Home ></a>
-               <a href="inicio_instituicao.html">Instituição ></a>
-                           <a href="#">Inicio Instituição</a>
+                <a href="<?= base_url(); ?>inicio">Home ></a>
+                <a href="#">Inicio Instituição</a> 
             </div>  
         </div>
         <!-- [FIM]BreadCrump[/FIM] -->

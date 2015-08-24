@@ -23,9 +23,10 @@
 		<div class="col-md-12 column">
             <div id="mapa">
                <a href="<?= base_url(); ?>inicio">Página Inicial</a> 
-               <a href="cursos.html">Cursos</a>              
-               <a href="campanhas_noticias.html">Campanhas/Noticias</a>                             
-               <a href="altera_cadastro_entidade.html">Altera Cadastro</a>
+               <a href="<?= base_url(); ?>cadastro_curso/index/<?= $this->session->userdata('id_entidade')?>">Cursos</a>              
+               <a href="<?= base_url(); ?>cadastro_campanhas_noticias/index/<?= $this->session->userdata('id_entidade')?>">Campanhas/Noticias</a>                             
+               <a href="<?= base_url(); ?>altera_cadastro/index/<?= $this->session->userdata('id_entidade')?>">Altera Cadastro</a>
+
                <a href="<?= base_url(); ?>sobre">Sobre</a> 
             </div>  
         </div>

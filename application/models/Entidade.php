@@ -24,12 +24,7 @@ class Entidade extends CI_Model {
     public function get_id($id_entidade=NULL){
         if ($id_entidade != NULL):
             $this->db->where('id_entidade', $id_entidade);
-            $query = $this->db->get('entidade')->row();
-            if ($query->num_rows == 1):
-                    return TRUE;
-            else:
-                    return FALSE;
-            endif;
+            return $this->db->get('entidade');
         else:
             return FALSE;
         endif;

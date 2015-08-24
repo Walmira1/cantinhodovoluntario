@@ -58,7 +58,7 @@ class Cadastro_entidade extends CI_Controller {
                 );
                 $dados['cidades'] = $this->db->get('cidades')->result();
                 $this->load->view('cadastro_entidade',$dados);
-                $this->load->view('includes/html_rodape_voluntario');
+                $this->load->view('includes/html_rodape_entidade');
                                 
 	}
         public function cadastrar()

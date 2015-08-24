@@ -14,7 +14,7 @@
              <div class="col-md-12 column">
                 <div id="breadcrump">
                   <a href="<?= base_url(); ?>inicio">Home ></a>
-                   <a href="inicio_instituicao">Instituição ></a>
+                   <a href="inicio_instituicao/<?php $this->session->userdata('id_instituicao')?>">Instituição ></a>
                            <a href="#">Incluir Nova Vaga</a>
                 </div>  
              </div>

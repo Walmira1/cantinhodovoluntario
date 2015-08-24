@@ -20,6 +20,21 @@ $config =
                     'confirma_senha'    => array('field' => 'confirma_senha',   'label' => 'Confirmar senha', 'rules'  => 'required|matches[senha]|md5')
                                
         ),
+        'altera_entidade_form'=> array(
+                    'nome'              => array('field' => 'nome',             'label' => 'Instituição',   'rules'  => 'trim|required|ucfirst'),
+                    'endereco'          => array('field' => 'endereco',         'label' => 'Endereço',       'rules'  => 'trim|required'),
+                    'bairro'            => array('field' => 'bairro',           'label' => 'Bairro',         'rules'  => 'trim|required'),
+                    'cidade'            => array('field' => 'cidade',           'label' => 'Cidade',         'rules'  => 'trim|required'),
+                    'telefone'          => array('field' => 'telefone',         'label' => 'Telefone',       'rules'  => 'trim|required'),
+                    'estado'            => array('field' => 'estado',           'label' => 'Estado',         'rules'  => 'trim|required'),
+                    'cep'               => array('field' => 'cep',              'label' => 'CEP',            'rules'  => 'trim|required'),
+                    'autoriza_endereco'   => array('field' => 'autoriza_endereco',  'label' => 'Autoriza Endereço',  'rules'  => 'trim|required'),
+                    'autoriza_foto'     => array('field' => 'autoriza_foto',    'label' => 'Autoriza Fotos', 'rules'  => 'trim|required'),
+                    'descricao'         => array('field' => 'descricao',        'label' => 'Objetivos',      'rules'  => 'trim|required'),
+                    'site'              => array('field' => 'site',             'label' => 'site',           'rules'  => ''),
+                    'video'              => array('field' => 'video',           'label' => 'video',          'rules'  => '')
+                               
+        ),
         'login_entidade_form'=> array(
                     'email_login'       => array('field' => 'email_login',      'label' => 'Usuário',         'rules'  => 'trim|required|valid_email|max_length[100]'),
                     'senha'             => array('field' => 'senha',            'label' => 'Senha',           'rules'  => 'required|min_length[6]|max_length[20]|md5') 

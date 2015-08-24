@@ -1,49 +1,22 @@
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-2 column nosso_logo">         
-                <a href="index.html">
-                <img alt="" src="<?= base_url(); ?>assets/img/cantinho.png" class="logo_cantinho">
-                </a>
-        </div>
-		<div class="col-md-6 column">
-			<h3 id="logo">
-				Cantinho do Voluntário
-			</h3>
-		</div>
-		<div class="col-md-4 column">
-			<div class="sair">
-                <a href="#" >
-                    Sair
-                </a> 
-			</div>
-		</div>
-	</div>
-	<div class="row clearfix">
-		<!-- [INI]Menu[/INI] -->
-		<div class="col-md-12 column">
-			<div id="mapa">
-			   <a href="index.html">Página Inicial</a>
-			   <a href="inicio_instituicao.html">Inicio Instituição</a>
-			   <a href="cursos.html">Cursos</a>
-			   <a href="#">Campanhas/Noticias</a>
-			   <a href="#">Sobre</a>			   
-			   <a href="altera_cadastro_entidade.html">Alterar Cadastro</a>
-			</div>	
-		</div>
-		<!-- [FIM]Menu[/FIM] -->
-	</div>
+
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <img src="<?= base_url(); ?>assets/img/todos fazendo.jpg" class="imagem_instituicao" alt=""/>
+            <?php  
+                if($this->session->userdata('upload_foto')== NULL){
+                    echo '<img src=".base_url().assets/img/maosnovas.jpg" class="imagem_cursos" alt="" />';
+                }else{   
+                    echo '<img src="'.base_url().$this->session->userdata('upload_foto').'" class="imagem_cursos" alt="" />';
+                }
+                ?>
         </div>
     </div>
     <div class="row clearfix">
         <!-- [INI]BreadCrump[/INI] -->
         <div class="col-md-12 column">
             <div id="breadcrump">
-               <a href="index.html">Home ></a>
-               <a href="inicio_instituicao.html">Instituição ></a>
-                           <a href="#">Incluir Curso</a>
+               <a href="<?= base_url(); ?>inicio">Home ></a>
+               <a href="inicio_instituicao/<?php $this->session->userdata('id_instituicao')?>">Instituição ></a>
+               <a href="#">Incluir Curso</a>
             </div>  
         </div>
         <!-- [FIM]BreadCrump[/FIM] -->
@@ -53,7 +26,7 @@
 	<div class="row clearfix">
             <div class="col-md-12 column">
 		<!-- [INI][/INI] -->
-                    <h2 style="margin-left: 15px;">Criar Noticias de Cursos/h2>
+                    <h2 style="margin-left: 15px;">Criar Noticias de Cursos</h2>
                     <div class="col-md-3 column incluir">
                             Titulo:
                             <br />
@@ -64,19 +37,19 @@
                             Inscrição até:
                             <br />
                             <?php echo form_error('inscricao_ate','<div class="erro">','</div>'); ?>
-                            <input type="date" name="inscricao_ate" required="" value ="<?php echo set_value('inscricao_ate');?>" />
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="inscricao_ate" required="" value ="<?php echo set_value('inscricao_ate');?>" />
                     </div>
                     <div class="col-md-3 column incluir">
                             Inicio:
                             <br />
                             <?php echo form_error('data_inicio','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_inicio" required="" value ="<?php echo set_value('data_inicio');?>" />
+                            <input type="date" name="data_inicio" min="<?php echo date('Y-m-d');?>" required="" value ="<?php echo set_value('data_inicio');?>" />
                     </div>
                     <div class="col-md-3 column incluir">
                             Fim:
                             <br />
                             <?php echo form_error('data_fim','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_fim" required="" value ="<?php echo set_value('data_fim');?>" />
+                            <input type="date" name="data_fim" min="<?php echo date('Y-m-d');?>" required="" value ="<?php echo set_value('data_fim');?>" />
                     </div>
             </div>
 		<!-- [INI][/INI] -->
@@ -120,10 +93,11 @@
                             <input type="date" name="data_postagem" required="" value ="<?php echo set_value('data_postagem');?>"/>
                 </div>
                 <div style="margin-left: 2%; margin-top: 15px;">
+                    <br />
                             Breve descrição:
                             <br />
-                            <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao" required="" value ="<?php echo set_value('descricao');?>"></textarea>
+                            <?php echo form_error('breve_descricao','<div class="erro">','</div>'); ?>
+                            <textarea style="width: 96%; min-height: 120px" name="breve_descricao" required="" value ="<?php echo set_value('breve_descricao');?>"></textarea>
                 </div>
                 <div style="margin-left: 2%; margin-top: 15px;">
                             Descrição:
@@ -135,18 +109,7 @@
                 <div>                                                   
                         <input type="submit" class="btn btn-primary btn-lg " style="margin-top: 20px; margin-left: 75%;" value="Incluir Vaga" />                         
                 </div>
-                <div style="margin-left: 2%; margin-top: 15px;">
-                            Tudo sobre a Oportunidade:
-                            <br />
-                            <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao" required="" value ="<?php echo set_value('descricao');?>"></textarea>
-                </div>
-                <div style="margin-left: 2%; margin-top: 15px;">
-                            Perfil do Candidato:
-                            <br />
-                            <?php echo form_error('perfil_voluntario','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="perfil_voluntario" required="" value ="<?php echo set_value('perfil_voluntario');?>"></textarea>
-                </div>
+               
             </div>
         </div>
         </form>

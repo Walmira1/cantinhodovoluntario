@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Cadastro_vaga extends CI_Controller {
+class Cadastro_curso extends CI_Controller {
 
     	public function __construct(){
                 parent::__construct();
@@ -9,30 +9,31 @@ class Cadastro_vaga extends CI_Controller {
        Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
-		$this->load->model('vaga', 'vaga');
-                $this->load->model('vaga_turno', 'vaga_turno');
+		$this->load->model('curso', 'curso');
+                $this->load->model('entidade', 'entidade');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 $this->load->library('upload');
                         
          }	
-        public function index($indice=null)
+        public function index($id_entidade=null)
 	{       
 		$this->load->view('includes/html_header');
                
-                if ($indice==1){
-                    
-                   $data['msg'] = "Vaga Cadastrada com Sucesso";
-                   $this->load->view('includes/msg_sucesso',$data); 
+                if ($id_entidade !=NULL){
+                   $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade); 
+        //           $data['msg'] = "Curso Cadastrado com Sucesso";
+        //           $this->load->view('includes/msg_sucesso',$data); 
                 }else if($indice==2){
-                   $data['msg'] = "Não foi possivel cadastrar a Vaga"; 
+                   $data['msg'] = "Não foi possivel cadastrar o Curso"; 
                     $this->load->view('includes/msg_erro',$data);
                 }
                $this->load->view('includes/html_menu_entidade');
-               $this->load->view('inicio_entidade',$data);
+               $this->load->view('cursos',$data);
                $this->load->view('includes/html_rodape_entidade');
                
                                 
 	}
+       
         public function cadastro($indice=null)
 	{       $this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
@@ -40,12 +41,12 @@ class Cadastro_vaga extends CI_Controller {
                 $cod_mensagem = $indice; 
                 $mensagem = NULL;
                 if ($indice==1){
-                   $data['msg'] = "Vaga Cadastrada com Sucesso";
-                   $mensagem = "Vaga Cadastrada com Sucesso";
+                   $data['msg'] = "Curso Cadastrado com Sucesso";
+                   $mensagem = "Curso Cadastrada com Sucesso";
                    $this->load->view('includes/msg_sucesso',$data); 
                 }else if($indice==2){
-                   $data['msg'] = "Não foi possivel cadastrar a Vaga"; 
-                   $mensagem = "Não foi possivel cadastrar a Vaga"; 
+                   $data['msg'] = "Não foi possivel cadastrar o Curso"; 
+                   $mensagem = "Não foi possivel cadastrar o Curso"; 
                     $this->load->view('includes/msg_erro',$data);
                 }
                 $dados = array(
@@ -53,7 +54,7 @@ class Cadastro_vaga extends CI_Controller {
                      "cod_mensagem" => $cod_mensagem,
                      "mensagem" => $mensagem 
                  );
-                $this->load->view('cadastro_vaga',$dados);
+                $this->load->view('cadastro_curso',$dados);
                 $this->load->view('includes/html_rodape_entidade');
                 
                 
