@@ -40,12 +40,12 @@
                     <div class="box1">    
                             Usuário:
                             <?php echo form_error('email_login','<div class="erro">','</div>'); ?>
-                            <input type="email" name="email_login"  value ="<?php echo set_value('email_login');?>" placeholder="E-mail" required=""/>
+                            <input type="email" name="email_login"  value ="<?php echo set_value('email_login');?>" placeholder="E-mail" required="" autofocus/>
                     </div>
                     <div class="box1"> 
                             Senha:
                             <?php echo form_error('senha','<div class="erro">','</div>'); ?>
-                            <input type="password" name="senha" required="" />
+                            <input type="password" name="senha" required="" placeholder="Senha"/>
                             <br />
                     </div>
                     <div class="checkbox box">

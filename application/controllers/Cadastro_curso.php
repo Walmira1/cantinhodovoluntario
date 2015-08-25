@@ -89,12 +89,13 @@ class Cadastro_curso extends CI_Controller {
             $alerta = null;
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
-                $this->load->view('cadastro_vaga');
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('cadastro_curso');
                 $this->load->view('includes/html_rodape_entidade');
-                redirect('cadastro_entidade/cadastro');
+                
             }
           //Verifica se o form passou nos testes de validação  
-            if ($this->form_validation->run('cadastro_vaga_form')==FALSE) {
+            if ($this->form_validation->run('cadastro_curso_form')==FALSE) {
                       // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
                  $alerta = array(
                     "class"=>"danger",
@@ -107,69 +108,36 @@ class Cadastro_curso extends CI_Controller {
                      "mensagem" => NULL 
                  );
                 $this->load->view('includes/html_header');
-                
-                $this->load->view('cadastro_vaga',$dados);
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('cadastro_curso',$dados);
                 $this->load->view('includes/html_rodape_entidade');
             }else{
                 
-            	$data['vaga_de'] = $this->input->post('vaga_de');
-                $data['descricao'] = $this->input->post('descricao');
-                $data['data_inicio'] = $this->input->post('data_inicio');
-                $data['data_fim'] = $this->input->post('data_fim');
-                $data['numero_horas'] = $this->input->post('numero_horas');
-                $data['tipo_carga_horaria'] = $this->input->post('tipo_carga_horaria');
+            	$data['nome'] = $this->input->post('titulo');
+                $data['inscricao_ate'] = $this->input->post('inscricao_ate');
+                $data['inicio'] = $this->input->post('data_inicio');
+                $data['fim'] = $this->input->post('data_fim');
                 $data['data_postagem'] = $this->input->post('data_postagem');
-                $data['numero_vagas'] = $this->input->post('numero_vagas');
+                $data['num_horas'] = $this->input->post('num_horas');
+                $data['taxa_inscricao'] = $this->input->post('taxa_inscricao');
+                
+                $data['horario'] = $this->input->post('horario');
+                $data['breve_descricao'] = $this->input->post('breve_descricao');
+                $data['longae_descricao'] = $this->input->post('descricao');
                 $data_ent['entidade_id_entidade'] = $this->input->post('id_entidade');
-                $data['entidade_id_entidade'] = $this->input->post('id_entidade');
-                $data['atividade_id_area'] = $this->input->post('area');
-                $data_ent['atividade_id_area'] = $this->input->post('area');
-                $data['atividade_id_atividade_projeto'] = $this->input->post('atividade');
-                $data_ent['atividade_id_atividade_projeto'] = $this->input->post('atividade');
-                $data['perfil_voluntario'] = $this->input->post('perfil_voluntario');
-         // verifica a se area e atividade são compativeis pela tabela  de atvidades
-                if ($this->vaga->get_atividade($this->input->post('area'),$this->input->post('atividade'))== FALSE){
-                    $alerta = array(
-                        "class"=>"danger",
-                        "mensagem" => "Area e Atividade incompativeis<br>" 
-                        );
-                    $dados = array(
-                     "alerta" => $alerta,
-                     "cod_mensagem" => NULL,
-                     "mensagem" => NULL 
-                 );
-                    $this->load->view('includes/html_header');
-                    $this->load->view('cadastro_vaga',$dados);
-                    $this->load->view('includes/html_rodape_entidade');
-                    var_dump($dados);
-                }else{
-                    if ($this->vaga->get_entidade_has_atividade($this->input->post('id_entidade'),$this->input->post('area'),$this->input->post('atividade'))):
-                        if ($this->vaga->insert_entidade_has_atividade($data_ent) == FALSE):
-                            $alerta = array(
-                                "class"=>"danger",
-                                "mensagem" => "Erro na base de dados <br>" 
-                             );
-                            $dados = array(
-                            "alerta" => $alerta,
-                            "cod_mensagem" => NULL,
-                            "mensagem" => NULL 
-                            );
-                            $this->load->view('includes/html_header');
-                            $this->load->view('cadastro_vaga',$dados);
-                            $this->load->view('includes/html_rodape_entidade');
-                        endif;
-                    endif;
-                    if ($this->vaga->cadastrar($data) == TRUE){
+                $data['upload_foto'] = NULL;
+                $data_ent['video_youtube'] = $this->input->post('video');
+                if ($this->curso->cadastrar($data) == TRUE){
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
-                        $query = $this->vaga->get_max_vaga_by_entidade($this->input->post('id_entidade'));
+                        $query = $this->curso->get_max_vaga_by_entidade($this->input->post('id_entidade'));
             //        var_dump($query);
             //        exit;
             //        echo "vaga_id_vaga = " .$query->id_vaga;
                     
-                        $vaga_turno['vaga_id_vaga']= $query->id_vaga;
+             /*             $vaga_turno['vaga_id_vaga']= $query->id_vaga;
                       
                      
-                        $arrlength2 = 3;
+                      $arrlength2 = 3;
                         $arrlength1 = 8;
                         for($indice1 = 1; $indice1 <  $arrlength1; $indice1++) {
                             $vaga_turno['dia_da_semana'] = $indice1;
@@ -272,23 +240,21 @@ class Cadastro_curso extends CI_Controller {
                             // grava o registro do dia 
                             $vaga_turno['id_vaga_turno'] = $indice1;
                             $this->vaga_turno->cadastrar($vaga_turno);
-                        } 
-                    redirect('cadastro_vaga/cadastro/1');                     
+                        } */
+                         redirect('cadastro_curso/cadastro/1');                     
                } else{
-                   redirect('cadastro_vaga/cadastro/2');
+                   redirect('cadastro_curso/cadastro/2');
                  
-                }
-                
-            }
+               }
             }
             
 	}
-        public function delete($id_vaga =null){
-            if ($id_vaga != null){
-                if ($this->vaga->delete_vaga($id_vaga) == FALSE){
+        public function delete($id_curso =null){
+            if ($id_curso != null){
+                if ($this->curso->delete_curso($id_curso) == FALSE){
                         $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Não conseguiu apagar o Registro de vaga <br>" 
+                            "mensagem" => "Não conseguiu apagar o Registro do Curso <br>" 
                              );
                         $dados = array(
                         "alerta" => $alerta,
@@ -310,29 +276,29 @@ class Cadastro_curso extends CI_Controller {
                      
             $id_entidade = NULL;
             $id_entidade = $this->session->userdata('id_entidade');
-            $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+            $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade);
             // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('inicio_entidade',$data);
+            $this->load->view('cursos',$data);
             $this->load->view('includes/html_rodape_entidade');
     
      }  
-     public function altera_vaga($id_vaga =null){
+     public function altera_curso($id_vaga =null){
             $alerta = NULL;
             $data = array(
                         "alerta" => $alerta,
                         "cod_mensagem" => NULL,
                         "mensagem" => NULL
             );
-            if ($id_vaga != null){
-                $query = $this->vaga->select_vaga($id_vaga) ;
+            if ($id_curso != null){
+                $query = $this->curso->select_curso($id_curso) ;
                 if ($query->num_rows() == 1){
-                $data['vaga'] = $query->row(0,'vaga') ;
+                $data['curso'] = $query->row(0,'curso') ;
                 }else {
                     $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
+                            "mensagem" => "Curso não identificado <br>" 
                              );
                     $data = array(
                         "alerta" => $alerta,
@@ -343,7 +309,7 @@ class Cadastro_curso extends CI_Controller {
             }else{
                 $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
+                            "mensagem" => "Curso não identificado <br>" 
                              );
                 $data = array(
                         "alerta" => $alerta,
@@ -353,19 +319,19 @@ class Cadastro_curso extends CI_Controller {
                         
             } 
             
-            $query = $this->vaga_turno->select_vaga($id_vaga);
+    /*        $query = $this->vaga_turno->select_vaga($id_vaga);
             
             if ($query->num_rows() > 0){
                 $data['turno_vaga'] = $query->row();
             //    var_dump($data['turno_vaga']);
             //    exit;
-            } 
+            } */
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_vaga',$data);
+            $this->load->view('alterar_curso',$data);
             $this->load->view('includes/html_rodape_entidade');
      }  
-      public function volta_entidade()
+      public function volta_curso()
 	{   
             /* Carrega a biblioteca do CodeIgniter responsável pela validação dos formulários */
          //   $this->load->library('form_validation');
@@ -377,11 +343,11 @@ class Cadastro_curso extends CI_Controller {
              //var_dump($this->input->post());
             $alerta = null;
             $id_entidade = $this->session->userdata('id_entidade');
-            $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+            $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade);
                    // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('inicio_entidade',$data);
+            $this->load->view('cursos',$data);
             $this->load->view('includes/html_rodape_entidade');
 	}
        

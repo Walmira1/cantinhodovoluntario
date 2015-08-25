@@ -2,12 +2,12 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
            <?php  
-            if($this->session->userdata('upload_foto')== NULL){
-                    echo '<img src=".base_url().assets/img/maosnovas.jpg" class="imagem_cursos" alt="" />';
+                if($this->session->userdata('upload_foto')== NULL){
+                    echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_cursos" alt="" />';
                 }else{   
                     echo '<img src="'.base_url().$this->session->userdata('upload_foto').'" class="imagem_cursos" alt="" />';
                 }
-            ?>   
+            ?>  
         </div>
     </div>
     <div class="row clearfix">
@@ -31,7 +31,7 @@
                 <div class="col-md-3 column">
                     <?php 
                         if($this->session->userdata('logotipo_entidade')== NULL) {
-                                echo '<img src="'.base_url().'assets/img/globo.jpg" class="logo_instituicao" alt="" />';
+                                echo '<img src="'.base_url().'assets/img/criancas_2.jpg" class="logo_instituicao" alt="" />';
                         }else{
                                 echo '<img src="'.base_url().$this->session->userdata('logotipo_entidade').'" class="logo_instituicao" alt="foto da entidade" />';
                         } 

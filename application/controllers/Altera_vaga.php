@@ -33,6 +33,7 @@ class Altera_vaga extends CI_Controller {
 	public function index()
 	{       
 		$this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
                 $this->load->view('altera_vaga');
                                 
 	}
@@ -43,9 +44,10 @@ class Altera_vaga extends CI_Controller {
             $alerta = null;
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
-                $this->load->view('cadastro_vaga');
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('altera_vaga');
                 $this->load->view('includes/html_rodape_entidade');
-                redirect('cadastro_entidade/cadastro');
+                
             }
           //Verifica se o form passou nos testes de validação  
             if ($this->form_validation->run('cadastro_vaga_form')==FALSE) {
@@ -61,8 +63,8 @@ class Altera_vaga extends CI_Controller {
                      "mensagem" => NULL 
                  );
                 $this->load->view('includes/html_header');
-                
-                $this->load->view('cadastro_vaga',$dados);
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('altera_vaga',$dados);
                 $this->load->view('includes/html_rodape_entidade');
             }else{
                 
@@ -93,7 +95,8 @@ class Altera_vaga extends CI_Controller {
                      "mensagem" => NULL 
                  );
                     $this->load->view('includes/html_header');
-                    $this->load->view('cadastro_vaga',$dados);
+                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('altera_vaga',$dados);
                     $this->load->view('includes/html_rodape_entidade');
                     var_dump($dados);
                 }else{
@@ -109,7 +112,8 @@ class Altera_vaga extends CI_Controller {
                             "mensagem" => NULL 
                             );
                             $this->load->view('includes/html_header');
-                            $this->load->view('cadastro_vaga',$dados);
+                            $this->load->view('includes/html_menu_entidade');
+                            $this->load->view('altera_vaga',$dados);
                             $this->load->view('includes/html_rodape_entidade');
                         endif;
                     endif;

@@ -170,6 +170,8 @@ class Cadastro_entidade extends CI_Controller {
                  // chamo o login
                 if ($this->entidade->do_login($email, $senha) == TRUE):
                     $query = $this->entidade->get_byemail($email)->row();
+           //     var_dump($query);
+           //     exit;
                     $dados = array(
 				'id_entidade' => $query->id_entidade,
 				'logotipo_entidade' => $query->logotipo_entidade,

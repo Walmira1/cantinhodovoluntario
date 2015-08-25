@@ -27,6 +27,19 @@ class Curso extends CI_Model {
         }
         
     }
+    public function delete_curso($id_curso=NULL){
+        //Busca com condição
+        if ($id_curso != NULL){
+            $this->db->delete('curso', array('id_curso' => $id_curso));
+            if ($this->db->affected_rows()>0){
+               return TRUE;     
+            }else{
+        //return false
+                return FALSE;
+            }
+        }
+    }
+    
    
 }
 
