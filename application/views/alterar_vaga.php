@@ -44,6 +44,10 @@
                      <!-- tenho uma variavel escondida na qual coloco de onde eu vim para saber ...-->
                     <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
                     <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
+                    <input type="hidden" name="id_vaga" value="<?php echo $vaga->id_vaga?>"/>
+                    <input type="hidden" name="atividade" value="<?php echo $vaga->atividade_id_atividade_projeto?>"/>
+                    <input type="hidden" name="area" value="<?php echo $vaga->atividade_id_area?>"/>
+                    
                     <input type="hidden" name="captcha"/>   
 		<!-- [INI][/INI] -->
                     <h2 style="margin-left: 15px;">Alterar oportunidade de Voluntáriado</h2>
@@ -62,8 +66,8 @@
                             case 6: $area = "Saúde";break;
                             }
                             ?>
-                            <?php echo form_error('area','<div class="erro">','</div>'); ?>
-                            <input type="text" name="area" required="" value ="<?php echo $area;?>"  readonly="true"/>
+                            
+                            <input type="text"  required="" value ="<?php echo $area;?>"  readonly="true"/>
                         </div>	
                         <div class="incluir">
                             Pessoas afetadas:
@@ -92,9 +96,9 @@
                             case 20: $atividade = "Sozinho em Casa";break;
                             }
                             ?>
-                           <?php echo form_error('atividade','<div class="erro">','</div>'); ?>
+                           
                             <br />
-                            <input type="text" name="atividade" required="" value ="<?php echo $atividade;?>"  readonly="true" />
+                            <input type="text"  required="" value ="<?php echo $atividade;?>"  readonly="true" />
                         </div>
                         <div class="incluir">
                             Tempo disponivel:

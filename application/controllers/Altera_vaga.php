@@ -34,7 +34,7 @@ class Altera_vaga extends CI_Controller {
 	{       
 		$this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
-                $this->load->view('altera_vaga');
+                $this->load->view('alterar_vaga');
                                 
 	}
         public function altera()
@@ -42,10 +42,10 @@ class Altera_vaga extends CI_Controller {
             
             $this->lang->load('form_validation','portuguese');
             $alerta = null;
-            if($this->input->post('captcha')){
+                if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
-                $this->load->view('altera_vaga');
+                $this->load->view('alterar_vaga');
                 $this->load->view('includes/html_rodape_entidade');
                 
             }
@@ -64,67 +64,53 @@ class Altera_vaga extends CI_Controller {
                  );
                 $this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
-                $this->load->view('altera_vaga',$dados);
+                $this->load->view('alterar_vaga',$dados);
                 $this->load->view('includes/html_rodape_entidade');
             }else{
                 
-            	$data['vaga_de'] = $this->input->post('vaga_de');
-                $data['descricao'] = $this->input->post('descricao');
-                $data['data_inicio'] = $this->input->post('data_inicio');
-                $data['data_fim'] = $this->input->post('data_fim');
-                $data['numero_horas'] = $this->input->post('numero_horas');
-                $data['tipo_carga_horaria'] = $this->input->post('tipo_carga_horaria');
-                $data['data_postagem'] = $this->input->post('data_postagem');
-                $data['numero_vagas'] = $this->input->post('numero_vagas');
-                $data_ent['entidade_id_entidade'] = $this->input->post('id_entidade');
-                $data['entidade_id_entidade'] = $this->input->post('id_entidade');
-                $data['atividade_id_area'] = $this->input->post('area');
-                $data_ent['atividade_id_area'] = $this->input->post('area');
-                $data['atividade_id_atividade_projeto'] = $this->input->post('atividade');
-                $data_ent['atividade_id_atividade_projeto'] = $this->input->post('atividade');
-                $data['perfil_voluntario'] = $this->input->post('perfil_voluntario');
+                $data = array(
+            	'vaga_de' => $this->input->post('vaga_de'),
+                'descricao' => $this->input->post('descricao'),
+                'data_inicio' => $this->input->post('data_inicio'),
+                'data_fim' => $this->input->post('data_fim'),
+                'numero_horas' => $this->input->post('numero_horas'),
+                'tipo_carga_horaria' => $this->input->post('tipo_carga_horaria'),
+                'data_postagem' => $this->input->post('data_postagem'),
+                'numero_vagas' => $this->input->post('numero_vagas'),
+                'entidade_id_entidade' => $this->input->post('id_entidade'),
+                'atividade_id_area' => $this->input->post('area'),
+                'atividade_id_atividade_projeto' => $this->input->post('atividade'),
+                'perfil_voluntario' => $this->input->post('perfil_voluntario')
+                );
+                $id_vaga = $this->input->post('id_vaga');
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
-                if ($this->vaga->get_atividade($this->input->post('area'),$this->input->post('atividade'))== FALSE){
-                    $alerta = array(
-                        "class"=>"danger",
-                        "mensagem" => "Area e Atividade incompativeis<br>" 
+                // var_dump($this->input->post());
+                $tabela = 1;
+                if ($this->vaga->alterar_vaga($id_vaga,$data) == TRUE){
+                    if ($this->vaga_turno->select_vaga($id_vaga, $tabela) == TRUE) {
+                        if ($this->vaga_turno->delete_vaga($id_vaga, $tabela) == FALSE) { 
+                           $alerta = array(
+                           "class"=>"danger",
+                    "mensagem" => "Atenção falha no delete do banco<br>" . validation_errors()
                         );
-                    $dados = array(
-                     "alerta" => $alerta,
-                     "cod_mensagem" => NULL,
-                     "mensagem" => NULL 
-                 );
-                    $this->load->view('includes/html_header');
-                    $this->load->view('includes/html_menu_entidade');
-                    $this->load->view('altera_vaga',$dados);
-                    $this->load->view('includes/html_rodape_entidade');
-                    var_dump($dados);
-                }else{
-                    if ($this->vaga->get_entidade_has_atividade($this->input->post('id_entidade'),$this->input->post('area'),$this->input->post('atividade'))):
-                        if ($this->vaga->insert_entidade_has_atividade($data_ent) == FALSE):
-                            $alerta = array(
-                                "class"=>"danger",
-                                "mensagem" => "Erro na base de dados <br>" 
-                             );
+                 
                             $dados = array(
                             "alerta" => $alerta,
                             "cod_mensagem" => NULL,
                             "mensagem" => NULL 
-                            );
-                            $this->load->view('includes/html_header');
-                            $this->load->view('includes/html_menu_entidade');
-                            $this->load->view('altera_vaga',$dados);
-                            $this->load->view('includes/html_rodape_entidade');
-                        endif;
-                    endif;
-                    if ($this->vaga->cadastrar($data) == TRUE){
+                        );
+                        $this->load->view('includes/html_header');
+                        $this->load->view('includes/html_menu_entidade');
+                        $this->load->view('alterar_vaga',$dados);
+                        $this->load->view('includes/html_rodape_entidade');
+                    }
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
-                        $query = $this->vaga->get_max_vaga_by_entidade($this->input->post('id_entidade'));
+                       
             //        var_dump($query);
             //        exit;
             //        echo "vaga_id_vaga = " .$query->id_vaga;
                     
-                        $vaga_turno['vaga_id_vaga']= $query->id_vaga;
+                        $vaga_turno['vaga_id_vaga']= $id_vaga;
                       
                      
                         $arrlength2 = 3;
@@ -227,13 +213,24 @@ class Altera_vaga extends CI_Controller {
                                     }
                                 }
                             }
-                            // grava o registro do dia 
+                            // escrever novamente o  registro
+                            
                             $vaga_turno['id_vaga_turno'] = $indice1;
                             $this->vaga_turno->cadastrar($vaga_turno);
                         } 
-                    redirect('cadastro_vaga/cadastro/1');                     
+                    $this->load->view('includes/html_header');
+                    $data['msg'] = "Vaga Alterada com Sucesso";
+                    $this->load->view('includes/msg_sucesso',$data);
+                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('alterar_vaga',$data);
+                    $this->load->view('includes/html_rodape_entidade');
                } else{
-                   redirect('cadastro_vaga/cadastro/2');
+                   $this->load->view('includes/html_header');
+                   $data['msg'] = "Não foi possivel alterar a Vaga"; 
+                   $this->load->view('includes/msg_erro',$data);
+                   $this->load->view('includes/html_menu_entidade');
+                   $this->load->view('alterar_vaga',$data);
+                   $this->load->view('includes/html_rodape_entidade');
                  
                 }
                 
@@ -276,7 +273,7 @@ class Altera_vaga extends CI_Controller {
             $this->load->view('includes/html_rodape_entidade');
     
      }  
-     public function altera_vaga($id_vaga =null){
+/*     public function altera_vaga($id_vaga =null){
             if ($id_vaga != null){
                 $query = $this->vaga->select_vaga($id_vaga) ;
                 if ($query->num_rows() == 1){
@@ -294,7 +291,7 @@ class Altera_vaga extends CI_Controller {
                  );
             } 
             
-    /*/*        $query = $this->vaga_turno->select_vaga($id_vaga);
+           $query = $this->vaga_turno->select_vaga($id_vaga);
             
             if ($query->num_rows() > 0){
                 $data['turno_vaga'] = $query->row();
@@ -304,8 +301,8 @@ class Altera_vaga extends CI_Controller {
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
             $this->load->view('alterar_vaga',$data);
-            $this->load->view('includes/html_rodape_entidade');*/
-     }  
+            $this->load->view('includes/html_rodape_entidade');
+     } */ 
         
 }
 

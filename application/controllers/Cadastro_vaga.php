@@ -166,7 +166,7 @@ class Cadastro_vaga extends CI_Controller {
             //        echo "vaga_id_vaga = " .$query->id_vaga;
                     
                         $vaga_turno['vaga_id_vaga']= $query->id_vaga;
-                      
+                        $vaga_turno['tabela']= 1;
                      
                         $arrlength2 = 3;
                         $arrlength1 = 8;
@@ -351,8 +351,8 @@ class Cadastro_vaga extends CI_Controller {
             );
                         
             } 
-            
-            $query = $this->vaga_turno->select_vaga($id_vaga);
+            $tabela = 1;
+            $query = $this->vaga_turno->select_turno_vaga($id_vaga,$tabela);
             
             if ($query->num_rows() > 0){
                 $data['turno_vaga'] = $query->row();

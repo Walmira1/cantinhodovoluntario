@@ -18,6 +18,20 @@ class Vaga extends CI_Model {
             }
         }
     }
+    public function alterar_vaga($id_vaga,$data){
+    //    $query = $this->db->select_max('id_vaga');
+        if (($id_vaga != NULL) && ($data != NULL)){
+            $this->db->where('id_vaga',$id_vaga);
+            $this->db->update('vaga', $data); 
+            if ($this->db->affected_rows()> 0){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }else{
+           return FALSE; 
+        }
+    }
     public function get_id(){
     //    $query = $this->db->select_max('id_vaga');
             $this->db->select('id_vaga');
