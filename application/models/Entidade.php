@@ -74,6 +74,20 @@ class Entidade extends CI_Model {
 		return FALSE;
         endif;
     }
+    public function alterar($id_entidade,$data){
+    //    $query = $this->db->select_max('id_vaga');
+        if (($id_entidade != NULL) && ($data != NULL)){
+            $this->db->where('id_entidade',$id_entidade);
+            $this->db->update('entidade', $data); 
+            if ($this->db->affected_rows()> 0){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }else{
+           return FALSE; 
+        }
+    }
     public function atualiza($id_entidade=NULL, $file=NULL){
         var_dump($file);
         echo "entidade = ".$id_entidade;

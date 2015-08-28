@@ -8,10 +8,13 @@ class Upload extends CI_Controller {
 	   $this->load->helper(array('url', 'form'));
 	}
 
-	public function index()
+	public function index($pagina=NULL)
 	{
-                
-		$this->load->view('upload_form');
+            if ($pagina != null){
+                $data['pagina'] = $pagina;
+            }
+		$this->load->view('upload_form',$data);
+                    
 	}
 
 	public function uploadify()
@@ -30,7 +33,7 @@ class Upload extends CI_Controller {
 			$response = $this->upload->data();
                         $id_entidade = $this->session->userdata('id_entidade');
                         $this->entidade->atualiza(id_entidade,$response);
-                        exit;
+                        
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

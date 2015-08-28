@@ -24,41 +24,41 @@ class Altera_vaga extends CI_Controller {
        Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
-		$this->load->model('vaga', 'vaga');
+		$this->load->model('curso', 'curso');
                 $this->load->model('turno', 'turno');
                
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                
                         
          }
-	public function index($id_vaga =null)
+	public function index($id_curso =null)
 	{       
             $alerta = NULL;
             $cod_mensagem = null;
             $mensagem = null;
-            if ($id_vaga != null){
+            if ($id_curso != null){
                 $query = $this->vaga->select_vaga($id_vaga) ;
                 if ($query->num_rows() == 1){
-                    $data['vaga'] = $query->row(0,'vaga') ;
+                    $data['curso'] = $query->row(0,'curso') ;
                 }else {
                     $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
+                            "mensagem" => "Curso não identificado <br>" 
                              );
                     $data['alerta'] =  $alerta;
                     $this->load->view('includes/html_header');
                     $this->load->view('includes/html_menu_entidade');
-                    $this->load->view('alterar_vaga',$data);
+                    $this->load->view('altera_curso',$data);
                     $this->load->view('includes/html_rodape_entidade');
                 }
             }else{
                 $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
+                            "mensagem" => "Curso não identificado <br>" 
                              );
             } 
-            $tabela = 1;
-            $query = $this->turno->select_turno_vaga($id_vaga,$tabela);
+            $tabela = 2;
+            $query = $this->turno->select_turno_vaga($id_curso,$tabela);
             
             if ($query->num_rows() > 0){
                 $data['turno'] = $query->row();
@@ -109,33 +109,33 @@ class Altera_vaga extends CI_Controller {
                 'atividade_id_atividade_projeto' => $this->input->post('atividade'),
                 'perfil_voluntario' => $this->input->post('perfil_voluntario')
                 );
-                $id_vaga = $this->input->post('id_vaga');
+                $id_curso = $this->input->post('id_curso');
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
                 // var_dump($this->input->post());
                 $tabela = 1;
                 
-                if ($this->vaga->alterar_vaga($id_vaga,$data1) == TRUE){
-                    $query = $this->vaga->select_vaga($id_vaga) ;
+                if ($this->curso->alterar_curso($id_curso,$data1) == TRUE){
+                    $query = $this->curso->select_vaga($id_curso) ;
                     if ($query->num_rows() == 1){
-                    $data['vaga'] = $query->row(0,'vaga') ;
+                    $data['curso'] = $query->row(0,'curso') ;
                      }
-                    if ($this->turno->select_vaga($id_vaga, $tabela) == TRUE) {
+                    if ($this->turno->select_vaga($id_curso, $tabela) == TRUE) {
                         
-                        if ($this->turno->delete_vaga($id_vaga, $tabela) == FALSE) { 
+                        if ($this->turno->delete_vaga($id_curso, $tabela) == FALSE) { 
                            $alerta = array(
                            "class"=>"danger",
                     "mensagem" => "Atenção falha no delete do banco<br>" . validation_errors()
                            );
                         }
-      // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
+      // vou ler a ultima vaga cadastrada para a entidade para buscar o id_curso
                        
             //        var_dump($query);
             //        exit;
-            //        echo "vaga_id_vaga = " .$query->id_vaga;
+            //        echo "vaga_id_curso = " .$query->id_curso;
                     }
                     
                     $turno['tabela_assoc']= 1;
-                        $turno['id_vaga_curso']= $id_vaga;
+                        $turno['id_vaga_curso']= $id_curso;
                         $arrlength2 = 3;
                         $arrlength1 = 8;
                         for($indice1 = 1; $indice1 <  $arrlength1; $indice1++) {
@@ -253,75 +253,10 @@ class Altera_vaga extends CI_Controller {
             $data['mensagem'] = $mensagem;
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_vaga',$data);
+            $this->load->view('alterar_curso',$data);
             $this->load->view('includes/html_rodape_entidade');
             
 	}
-        public function delete($id_vaga =null){
-            if ($id_vaga != null){
-                if ($this->vaga->delete_vaga($id_vaga) == FALSE){
-                        $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Não conseguiu apagar o Registro de vaga <br>" 
-                             );
-                        $dados = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL 
-                 );
-                }
-            }else{
-                $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
-                             );
-                        $dados = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL 
-                 );
-            }                 
-                     
-            $id_entidade = NULL;
-            $id_entidade = $this->session->userdata('id_entidade');
-            $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
-            // redirect('cadastro_entidade/index/3');
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('inicio_entidade',$data);
-            $this->load->view('includes/html_rodape_entidade');
-    
-     }  
-/*     public function altera_vaga($id_vaga =null){
-            if ($id_vaga != null){
-                $query = $this->vaga->select_vaga($id_vaga) ;
-                if ($query->num_rows() == 1){
-                $data['vaga'] = $query->row(0,'vaga') ;
-                }       
-            }else{
-                $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
-                             );
-                        $dados = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL
-                 );
-            } 
-            
-           $query = $this->turno->select_vaga($id_vaga);
-            
-            if ($query->num_rows() > 0){
-                $data['turno_vaga'] = $query->row();
-            //    var_dump($data['turno_vaga']);
-            //    exit;
-            } var_dump($this->input->post());
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_vaga',$data);
-            $this->load->view('includes/html_rodape_entidade');
-     } */ 
         
 }
 

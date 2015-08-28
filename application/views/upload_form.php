@@ -55,10 +55,11 @@
         </div>
 
         <div class="uploadify-queue" id="file-queue"></div>
-        
+        <strong>Escolha uma foto para divulgação da entidade </strong>
         <input type="file" name="userfile" id="upload_btn" />
+        <strong>Escolha uma foto para divulgação da entidade </strong>
         <a href="<?= base_url(); ?>cadastro_entidade/cadastro"><button type="button" class="btn btn-primary btn-lg" style="float: right"/>Sair</button> </a>
-            
+         
     <script type='text/javascript' >
     $(function() {
      $('#upload_btn').uploadify({

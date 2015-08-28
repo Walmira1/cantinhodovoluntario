@@ -29,11 +29,11 @@
         <div class="row clearfix">
         <div class="col-md-12 column">
                 <div class="col-md-3 column">
-                    <?php 
+                   <?php 
                         if($this->session->userdata('logotipo_entidade')== NULL) {
-                                echo '<img src="'.base_url().'assets/img/criancas_2.jpg" class="logo_instituicao" alt="" />';
+                                 echo '<img class="img-responsive" src="'.base_url()."assets/img/criancas_4.png".'" class="imagem_cursos img_responsive" alt="" />';
                         }else{
-                                echo '<img src="'.base_url().$this->session->userdata('logotipo_entidade').'" class="logo_instituicao" alt="foto da entidade" />';
+                                echo '<img class="img-responsive" src="'.base_url().$this->session->userdata('logotipo_entidade').'" class="logo_instituicao" alt="foto da entidade" />';
                         } 
                     ?>
                 </div>
@@ -57,7 +57,7 @@
                                 <td ><?= $curso->inicio;?></td>
                                 <td ><?= $curso->fim;?></td>
                                 <td> <a href="<?= base_url(); ?>cadastro_curso/delete/<?= $curso->id_curso;?>"><button type="button" class="btn btn-primary btn-sm" onclick=" return confirma()" style="float: right;">Excluir</button></a> </td>
-                                <td><a href="<?= base_url(); ?>cadastro_curso/altera_curso/<?= $curso->id_curso;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
+                                <td><a href="<?= base_url(); ?>altera_curso/index<?= $curso->id_curso;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
                             </tr>
                             <?php }?>
                             </tbody>

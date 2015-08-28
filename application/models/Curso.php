@@ -39,6 +39,17 @@ class Curso extends CI_Model {
             }
         }
     }
+    public function get_max_curso_by_entidade($id_entidade){
+        if ($id_entidade != NULL){
+            $this->db->select('id_curso');
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            $this->db->order_by("id_curso", "desc"); 
+            $this->db->limit(1);
+            return $this->db->get('curso')->row();
+        }else {
+            return FALSE;
+        }
+    }
     
    
 }

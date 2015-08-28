@@ -29,7 +29,7 @@
                               <?php  echo $alerta["mensagem"]; ?>
                          </div>    
                      <?php  }?>
-                    <form method="post" action="<?= base_url(); ?>altera_entidade/altera">
+                    <form method="post" action="<?= base_url(); ?>altera_cadastro/altera">
                         <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
                         <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
                         <input type="hidden" name="captcha"/> 
@@ -57,14 +57,19 @@
                             <input type="text" name="bairro" required="" value ="<?php echo $entidade->bairro?>" />
                         </div> 
                         <div class="box">
+                        <h4>Cidade:</h4>
+                         <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
+                            <select id="cidade"  name="cidade" required="" />
+                                <option value="<?php echo $entidade->cidade?>"> <?php echo$cidade ?></option>
+                                <?php foreach($cidades as $cidade) {?>
+                                <option value="<?= $cidade->identificador?>"> <?= $cidade->cidade; ?></option>
+                                <?php }?>
+                            </select>        
+                        </div>
+                        <div class="box">
                         <h4>Estado:</h4>
                         <?php echo form_error('estado','<div class="erro">','</div>'); ?>
                         <input type="text" name="estado" value="<?php echo $entidade->estado?>" />
-                        </div>
-                        <div class="box">
-                        <h4>Cidade:</h4>
-                        <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
-                        <input type="text" name="cidade" value="<?php echo $entidade->cidade?>"/>
                         </div>
                         <div class="box">
                         <h4>CEP:</h4>
@@ -77,17 +82,19 @@
                         </div>
                         <div class="box">
                         <h4>Autoriza endereço:</h4>
-                        <input type="checkbox" name="autoriza_endereço" value="1"
-                            <?php if($entidade->autoriza_endereco == 1){?> checked <?php }?> />Sim
-                        <input type="checkbox" name="autoriza_endereco" value="2" 
-                            <?php if($entidade->autoriza_endereco == 2){?> checked <?php }?> /> Não
+                         <?php echo form_error('autoriza_endereco','<div class="erro">','</div>'); ?>
+                        <input type="radio" name="autoriza_endereco" value="1"
+                           <?php if($entidade->autoriza_endereco == 1){?> checked <?php }?> />Sim
+                        <input type="radio" name="autoriza_endereco" value="2"
+                            <?php if($entidade->autoriza_endereco == 2){?> checked <?php }?> />Não
                         </div>
                         <div class="box">
                         <h4>Autoriza foto:</h4>
-                        <input type="radio" name="autoriza_foto" 
-                           <?php if($entidade->autoriza_foto == 1){?> checked <?php }?> /> Sim
-                        <input type="radio" name="autoriza_foto" 
-                            <?php if($entidade->autoriza_foto == 2){?> checked <?php }?> /> Não
+                         <?php echo form_error('autoriza_foto','<div class="erro">','</div>'); ?>
+                        <input type="radio" name="autoriza_foto" value="1"
+                           <?php if($entidade->autoriza_foto == 1){?> checked <?php }?> />Sim
+                        <input type="radio" name="autoriza_foto" value="2"
+                            <?php if($entidade->autoriza_foto == 2){?> checked <?php }?> />Não
                         </div>
                         <div class="box">
                         <h4>Video do youtube</h4>
@@ -104,7 +111,7 @@
                         <br />
                          <input type="submit" class="btn btn-primary btn-lg" style="margin-left: 60%; margin-top: 50px;" value="Alterar" />
                     </form>
-                    <a href="<?= base_url(); ?>upload/index/"><img class="img-responsive" src="<?= base_url(); ?>assets/img/picture.png" style="width: 90px;" alt="" />Altera Fotos</a>
+                    <a href="<?= base_url(); ?>upload/index/2"><img class="img-responsive" src="<?= base_url(); ?>assets/img/picture.png" style="width: 90px;" alt="" />Altera Fotos</a>
                 </div>
             </div>
         </div>

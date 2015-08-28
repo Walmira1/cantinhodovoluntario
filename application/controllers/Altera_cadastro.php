@@ -26,6 +26,7 @@ class Altera_cadastro extends CI_Controller {
     */
 		$this->load->model('entidade', 'entidade');
                 $this->load->model('Vaga', 'vaga');
+                 $this->load->model('cidade', 'cidade');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -39,6 +40,12 @@ class Altera_cadastro extends CI_Controller {
                     $query = $this->entidade->get_id($id_entidade);
                     if ($query->num_rows() == 1){
                         $dados['entidade'] = $query->row(0,'entidade') ;
+                        $id_cidade = $dados['entidade']->cidade;
+                        $dados['cidades'] = $this->db->get('cidade')->result();
+                        $query = $this->cidade->get_cidade($id_cidade);
+                        $dados['cidade'] = $query[0]['cidade'];
+                        $dados['uf'] = $query[0]['uf'] ;
+                         
                         $this->load->view('includes/html_header');
                         $this->load->view('altera_cadastro_entidade',$dados);
                         $this->load->view('includes/html_rodape_entidade');
@@ -85,10 +92,11 @@ class Altera_cadastro extends CI_Controller {
         */
           //Verifica se o form passou nos testes de validação  
            
-             if($this->input->post('entrar')== "Alterar Vaga"){
-             echo "o formulario foi submetido";}
-        //    var_dump($this->input->post());
-            exit;
+        //   if($this->input->post('entrar')== "Alterar"){
+       //    echo "o formulario foi submetido";}
+                    var_dump($this->input->post());
+      //      echo "o formulario foi submetido";
+      //    exit;
            if ($this->form_validation->run('altera_entidade_form')==FALSE) {
                $alerta = array(
                     "class"=>"danger",
@@ -123,8 +131,9 @@ class Altera_cadastro extends CI_Controller {
                 $data['autoriza_foto'] = $this->input->post('autoriza_foto');
                 $data['video_youtube'] = $this->input->post('video');
                 $data['site_entidade'] = $this->input->post('site');
+                $id_entidade = $this->input->post('id_entidade');
                 
-                if ($this->entidade->alterar($data) == TRUE){
+                if ($this->entidade->alterar($id_entidade,$data) == TRUE){
                    $query = $this->entidade->get_entidade_by_email($data['email']);
                    
                    // redirect recarrega a página ou seja perdi o array dados  
@@ -139,7 +148,12 @@ class Altera_cadastro extends CI_Controller {
                     );
                    
                    //redirect('cadastro_entidade/index/1');
-                   $this->load->view('upload_form');
+                    if($query[0]['autoriza_foto'] == 2){
+                       redirect('cadastro_entidade/index/1');
+                   }else {
+                   //redirect('cadastro_entidade/index/1');
+                    $this->load->view('upload_form');
+                   }
                } else{
                     
                    redirect('cadastro_entidade/index/2');

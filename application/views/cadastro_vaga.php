@@ -1,12 +1,12 @@
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <?php  
-                if($this->session->userdata('upload_foto')== NULL){
-                    echo '<img src=".base_url().assets/img/maosnovas.jpg" class="imagem_cursos" alt="" />';
+            if($this->session->userdata('upload_foto')== NULL){
+                    echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_cursos" alt="" />';
                 }else{   
                     echo '<img src="'.base_url().$this->session->userdata('upload_foto').'" class="imagem_cursos" alt="" />';
                 }
-                ?>   
+        ?>   
             </div>
           </div>
         <div class="row clearfix">
@@ -269,7 +269,7 @@
                             Tudo sobre a Oportunidade:
                             <br />
                             <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao"  ></textarea>
+                            <textarea style="width: 96%; min-height: 120px" name="descricao" > </textarea>
                     </div>
                     <div style="margin-left: 2%; margin-top: 15px;">
                             Perfil do Candidato:

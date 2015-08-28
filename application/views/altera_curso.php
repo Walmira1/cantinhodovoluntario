@@ -1,5 +1,4 @@
-
-    <div class="row clearfix">
+<div class="row clearfix">
         <div class="col-md-12 column">
             <?php  
             if($this->session->userdata('upload_foto')== NULL){
