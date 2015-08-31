@@ -1,23 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Altera_vaga extends CI_Controller {
+class Altera_curso extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-         public function __construct(){
+    	public function __construct(){
                 parent::__construct();
                 $this->load->helper(array('form','url'));
                 /* Carrega o model para interação com o banco de dados
@@ -25,19 +10,19 @@ class Altera_vaga extends CI_Controller {
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
 		$this->load->model('curso', 'curso');
+                $this->load->model('entidade', 'entidade');
                 $this->load->model('turno', 'turno');
-               
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
-               
+                $this->load->library('upload');
                         
-         }
+         }	
 	public function index($id_curso =null)
 	{       
             $alerta = NULL;
             $cod_mensagem = null;
             $mensagem = null;
             if ($id_curso != null){
-                $query = $this->vaga->select_vaga($id_vaga) ;
+                $query = $this->curso->select_curso($id_curso) ;
                 if ($query->num_rows() == 1){
                     $data['curso'] = $query->row(0,'curso') ;
                 }else {
@@ -70,7 +55,7 @@ class Altera_vaga extends CI_Controller {
             $data['mensagem'] =  $mensagem;
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_vaga',$data);
+            $this->load->view('altera_curso',$data);
             $this->load->view('includes/html_rodape_entidade');
         }  
         public function altera()

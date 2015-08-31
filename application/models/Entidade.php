@@ -91,42 +91,49 @@ class Entidade extends CI_Model {
     public function atualiza($id_entidade=NULL, $file=NULL){
         var_dump($file);
         echo "entidade = ".$id_entidade;
-        exit;
-        if ($id_entidade != NULL):
+        
+        if (($id_entidade != NULL)&& ($file != NULL)){
             $this->db->where('id_entidade', $id_entidade);
-            $query = $this->db->get('entidade')->row();
-            if ($query->num_rows == 1):
+            $query = $this->db->get('entidade');
+            if ($query->num_rows == 1){
+                 var_dump($query);
+                 exit;
                 $data = array(
-                   'id_entidade' => $query->id_entidade,
-                   'nome' =>$query->nome,
-                    'endereco' => $query->endereco,
-                    'bairro' => $query->bairro,
-                    'cidade' => $query->cidade,
-                    'telefone' => $query->telefone,
-                    'estado' => $query->estado,
-                    'cep' => $query->cep,
-                    'email' => $query->email,
-                    'descricao' => $query->descricao,
-                    'logotipo_entidade' => $query->logotipo_entidade,
-                    'upload_foto' => $query->username,
+                    'id_entidade' => $query[0]['id_entidade'],
+                    'nome'        => $query[0]['nome'] ,
+                    'endereco'    => $query[0]['endereco'],
+                    'bairro'      => $query[0]['bairro'],
+                    'cidade'      => $query[0]['cidade'],
+                    'telefone'    => $query[0]['telefone'],
+                    'estado'      => $query[0]['estado'],
+                    'cep'         => $query[0]['cep'],
+                    'email'       => $query[0]['email'],
+                    'descricao'   => $query[0]['descricao'],
                     'logotipo_entidade' => $file,
                     'upload_foto' => $file,
-                    'autoriza_endereco' => $query->autoriza_endereco, 
-                    'autoriza_foto' => $query->autoriza_foto,
-                    'video_youtube' => $query->video,
-                    'site_entidade' => $query->site,
-                    'senha' => md5($query->senha));
-            
-              //      $query[0]['upload_foto']= $file;
-            else:
+                    'autoriza_endereco' => $query[0]['autoriza_endereco'], 
+                    'autoriza_foto'     => $query[0]['autoriza_foto'],
+                    'video_youtube'     => $query[0]['video'],
+                    'site_entidade'     => $query[0]['site'],
+                    'senha'             => $query[0]['senha'],
+                    'ativo'             => $query[0]['ativo']
+                    );
+                $this->db->where('id_entidade', $id_entidade);
+                $this->db->update('entidade', $data); 
+                if ($this->db->affected_rows()>0){
+        //retorna ok
+                    return TRUE;
+                }else{
+        //return false
                     return FALSE;
-            endif;
-        else:
+                }
+            }else{
+                    return FALSE;
+            }
+        }else{
             return FALSE;
-        endif;
+        }
 
-        //row_object() retorna direto o objeto produto e não um array
-        return $data;
     }
 }
 

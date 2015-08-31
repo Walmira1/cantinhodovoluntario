@@ -11,11 +11,11 @@
 			</h3>
 	</div>
         <div class="col-md-2 column">
-        <div class="sair">
+            <div class="sair">
                 <a href="#" >
                     Sair
                 </a> 
-        </div>
+            </div>
         </div>
 		
     </div>
@@ -84,15 +84,21 @@
                     <div class="box">
                           <h4>Estado:</h4>
                            <?php echo form_error('estado','<div class="erro">','</div>'); ?>
-                          <input type="text" name="estado" required="" value ="<?php echo set_value('estado');?>" />
+                          <select id="estado"  name="estado" required="" />
+                          <option value=" "> -- </option>
+                                <?php foreach($estados as $estado) {?>
+                                <option value="<?= $estado->uf?>"> <?= $estado->uf; ?></option>
+                                <?php }?>
+                            </select>
+                          
                     </div>
                     <div class="box">
                             <h4>Cidade:</h4>
                              <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
                             <select id="cidade"  name="cidade" required="" />
-                                <option value="0"> ---- </option>
+                                <option value=" "> ---- </option>
                                 <?php foreach($cidades as $cidade) {?>
-                                <option value="<?= $cidade->identificador?>"> <?= $cidade->cidade; ?></option>
+                                <option value="<?= $cidade->cidade?>"> <?= $cidade->cidade; ?></option>
                                 <?php }?>
                             </select>
                     </div>
@@ -157,6 +163,33 @@
                                 <input type="file" id="foto1" name="userfile" />
                                 <input type="button" id="teste" value="submit"/>
                         </form>  -->
-                </div>
+            </div>
         </div>
-    </div>   
+    </div>  
+    <!-- [INI]Rodapé[/INI] -->
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+                    <div class="rodape">
+                        <div class="rodape_links">
+                                    <a href="<?= base_url(); ?>inicio">Página Inicial</a>
+				    <a href="<?= base_url(); ?>sobre">Sobre</a>	
+			</div>
+                        <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >
+                         <strong>Nossa Página no Face </strong>
+                        </a>
+                        <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >
+                          <img src="<?= base_url(); ?>assets/img/Facebook_creatures.png" alt="Facebook" 
+                                  style="width: 4em"/>
+                        </a>           
+                    
+                    <h5 id="rodape_logo">
+                          Cantinho do Voluntario@2015
+                    </h5>
+                    </div>
+		</div>	
+	</div>
+	<!-- [FIM]Rodapé[/FIM] -->
+</div>
+</body>
+</html>
+

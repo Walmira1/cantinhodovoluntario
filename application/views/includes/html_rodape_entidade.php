@@ -3,12 +3,12 @@
 		<div class="col-md-12 column">
                     <div class="rodape">
                         <div class="rodape_links">
-                                    <a href="index.html">Página Inicial</a>
-				    <a href="inicio_instituicao.html">Inicio Instituição</a>
-				    <a href="cursos.html">Cursos</a>
-				    <a href="#">Campanhas/Noticias</a>
-                                    <a href="altera_cadastro_entidade.html">Altera Cadastro</a>
-				    <a href="#">Sobre</a>			   
+                                    <a href="<?= base_url(); ?>inicio">Página Inicial</a>
+				    <a href="<?= base_url(); ?>inicio_entidade.html">Inicio Instituição</a>
+				    <a href="<?= base_url(); ?>cadastro_cursos.html">Cursos</a>
+				    <a href="<?= base_url(); ?>cadastro_campanhas_noticias">Campanhas/Noticias</a>
+                                    <a href="<?= base_url(); ?>altera_cadastro_entidade">Altera Cadastro</a>
+				    <a href="<?= base_url(); ?>inicio">Sobre</a>			   
 				    <a href="#">Termos e Condições</a>
 			</div>
                         <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >

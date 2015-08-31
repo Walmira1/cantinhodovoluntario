@@ -11,6 +11,7 @@ class Cadastro_entidade extends CI_Controller {
     */
 		$this->load->model('entidade', 'entidade');
                 $this->load->model('Vaga', 'vaga');
+                $this->load->model('Cidade', 'cidade');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -60,8 +61,8 @@ class Cadastro_entidade extends CI_Controller {
                  "alerta" => $alerta
                 );
                 $dados['cidades'] = $this->db->get('cidade')->result();
+                $dados['estados'] = $this->cidade->get_estado();
                 $this->load->view('cadastro_entidade',$dados);
-                $this->load->view('includes/html_rodape_entidade');
                                 
 	}
         public function cadastrar()
@@ -95,7 +96,7 @@ class Cadastro_entidade extends CI_Controller {
                    "alerta" => $alerta   );
                 $this->load->view('includes/html_header');
                 $this->load->view('cadastro_entidade',$dados);
-                $this->load->view('includes/html_rodape_entidade');
+                
             }else{
                 //Upload do arquivo
              //   $upload = $this->do_upload($this->input->post('userfile'));
@@ -129,13 +130,14 @@ class Cadastro_entidade extends CI_Controller {
                    // redirect recarrega a página ou seja perdi o array dados  
                    // para não perder os dados crio uma variavel de sessão
                    $dados = array(
-                            'user_id' => $query[0]['id_entidade'],
+                            'id_entidade' => $query[0]['id_entidade'],
                             'logotipo_entidade' => $query[0]['logotipo_entidade'],
                             'upload_foto' => $query[0]['upload_foto'],
                             'site_entidade' => $query[0]['site_entidade'],
                             'user_nome' => $query[0]['nome'],
                             'user_logado' => TRUE
                     );
+                   $this->session->set_userdata($dados);
                    $autoriza_foto = $query[0]['autoriza_foto'];
                    if($autoriza_foto == 2){
                        $data[vagas] = $query[0];
@@ -167,8 +169,8 @@ class Cadastro_entidade extends CI_Controller {
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
                 $this->load->view('cadastro_entidade');
-                $this->load->view('includes/html_rodape_entidade');
-                redirect('cadastro_entidade/cadastro');
+                
+               
                  
             }
             if ($this->form_validation->run('login_entidade_form')== TRUE) {
@@ -230,7 +232,7 @@ class Cadastro_entidade extends CI_Controller {
                     $this->load->view('includes/html_header');
                 
                     $this->load->view('cadastro_entidade',$dados);
-                    $this->load->view('includes/html_rodape_voluntario');   
+                     
                 endif;                
                  
              }

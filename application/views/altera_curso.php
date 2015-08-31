@@ -28,8 +28,9 @@
         <?php  }?> 
         <form  method="post"  action="cadastrar">
             <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
-                        <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
-                        <input type="hidden" name="captcha"/> 
+            <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
+            <input type="hidden" name="id_vaga" value="<?php echo $curso->id_curso?>"/>
+            <input type="hidden" name="captcha"/> 
 	<div class="row clearfix">
             <div class="col-md-12 column">
 		<!-- [INI][/INI] -->
@@ -39,28 +40,28 @@
                             Titulo:
                             <br />
                             <?php echo form_error('titulo','<div class="erro">','</div>'); ?>
-                            <input type="text" name="titulo" required="" value ="<?php echo set_value('titulo');?>" autofocus/>
+                            <input type="text" name="titulo" required="" value ="<?php echo $curso->titulo;?>"  autofocus/>
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Video_youtube:
                     <br />
                     <?php echo form_error('video','<div class="erro">','</div>'); ?>
-                    <input type="text" name="video"  value ="<?php echo set_value('video');?>" />
+                    <input type="text" name="video" value ="<?php echo $curso->video;?>"  />
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Numero de Horas:
                     <br />
                     <?php echo form_error('num_horas','<div class="erro">','</div>'); ?>
-                    <input type="text" name="num_horas" required="" value ="<?php echo set_value('num_horas');?>" />
+                    <input type="text" name="num_horas" required="" value ="<?php echo $curso->num_horas;?>"/>
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Taxa de Inscrição:
                     <br />
                     <?php echo form_error('taxa_inscr','<div class="erro">','</div>'); ?>
-                    <input type="text" name="taxa_inscr"  required="" data-thousands="." data-decimal="," data-prefix="R$ " value ="<?php echo set_value('taxa_inscr');?>" />
+                    <input type="text" name="taxa_inscr"  required="" data-thousands="." data-decimal="," data-prefix="R$ "  value ="<?php echo $curso->taxa_inscr;?>" />
                 </div>
             </div>
         </div>
@@ -71,14 +72,14 @@
                             Inscrição até:
                             <br />
                             <?php echo form_error('inscricao_ate','<div class="erro">','</div>'); ?>
-                            <input type="date" min="<?php echo date('Y-m-d');?>" name="inscricao_ate" required="" value ="<?php echo set_value('inscricao_ate');?>" />
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="inscricao_ate" required="" value ="<?php echo $curso->inscricao_ate;?>" />
                     </div>
                     <div class="col-md-3 column incluir_curso">
                             <br />
                             Data Inicio:
                             <br />
                             <?php echo form_error('data_inicio','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_inicio" min="<?php echo date('Y-m-d');?>" required="" value ="<?php echo set_value('data_inicio');?>" />
+                            <input type="date" name="data_inicio" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->inicio;?>"/>
                     </div>
                     
                     <div class="col-md-3 column incluir_curso">
@@ -86,14 +87,14 @@
                             Data Fim:
                             <br />
                             <?php echo form_error('data_fim','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_fim" min="<?php echo date('Y-m-d');?>" required="" value ="<?php echo set_value('data_fim');?>" />
+                            <input type="date" name="data_fim" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->fim;?>"/>
                     </div>
                     <div class="col-md-3 column incluir_curso" style="margin-bottom: 20px;">
                             <br />
                             Data de postagem:
                             <br />
                             <?php echo form_error('data_postagem','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_postagem" required="" value ="<?php echo set_value('data_postagem');?>"/>
+                            <input type="date" name="data_postagem" required="" value ="<?php echo $curso->data_postagem;?>"/>
                     </div>  
                 </div>
         </div>
@@ -206,7 +207,7 @@
                             Horário:
                             <br />
                             <?php echo form_error('horario','<div class="erro">','</div>'); ?>
-                            <input type="text" name="horario" required="" value ="<?php echo set_value('horario');?>"/>
+                            <input type="text" name="horario" required="" value ="<?php echo $curso->horario;?>"/>
                 </div>
             </div>    
         </div>
@@ -216,13 +217,13 @@
                             Breve descrição:
                             <br />
                             <?php echo form_error('breve_descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="breve_descricao" required="" value ="<?php echo set_value('breve_descricao');?>"></textarea>
+                            <textarea style="width: 96%; min-height: 120px" name="breve_descricao" required="" value ="<?php echo $curso->breve_descricao;?>"></textarea>
                 </div>
                 <div style="margin-left: 2%; margin-top: 15px;">
                             Descrição:
                             <br />
                             <?php echo form_error('perfil_voluntario','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao" required="" value ="<?php echo set_value('perfil_voluntario');?>"></textarea>
+                            <textarea style="width: 96%; min-height: 120px" name="descricao" required="" value ="<?php echo $curso->descricao;?>"></textarea>
                 </div>
                 
                 <div>                                                   

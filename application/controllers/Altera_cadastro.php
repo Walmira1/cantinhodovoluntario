@@ -139,14 +139,14 @@ class Altera_cadastro extends CI_Controller {
                    // redirect recarrega a página ou seja perdi o array dados  
                    // para não perder os dados crio uma variavel de sessão
                    $dados = array(
-                            'user_id' => $query[0]['id_entidade'],
+                            'id_entidade' => $query[0]['id_entidade'],
                             'logotipo_entidade' => $query[0]['logotipo_entidade'],
                             'upload_foto' => $query[0]['upload_foto'],
                             'site_entidade' => $query[0]['site_entidade'],
                             'user_nome' => $query[0]['nome'],
                             'user_logado' => TRUE
                     );
-                   
+                   $this->session->set_userdata($dados);
                    //redirect('cadastro_entidade/index/1');
                     if($query[0]['autoriza_foto'] == 2){
                        redirect('cadastro_entidade/index/1');

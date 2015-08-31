@@ -55,6 +55,7 @@
         </div>
 
         <div class="uploadify-queue" id="file-queue"></div>
+        <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('user_id')?>"/>
         <strong>Escolha uma foto para divulgação da entidade </strong>
         <input type="file" name="userfile" id="upload_btn" />
         <strong>Escolha uma foto para divulgação da entidade </strong>
@@ -108,12 +109,13 @@
 
       'swf'   : '<?php echo base_url() ?>assets/js/uploadify/uploadify.swf',
       'uploader'  : '<?php echo base_url('upload/uploadify')?>',
-      'cancelImage' : '<?php echo base_url() ?>assets/js/uploadify/uploadify-cancel.png',
+      'cancelImage' : '<?php echo base_url()?>assets/js/uploadify/uploadify-cancel.png',
+      'script': '<?php echo base_url('upload/uploadify')?>',
       'queueID'  : 'file-queue',
       'buttonClass'  : 'button',
       'height'   : 120,
       'buttonText' : "Foto da Instituição",
-      'multi'   : true,
+      'multi'   : false,
       'auto'   : true,
 
       'fileTypeExts' : '*.jpg; *.png; *.gif; *.PNG; *.JPG; *.GIF;',
