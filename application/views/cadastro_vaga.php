@@ -14,7 +14,7 @@
              <div class="col-md-12 column">
                 <div id="breadcrump">
                   <a href="<?= base_url(); ?>inicio">Home ></a>
-                   <a href=<?= base_url(); ?>"inicio_entidade/<?php $this->session->userdata('id_entidade')?>">Instituição ></a>
+                   <a href="<?= base_url();?>inicio_entidade/index/<?php $this->session->userdata('id_entidade')?>">Instituição ></a>
                            <a href="#">Incluir Nova Vaga</a>
                 </div>  
              </div>
@@ -32,7 +32,7 @@
                 <?php if($mensagem != null) {?>
                 <div class="alert alert-success">
                     <?php  echo $mensagem;?> 
-                    
+                    <?php   $mensagem = NULL;?> 
                 </div>  
                 <div>
                     <a href="<?= base_url(); ?>cadastro_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>

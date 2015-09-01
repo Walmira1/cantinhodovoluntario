@@ -2,27 +2,27 @@
 
 class Inicio extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+	public function __construct(){
+                parent::__construct();
+                $this->load->helper(array('form','url'));
+                /* Carrega o model para interação com o banco de dados
+       Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
+            O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
+    */
+		$this->load->model('cidade', 'cidade');
+                $this->load->model('curso', 'curso');
+       // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
+                
+                        
+         }
 	
         public function index()
 	{       
+                $dados['cidades'] = $this->db->get('cidade')->result();
+                $dados['estados'] = $this->cidade->get_estado();
 		$this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_voluntario');
-                $this->load->view('home');
+                $this->load->view('home',$dados);
                 $this->load->view('includes/html_rodape_voluntario');
                                 
 	}

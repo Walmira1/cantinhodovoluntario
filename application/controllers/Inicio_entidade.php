@@ -1,31 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Cadastro_entidade extends CI_Controller {
+class Inicio_entidade extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+	public function __construct(){
+                parent::__construct();
+                $this->load->helper(array('form','url'));
+                /* Carrega o model para interação com o banco de dados
+       Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
+            O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
+    */
+		$this->load->model('entidade', 'entidade');
+                $this->load->model('vaga', 'vaga');
+       // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
+                
+                        
+         }
 	
-        public function index()
-	{       
+        public function index($id_entidade=NULL)
+	{      
+            if($id_entidade != NULL){
+                $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
 		$this->load->view('includes/html_header');
-                
-                $this->load->view('inicio_entidade');
-                
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('inicio_entidade',$data);
                 $this->load->view('includes/html_rodape_entidade');
-                
+             }    
                                 
 	}
         

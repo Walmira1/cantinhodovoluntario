@@ -25,7 +25,7 @@
 		<div class="col-md-12 column">
 			<div id="mapa">
 			   <a href="<?= base_url(); ?>cadastro_entidade/cadastro">Instituições</a>
-			   <a href="<?= base_url(); ?>ver_vagas">Vagas</a>
+			   <a href="<?= base_url(); ?>pesquisa_vaga/index">Vagas</a>
 			   <a href="<?= base_url(); ?>testemunhos">Testemunhos</a>
 			   <a href="<?= base_url(); ?>entidades/index">Instituições Registradas</a>
 			   <a href="<?= base_url(); ?>sobre">Sobre</a>			   

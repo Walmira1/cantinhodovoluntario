@@ -4,11 +4,11 @@
 		<div class="col-md-12 column">
                     <div id="rodape">
 				<div class="rodape_links">
-                                    <a href="#">Página Inicial</a>
-				    <a href="#">Vagas</a>
-				    <a href="#">Testemunhos</a>
-				    <a href="#">Instituições Registradas</a>
-				    <a href="#">Sobre</a>			   
+                                    <a href="<?= base_url(); ?>inicio">Página Inicial</a>
+				    <a href="<?= base_url(); ?>ver_vagas">Vagas</a>
+				    <a href="<?= base_url(); ?>testemunhos">Testemunhos</a>
+				    <a href="<?= base_url(); ?>entidades/index">Instituições Registradas</a>
+				    <a href="<?= base_url(); ?>sobre">Sobre</a>			   
 				    <a href="#">Termos e Condições</a>
 				</div>
                         

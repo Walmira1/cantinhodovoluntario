@@ -44,7 +44,7 @@
                         <div class="box">
                         <h4>Telefone:</h4>
                         <?php echo form_error('telefone','<div class="erro">','</div>'); ?>
-                        <input type="text"  name="telefone" value="<?php echo $entidade->telefone?>"/>
+                        <input type="text"  id="telefone" name="telefone" value="<?php echo $entidade->telefone?>"/>
                         </div>
                         <div class="box">
                         <h4>Endereço:</h4>
@@ -60,21 +60,27 @@
                         <h4>Cidade:</h4>
                          <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
                             <select id="cidade"  name="cidade" required="" />
-                                <option value="<?php echo $entidade->cidade?>"> <?php echo$cidade ?></option>
+                                <option value=" "> ---- </option>
                                 <?php foreach($cidades as $cidade) {?>
-                                <option value="<?= $cidade->identificador?>"> <?= $cidade->cidade; ?></option>
+                                <option value="<?= $cidade->cidade?>"> <?= $cidade->cidade; ?></option>
                                 <?php }?>
-                            </select>        
+                            </select>      
                         </div>
                         <div class="box">
                         <h4>Estado:</h4>
                         <?php echo form_error('estado','<div class="erro">','</div>'); ?>
-                        <input type="text" name="estado" value="<?php echo $entidade->estado?>" />
+                          <select id="estado"  name="estado" required="" />
+                          <option value=" "> -- </option>
+                                <?php foreach($estados as $estado) {?>
+                                <option value="<?= $estado->uf?>"> <?= $estado->uf; ?></option>
+                                <?php }?>
+                            </select>
                         </div>
                         <div class="box">
                         <h4>CEP:</h4>
                         <?php echo form_error('cep','<div class="erro">','</div>'); ?>
-                        <input type="text" name="cep" value="<?php echo $entidade->cep?>"/>
+                        <input id="cep" type="text" name="cep" 
+                               value="<?php echo $entidade->cep?>" />
                         </div>
                         <div class="box">
                         <h4>E-mail:</h4>
@@ -116,6 +122,3 @@
             </div>
         </div>
     <!-- [FIM]Login[/FIM] -->
-	
-
-
