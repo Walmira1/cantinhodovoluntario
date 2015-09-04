@@ -67,7 +67,7 @@
       'debug'   : false,
       'checkExisting' : '<?php echo base_url() ?>assets/js/uploadify/check-exists.php',
       'swf'   : '<?php echo base_url() ?>assets/js/uploadify/uploadify.swf',
-      'uploader'  : '<?php echo base_url('upload/uploadify')?>',
+      'uploader'  : '<?php echo base_url('upload/uploadify2')?>',
       'cancelImage' : '<?php echo base_url() ?>assets/js/uploadify/uploadify-cancel.png',
       'queueID'  : 'file-queue',
       'buttonClass'  : 'button',
@@ -108,7 +108,7 @@
       'debug'   : false,
 
       'swf'   : '<?php echo base_url() ?>assets/js/uploadify/uploadify.swf',
-      'uploader'  : '<?php echo base_url('upload/uploadify')?>',
+      'uploader'  : '<?php echo base_url('upload/uploadify1')?>',
       'cancelImage' : '<?php echo base_url()?>assets/js/uploadify/uploadify-cancel.png',
       'script': '<?php echo base_url('upload/uploadify')?>',
       'queueID'  : 'file-queue',

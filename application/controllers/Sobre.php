@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Inicio_entidade extends CI_Controller {
+class Sobre extends CI_Controller {
 
 	public function __construct(){
                 parent::__construct();
@@ -17,16 +17,11 @@ class Inicio_entidade extends CI_Controller {
          }
 	
         public function index($id_entidade=NULL)
-	{      
-            if($id_entidade != NULL){
-                $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
-                $query = get_vaga_by_entidade_id_entidade($query->id_entidade)->row();
-                $data[vagas] = $query[0];
+	{   
 		$this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
-                $this->load->view('inicio_entidade',$data);
-                $this->load->view('includes/html_rodape_entidade');
-             }    
+                $this->load->view('includes/html_menu_voluntario');
+                $this->load->view('sobre');
+                $this->load->view('includes/html_rodape_voluntario');
                                 
 	}
         

@@ -99,6 +99,14 @@ class Vaga extends CI_Model {
             return $this->db->get('vaga')->result();
             
         }
+    }    
+        public function get_vaga_by_id_entidade($id_entidade=NULL){
+        //Busca com condição
+        if ($id_entidade != NULL){
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            return $this->db->get('vaga')->row();
+            
+        }
         
     }
     public function delete_vaga($id_vaga=NULL){

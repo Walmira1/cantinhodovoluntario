@@ -24,10 +24,9 @@
             <div id="mapa">
                <a href="<?= base_url(); ?>inicio">Página Inicial</a> 
                <a href="<?= base_url(); ?>cadastro_curso/index/<?= $this->session->userdata('id_entidade')?>">Cursos</a>              
-               <a href="<?= base_url(); ?>cadastro_campanhas_noticias/index/<?= $this->session->userdata('id_entidade')?>">Campanhas/Noticias</a>                             
+               <a href="<?= base_url(); ?>cadastro_campanha_noticia/index/<?= $this->session->userdata('id_entidade')?>">Campanhas/Noticias</a>                             
                <a href="<?= base_url(); ?>altera_cadastro/index/<?= $this->session->userdata('id_entidade')?>">Altera Cadastro</a>
-
-               <a href="<?= base_url(); ?>sobre">Sobre</a> 
+              
             </div>  
         </div>
 		<!-- [FIM]Menu[/FIM] --> 

@@ -25,8 +25,8 @@ class Altera_cadastro extends CI_Controller {
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
 		$this->load->model('entidade', 'entidade');
-                $this->load->model('Vaga', 'vaga');
-                 $this->load->model('cidade', 'cidade');
+                $this->load->model('vaga', 'vaga');
+                $this->load->model('cidade', 'cidade');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -41,12 +41,6 @@ class Altera_cadastro extends CI_Controller {
                     if ($query->num_rows() == 1){
                         $dados['entidade'] = $query->row(0,'entidade') ;
                         $id_cidade = $dados['entidade']->cidade;
-                        $dados['cidades'] = $this->db->get('cidade')->result();
-                        $query = $this->cidade->get_cidade($id_cidade);
-                        $dados['cidade'] = $query[0]['cidade'];
-                        $dados['uf'] = $query[0]['uf'] ;
-                         
-                        $this->load->view('includes/html_header');
                         $this->load->view('altera_cadastro_entidade',$dados);
                         $this->load->view('includes/html_rodape_entidade');
                     }else{                            
@@ -94,17 +88,17 @@ class Altera_cadastro extends CI_Controller {
            
         //   if($this->input->post('entrar')== "Alterar"){
        //    echo "o formulario foi submetido";}
-                    var_dump($this->input->post());
+       //            var_dump($this->input->post());
       //      echo "o formulario foi submetido";
       //    exit;
-           if ($this->form_validation->run('altera_entidade_form')==FALSE) {
+            if ($this->form_validation->run('altera_entidade_form')==FALSE) {
                $alerta = array(
                     "class"=>"danger",
                     "mensagem" => "Atenção falha na validação do formulário<br>" . validation_errors()
                     );
                $dados = array(
                    "alerta" => $alerta   );
-                $this->load->view('includes/html_header');
+                
                 $this->load->view('altera_cadastro_entidade',$dados);
                 $this->load->view('includes/html_rodape_entidade');
             }else{
@@ -114,50 +108,65 @@ class Altera_cadastro extends CI_Controller {
              // outra maneira
              // usando elements...em uma unica linha
              // $dados = elements(array('nome', 'endereço' .....
-            	$data['nome'] = $this->input->post('nome');
-                $data['endereco'] = $this->input->post('endereco');
-                $data['bairro'] = $this->input->post('bairro');
-                $data['cidade'] = $this->input->post('cidade');
-                $data['telefone'] = $this->input->post('telefone');
-                $data['estado'] = $this->input->post('estado');
-                $data['cep'] = $this->input->post('cep');
-                $data['email'] = $this->input->post('email');
-                $data['descricao'] = $this->input->post('descricao');
-             //   $data['logotipo_entidade'] = $this->input->post('logotipo_entidade');
-             //   $data['upload_foto'] = $this->input->post('username');
-                $data['logotipo_entidade'] = null;
-                $data['upload_foto'] = null;
-                $data['autoriza_endereco'] = $this->input->post('autoriza_endereco'); 
-                $data['autoriza_foto'] = $this->input->post('autoriza_foto');
-                $data['video_youtube'] = $this->input->post('video');
-                $data['site_entidade'] = $this->input->post('site');
+                $data = array(
+                    'id_entidade' => $this->input->post('id_entidade'),
+                    'nome'        => $this->input->post('nome') ,
+                    'endereco'    => $this->input->post('endereco'),
+                    'bairro'      => $this->input->post('bairro'),
+                    'cidade'      => $this->input->post('cidade'),
+                    'telefone'    => $this->input->post('telefone'),
+                    'estado'      => $this->input->post('estado'),
+                    'cep'         => $this->input->post('cep'),
+                    'email'       => $this->input->post('email'),
+                    'descricao'   => $this->input->post('descricao'),
+                    'logotipo_entidade' => $this->input->post('logotipo_entidade'),
+                    'upload_foto' => $this->input->post('upload_foto'),
+                    'autoriza_endereco' => $this->input->post('autoriza_endereco'), 
+                    'autoriza_foto'     => $this->input->post('autoriza_foto'),
+                    'video_youtube'     => $this->input->post('video'),
+                    'site_entidade'     => $this->input->post('site'),
+                    'senha'             => $this->input->post('senha'),
+                    'ativo'             => $this->input->post('ativo')
+                    );
                 $id_entidade = $this->input->post('id_entidade');
-                
-                if ($this->entidade->alterar($id_entidade,$data) == TRUE){
-                   $query = $this->entidade->get_entidade_by_email($data['email']);
+                if ($this->entidade->alterar($id_entidade, $data) == TRUE){
+                   $query = $this->entidade->get_entidade_by_email($data['email'])->row();
                    
                    // redirect recarrega a página ou seja perdi o array dados  
                    // para não perder os dados crio uma variavel de sessão
                    $dados = array(
-                            'id_entidade' => $query[0]['id_entidade'],
+            /*                'id_entidade' => $query[0]['id_entidade'],
                             'logotipo_entidade' => $query[0]['logotipo_entidade'],
                             'upload_foto' => $query[0]['upload_foto'],
                             'site_entidade' => $query[0]['site_entidade'],
-                            'user_nome' => $query[0]['nome'],
+                            'user_nome' => $query[0]['nome'],*/
+                            'id_entidade' => $query->id_entidade,
+                            'logotipo_entidade' => $query->logotipo_entidade,
+                            'upload_foto' => $query->upload_foto,
+                            'site_entidade' => $query->site_entidade,
+                            'user_nome' => $query->nome,
                             'user_logado' => TRUE
-                    );
-                   $this->session->set_userdata($dados);
-                   //redirect('cadastro_entidade/index/1');
-                    if($query[0]['autoriza_foto'] == 2){
-                       redirect('cadastro_entidade/index/1');
-                   }else {
-                   //redirect('cadastro_entidade/index/1');
-                    $this->load->view('upload_form');
-                   }
-               } else{
-                    
-                   redirect('cadastro_entidade/index/2');
-                 
+                        );
+                        $this->session->set_userdata($dados);
+                        $query = $this->entidade->get_id($id_entidade);
+                        $dados['entidade'] = $query->row(0,'entidade');
+                        $query = $this->vaga->get_vaga_by_id_entidade($id_entidade);
+                        $dados['vagas'] = $query;
+                        $dados['alerta'] = $alerta;
+                        $this->load->view('includes/html_header');
+                        $data['msg'] = "Entidade Alterada com Sucesso";
+                        $this->load->view('includes/msg_sucesso',$data); 
+                        $this->load->view('includes/html_menu_entidade');
+                        $this->load->view('inicio_entidade',$dados);
+                        $this->load->view('includes/html_rodape_entidade');
+               }else{
+                    $data['msg'] = "Não foi possivel Alterar a Entidade"; 
+                    $this->load->view('includes/msg_erro',$data);
+                    $query = $this->entidade->get_id($id_entidade);
+                    $dados['entidade'] = $query->row(0,'entidade');
+                    $dados['alerta'] = $alerta;
+                    $this->load->view('altera_cadastro_entidade',$dados);
+                    $this->load->view('includes/html_rodape_entidade');
                 }
                 
            }    

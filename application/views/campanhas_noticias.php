@@ -25,7 +25,7 @@
 		<!-- [INI]Menu[/INI] -->
 		<div class="col-md-12 column">
 			<div id="mapa">
-				<a href="index.html">Página Inicial</a>
+				<a href="<?= base_url(); ?>inicio">Página Inicial</a>
 				<a href="cadastro_entidade.html">Instituições</a>
 				 <a href="ver_vagas.html">Vagas</a>
 				 <a href="#">Testemunhos</a>

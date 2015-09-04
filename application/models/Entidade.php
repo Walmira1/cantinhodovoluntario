@@ -36,12 +36,7 @@ class Entidade extends CI_Model {
         //Busca com condição
         if ($email != NULL):
             $this->db->where('email', $email);
-            $query = $this->db->get('entidade');
-            if ($query->num_rows == 1):
-                    return TRUE;
-            else:
-                    return FALSE;
-            endif;
+            return $this->db->get('entidade');
         else:
             return FALSE;
         endif;
@@ -74,18 +69,40 @@ class Entidade extends CI_Model {
 		return FALSE;
         endif;
     }
-    public function alterar($id_entidade,$data){
-    //    $query = $this->db->select_max('id_vaga');
-        if (($id_entidade != NULL) && ($data != NULL)){
-            $this->db->where('id_entidade',$id_entidade);
+    public function alterar($id_entidade= NULL, $dados=NULL){
+        if (($id_entidade != NULL) && ($dados != NULL)){
+            $data = array(
+                    'id_entidade' => $dados['id_entidade'],
+                    'nome'        => $dados['nome'] ,
+                    'endereco'    => $dados['endereco'],
+                    'bairro'      => $dados['bairro'],
+                    'cidade'      => $dados['cidade'],
+                    'telefone'    => $dados['telefone'],
+                    'estado'      => $dados['estado'],
+                    'cep'         => $dados['cep'],
+                    'email'       => $dados['email'],
+                    'descricao'   => $dados['descricao'],
+                    'logotipo_entidade' => $dados['logotipo_entidade'],
+                    'upload_foto' => $dados['upload_foto'],
+                    'autoriza_endereco' => $dados['autoriza_endereco'], 
+                    'autoriza_foto'     => $dados['autoriza_foto'],
+                    'video_youtube'     => $dados['video_youtube'],
+                    'site_entidade'     => $dados['site_entidade'],
+                    'senha'             => $dados['senha'],
+                    'ativo'             => $dados['ativo']
+                    );
+            $this->db->where('id_entidade', $id_entidade);
             $this->db->update('entidade', $data); 
-            if ($this->db->affected_rows()> 0){
-                return TRUE;
+            if ($this->db->affected_rows()>0){
+        //retorna ok
+                    return TRUE;
             }else{
-                return FALSE;
-            }
+        //return false
+        echo "Não altereou nenhum registro";
+                    return FALSE;
+                }
         }else{
-           return FALSE; 
+                    return FALSE;
         }
     }
     public function atualiza($id_entidade=NULL, $file=NULL){
@@ -113,8 +130,8 @@ class Entidade extends CI_Model {
                     'upload_foto' => $file,
                     'autoriza_endereco' => $query[0]['autoriza_endereco'], 
                     'autoriza_foto'     => $query[0]['autoriza_foto'],
-                    'video_youtube'     => $query[0]['video'],
-                    'site_entidade'     => $query[0]['site'],
+                    'video_youtube'     => $query[0]['video_youtube'],
+                    'site_entidade'     => $query[0]['site_entidade'],
                     'senha'             => $query[0]['senha'],
                     'ativo'             => $query[0]['ativo']
                     );

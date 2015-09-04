@@ -21,36 +21,27 @@
   <![endif]-->
 
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img<?= base_url(); ?>assets/img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url(); ?>assets/img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="<?= base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
-  <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.png">
-   <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
-   <script type="text/javascript" src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
-        <script src="<?= base_url(); ?>assets/js/jquery.js" type="text/javascript"></script>
-        <script src="<?= base_url(); ?>assets/js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-		$("#telefone").mask("(99)9999-9999");
-		$("#cpf").mask("999.999.999-99");
-		$("#cep").mask("99999-999");
-		$("#data").mask("99/99/9999");
-	});
-        </script>
-        <script type="text/javascript">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img<?= base_url(); ?>assets/img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url(); ?>assets/img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?= base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.png">
+    <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
         function confirma() {
              if (confirm("Tem certeza que deseja realmente excluir este registro?\nEsta operação não poderá ser desfeita!")) return true; else return false;
         }
-        </script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-        <script src="<?= base_url(); ?>assets/js/jquery.maskMoney.js" type="text/javascript"></script>
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script src="<?= base_url(); ?>assets/js/jquery.maskMoney.js" type="text/javascript"></script>
         
-        <script>
+    <script>
         $(function() {
             $('#taxa_inscr').maskMoney();
         })
-        </script>
+    </script>
 </head>
 
 <body>

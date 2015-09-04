@@ -4,14 +4,14 @@
                     <div class="row clearfix">
 			<div class="rodape">
 				<div class="rodape_links">
-                                	<a href="cadastro_entidade.html">Instituições</a>
-                                        <a href="ver_vagas.html">Vagas</a>
-                                        <a href="testemunhos.html">Testemunhos</a>
-                                        <a href="instituicoes.html">Instituições Registradas</a>					    			   
-                                        <a href="campanhas_noticias.html">Noticias/Campanhas</a>
-                                        <a href="informa_cursos.html">Cursos</a>
-                                        <a href="sobre.html">Sobre</a>
-                                        <a href="contatos.html">Contatos</a>
+                                	<a href="<?= base_url(); ?>cadastro_entidade">Instituições</a>
+                                        <a href="<?= base_url(); ?>ver_vagas">Vagas</a>
+                                        <a href="<?= base_url(); ?>testemunhos">Testemunhos</a>
+                                        <a href="<?= base_url(); ?>instituicoes">Instituições Registradas</a>					    			   
+                                        <a href="<?= base_url(); ?>campanhas_noticias">Noticias/Campanhas</a>
+                                        <a href="<?= base_url(); ?>informa_cursos">Cursos</a>
+                                        <a href="<?= base_url(); ?>sobre">Sobre</a>
+                                        <a href="<?= base_url(); ?>contatos.html">Contatos</a>
 				</div>
 					
                                 <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >

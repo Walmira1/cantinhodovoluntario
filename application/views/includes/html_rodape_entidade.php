@@ -6,9 +6,8 @@
                                     <a href="<?= base_url(); ?>inicio">Página Inicial</a>
 				    <a href="<?= base_url(); ?>inicio_entidade/<?=$this->session->userdata('id_entidade')?>">Inicio Instituição</a>
 				    <a href="<?= base_url(); ?>cadastro_curso/index/<?= $this->session->userdata('id_entidade')?>">Cursos</a>
-				    <a href="<?= base_url(); ?>cadastro_campanhas_noticias/index/<?= $this->session->userdata('id_entidade')?>">Campanhas/Noticias</a>
+				    <a href="<?= base_url(); ?>cadastro_campanha_noticia/index/<?= $this->session->userdata('id_entidade')?>">Campanhas/Noticias</a>
                                     <a href="<?= base_url(); ?>altera_cadastro_entidade<?=$this->session->userdata('id_entidade')?>">Altera Cadastro</a>
-				    <a href="<?= base_url(); ?>sobre">Sobre</a>			   
 				    <a href="#">Termos e Condições</a>
 			</div>
                         <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >

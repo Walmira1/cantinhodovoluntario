@@ -273,6 +273,19 @@ class Cadastro_vaga extends CI_Controller {
                         "cod_mensagem" => NULL,
                         "mensagem" => NULL 
                  );
+                }else{
+                    $tabela = 1;
+                    if ($this->turno->delete_vaga($id_vaga,$tabela)== FALSE){
+                         $alerta = array(
+                          "class"=>"danger",
+                            "mensagem" => "Não conseguiu apagar o Registro de rurno <br>" 
+                             );
+                        $dados = array(
+                        "alerta" => $alerta,
+                        "cod_mensagem" => NULL,
+                        "mensagem" => NULL 
+                        );    
+                    }
                 }
             }else{
                 $alerta = array(

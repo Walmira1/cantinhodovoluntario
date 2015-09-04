@@ -1,9 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Cantinho do Voluntário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="<?= base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= base_url();?>assets/css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= base_url();?>assets/img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url();?>assets/img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url();?>assets/img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="<?= base_url();?>assets/img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="<?= base_url();?>assets/img/favicon.png">
+	<script type="text/javascript" src="<?= base_url();?>assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script src="<?= base_url(); ?>assets/js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+		$("#telefone").mask("(99)9999-9999");
+		$("#cpf").mask("999.999.999-99");
+		$("#cep").mask("99999-999");
+		$("#data").mask("99/99/9999");
+	});
+        </script>
+</head>
+<body>
 <div class="container">
     <div class="row clearfix topo "  >
         <div class="col-md-2 column logo">
             <a href="<?= base_url(); ?>inicio">
-            <img  class="img-responsive" alt="" src="<?= base_url(); ?>assets/img/cantinho.png" >
+            <img  class="img-responsive" alt="logotipo do cantinho do voluntário" src="<?= base_url(); ?>assets/img/cantinho.png" >
             </a>
 	</div>
 	<div class="col-md-8 column">
@@ -32,6 +73,10 @@
                     <form method="post" action="<?= base_url(); ?>altera_cadastro/altera">
                         <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
                         <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
+                        <input type="hidden" name="logotipo_entidade" value="<?php echo $entidade->logotipo_entidade?>"/>
+                        <input type="hidden" name="upload_foto" value="<?php echo $entidade->upload_foto?>"/>
+                        <input type="hidden" name="ativo" value="<?php echo $entidade->ativo?>"/>
+                        <input type="hidden" name="senha" value="<?php echo $entidade->senha?>"/>
                         <input type="hidden" name="captcha"/> 
                         <h2>Alteração do Cadastro</h2>
                         <br />
@@ -59,22 +104,14 @@
                         <div class="box">
                         <h4>Cidade:</h4>
                          <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
-                            <select id="cidade"  name="cidade" required="" />
-                                <option value=" "> ---- </option>
-                                <?php foreach($cidades as $cidade) {?>
-                                <option value="<?= $cidade->cidade?>"> <?= $cidade->cidade; ?></option>
-                                <?php }?>
-                            </select>      
+                           <input type="text" name="cidade" required="" value ="<?php echo $entidade->cidade?>" />
+                               
                         </div>
                         <div class="box">
                         <h4>Estado:</h4>
                         <?php echo form_error('estado','<div class="erro">','</div>'); ?>
-                          <select id="estado"  name="estado" required="" />
-                          <option value=" "> -- </option>
-                                <?php foreach($estados as $estado) {?>
-                                <option value="<?= $estado->uf?>"> <?= $estado->uf; ?></option>
-                                <?php }?>
-                            </select>
+                          <input type="text" name="estado" required="" value ="<?php echo $entidade->estado?>" />
+                          
                         </div>
                         <div class="box">
                         <h4>CEP:</h4>

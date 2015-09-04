@@ -30,7 +30,7 @@ class Cadastro_entidade extends CI_Controller {
                     
                 }else if($indice==2){
                    $data['msg'] = "Não foi possivel cadastrar a Entidade"; 
-                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('includes/html_menu_voluntario');
                     $this->load->view('includes/msg_erro',$data); 
                     $this->load->view('home');
                     $this->load->view('includes/html_rodape_entidade');
@@ -52,7 +52,7 @@ class Cadastro_entidade extends CI_Controller {
 	}
         public function cadastro($indice=null)
 	{      
-                $this->load->view('includes/html_header');
+        //        $this->load->view('includes/html_header');
                 if ($indice==1){
                    $this->load->view('includes/msg_sucesso',$data['mensagem']); 
                 }
@@ -94,13 +94,11 @@ class Cadastro_entidade extends CI_Controller {
                     );
                $dados = array(
                    "alerta" => $alerta   );
-                $this->load->view('includes/html_header');
+                
                 $this->load->view('cadastro_entidade',$dados);
                 
             }else{
-                //Upload do arquivo
-             //   $upload = $this->do_upload($this->input->post('userfile'));
-             //    echo  $upload;
+                
              // outra maneira
              // usando elements...em uma unica linha
              // $dados = elements(array('nome', 'endereço' .....
@@ -125,27 +123,35 @@ class Cadastro_entidade extends CI_Controller {
                 
                 
                 if ($this->entidade->cadastrar($data) == TRUE){
-                   $query = $this->entidade->get_entidade_by_email($data['email']);
+                   $query = $this->entidade->get_entidade_by_email($data['email'])->row();
                    
                    // redirect recarrega a página ou seja perdi o array dados  
                    // para não perder os dados crio uma variavel de sessão
-                   $dados = array(
-                            'id_entidade' => $query[0]['id_entidade'],
+                        $dados = array(
+            /*                'id_entidade' => $query[0]['id_entidade'],
                             'logotipo_entidade' => $query[0]['logotipo_entidade'],
                             'upload_foto' => $query[0]['upload_foto'],
                             'site_entidade' => $query[0]['site_entidade'],
-                            'user_nome' => $query[0]['nome'],
+                            'user_nome' => $query[0]['nome'],*/
+                            'id_entidade' => $query->id_entidade,
+                            'logotipo_entidade' => $query->logotipo_entidade,
+                            'upload_foto' => $query->upload_foto,
+                            'site_entidade' => $query->site_entidade,
+                            'user_nome' => $query->nome,
                             'user_logado' => TRUE
-                    );
+                           
+                        );
                    $this->session->set_userdata($dados);
-                   $autoriza_foto = $query[0]['autoriza_foto'];
+                   $autoriza_foto = $query->autoriza_foto;
                    if($autoriza_foto == 2){
-                       $data[vagas] = $query[0];
+                       $query = $this->vaga->get_vaga_by_id_entidade($query->id_entidade);
+                        $dados['vagas'] = $query;
                        redirect('cadastro_entidade/index/1');
                    }else {
                    //redirect('cadastro_entidade/index/1');
                         $this->load->view('upload_form');
                    }
+                
                } else{
                     
                    redirect('cadastro_entidade/index/2');
