@@ -9,8 +9,9 @@
 		<!-- [FIM]BreadCrump[/FIM] -->
 	</div>
         <!-- [INI]Pesquisa[/INI] -->
-            <div class="pesquisa">
-                 <div class="col-md-12 column ">
+        <div class="pesquisa">
+            <form method="post" action="<?= base_url(); ?>pesquisa_vaga/pesquisa">
+                <div class="col-md-12 column ">
                 <div class="row clearfix">
 			<!-- [INI]Pesquisa[/INI] -->
                         <div class="col-md-3 ">
@@ -36,6 +37,7 @@
 					<?php echo form_error('atividade','<div class="erro">','</div>'); ?>
                              
                                 <select id="incluir_pessoas" name="atividade" alt="quero trabalhar com">
+                                    <option value= "0"> </option>
                                     <option value= "1">Adultos</option>
                                     <option value= "19">Animais</option>
                                     <option value= "2">Crianças e Jovens</option>
@@ -64,7 +66,8 @@
 					<?php echo form_error('tipo_carga_horaria','<div class="erro">','</div>'); ?>
                             
                             <select name="tipo_carga_horaria" alt="tipo de carga horária">
-				<option value= "1">Fins de Semana</option>
+				<option value= "0"> </option>
+                                <option value= "1">Fins de Semana</option>
 				<option value= "2">Fins de Semana - Sábados</option>
 				<option value= "3">Fins de Semana - Domingos</option>
 				<option value= "4">Todos os dias</option>
@@ -111,64 +114,45 @@
                             </select>   
                     </div>
                     <div class="col-md-6 column ">
-                    <a href="ver_vagas.html">
-                  		<button type="button" class="btn btn-primary btn-lg btn_ver_vagas_index" alt="ver vagas">Ver Vagas
-                  		</button>
-                     </a>
+                        <input type="submit" class="btn btn-primary btn-lg btn_ver_vagas_index" value = "Ver Vagas" />
                     </div> 
         	</div>   
             <!-- [INI]Fim[/INI] -->
-        </div>               
+            </div>               
             <!-- [INI]Fim[/INI] -->
-            </div>
+            </form>
+        </div>
 	<!-- [INI]Vagas[/INI] -->
         <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="col-md-3 column">
-                    <div class="col_logo">
-                        Logo
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="col_funcao">
-                        Função
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="col_instituicao">
-                        Instituição
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="col_local">
-                        Local
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="col-md-3 column">
-                    <a href="http://www.doutoresdaalegria.org.br/"><img src="img/doutores-da-alegria-logo-novo.jpg" class="logo_instituicoes" alt="doutores da alegria" /></a>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="">
-                        <h3>Animador</h3>
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="">
-                        <h3>Doutores da Alegria</h3>
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="">
-                        <h3>Hospital de Clinicas Porto Alegre / RS</h3>
-                        <a href="saiba_mais_vaga.html"><button type="button" class="btn btn-primary btn-sm" style="float: right">Saiba mais</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="margem_tabela"> 
+            <table class=" table table-responsive">
+                <thead>   
+                    <tr id="dias_semana">
+                        <th>Logo Entidade</th>
+                        <th>Entidades</th>
+                        <th>funcao</th>
+                        <th>Local</th>
+                        <th>Cidade</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead> 
+                <tbody>
+                <?php foreach($vagas as $vaga) {?>
+                    <tr >
+                        <td ><?php echo '<a href="'.$vaga->site_entidade.'"> <img class="img-responsive"  src="'.base_url().$vaga->logotipo_entidade;?>"> </a></td>
+                        <td ><?= $vaga->nome;?></td>
+                        <td ><?= $vaga->vaga_de;?></td>
+                        <td ><?= $vaga->endereco;?></td>
+                        <td ><?= $vaga->cidade;?></td>
+                        <td> <a href="<?= base_url(); ?>pesquisa_vaga/vaga/<?= $vaga->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Saiba mais</button></a> </td>
+                        
+                    </tr>
+                <?php }?>
+                </tbody>
+            </table> 
+        </div>  
+    </div>
 	<!-- [FIM]Vagas[/FIM] -->
         
         <!-- [INI]Paginação[/INI] -->
@@ -178,7 +162,7 @@
                    < 1, 2, 3, 4, 5 .... 12 >
                 </div>
                 <div class="mapa">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9380271970354!2d-51.20673065!3d-30.03863575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951978495072ab99%3A0x1cbc0b6d6799fecd!2sHospital+de+Cl%C3%ADnicas+de+Porto+Alegre!5e0!3m2!1spt-BR!2sbr!4v1433427648969" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                    <iframe src="http://mapbuildr.com/frame/cbqyfr" frameborder="0" height="400" width="550"></iframe>
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@
                 </div>    
                 <?php  }?> 
                 <div id="cadastros_vagas">
-                    <form  method="post"  action="cadastrar">
+                    <form  method="post"  action="<?= base_url(); ?>cadastro_vaga/cadastrar">
                      <!-- tenho uma variavel escondida na qual coloco de onde eu vim para saber ...-->
                     <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
                     <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
@@ -208,7 +208,7 @@
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="sexta[]" value="1">
                                 </td>
-                                <td style="text-align: center;">
+                                <td class="tabela_turno">
                                     <input type="checkbox" name="sab[]" value="1">
                                 </td>
                                 <td class="tabela_turno">

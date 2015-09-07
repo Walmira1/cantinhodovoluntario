@@ -11,7 +11,7 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="item active">
-					<img  alt="" src="<?= base_url(); ?>assets/img\maosnovas.jpg" >
+                                    <img  alt="" src="<?= base_url(); ?>assets/img\maosnovas.jpg" alt="seja a mudança que você quer ver no mundo"> 
 					<div class="carousel-caption">
 						<h4>
 							Primeira ideia
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<img alt="" src="<?= base_url(); ?>assets/img\maoscerta.jpg">
+                                    <img alt="" src="<?= base_url(); ?>assets/img\maoscerta.jpg" alt="se você pensa que é muito pequeno para fazer a diferença, experimente dormir com um mosquito">
 					<div class="carousel-caption">
 						<h4>
 							Segunda ideia
@@ -54,9 +54,11 @@
             </div>
 		<!-- [FIM]Menu[/FIM] -->
 	</div>
-	<div class="pesquisa_index">
-            <div class="col-md-12 column ">
-                <div class="row clearfix">
+        <form method="post" action="<?= base_url(); ?>pesquisa_vaga/pesquisa">	
+            <div class="pesquisa_index">
+            <div class="row clearfix">    
+                <div class="col-md-12 column ">
+                    <div class="row clearfix">
 			<!-- [INI]Pesquisa[/INI] -->
                         <div class="col-md-3 ">
 					<h3>
@@ -129,8 +131,9 @@
                             <?php echo form_error('numero_horas','<div class="erro">','</div>'); ?>
                             <input type="text" name="numero_horas" value ="<?php echo set_value('numero_horas');?>"/>
 			</div>
+                    </div>
                 </div>
-	    </div>
+            </div>
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <div class="col-md-3 column ">
@@ -158,15 +161,14 @@
                             </select>   
                     </div>
                     <div class="col-md-6 column ">
-                    <a href="<?= base_url(); ?>pesquisa_vaga/index">
-                  		<button type="button" class="btn btn-primary btn-lg btn_ver_vagas_index">Ver Vagas
-                  		</button>
-                     </a>
+                        <input type="submit" class="btn btn-primary btn-lg btn_ver_vagas_index" value = "Ver Vagas" />
+                        
                     </div> 
         	</div>   
             <!-- [INI]Fim[/INI] -->
-        </div>
-    </div>    
+            </div>
+            </div> 
+        </form>    
 	<!-- [INI]Curso[/INI] -->
 	<div class="col-md-12 column col_cursos">
 		<div id="lista_cursos">
