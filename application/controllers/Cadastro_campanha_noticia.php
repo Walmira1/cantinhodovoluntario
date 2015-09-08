@@ -12,7 +12,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
 		$this->load->model('campanha', 'campanha');
                 $this->load->model('entidade', 'entidade');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
-                $this->load->library('upload');
+                
                         
          }	
         public function index($id_entidade=null)
@@ -21,6 +21,8 @@ class Cadastro_campanha_noticia extends CI_Controller {
                
                 if ($id_entidade !=NULL){
                    $data['campanhas'] = $this->campanha->get_campanha_by_entidade_id_entidade($id_entidade); 
+             //      var_dump($data['campanhas']);
+             //      exit;
         //           $data['msg'] = "Curso Cadastrado com Sucesso";
         //           $this->load->view('includes/msg_sucesso',$data); 
                 }else if($indice==2){
@@ -35,18 +37,18 @@ class Cadastro_campanha_noticia extends CI_Controller {
 	}
        
         public function cadastro($indice=null)
-	{       $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+	{  //     $this->load->view('includes/html_header');
+           //     $this->load->view('includes/html_menu_entidade');
                 $alerta = NULL;
                 $cod_mensagem = $indice; 
                 $mensagem = NULL;
                 if ($indice==1){
-                   $data['msg'] = "Curso Cadastrado com Sucesso";
-                   $mensagem = "Curso Cadastrada com Sucesso";
+                   $data['msg'] = "Campanha Cadastrada com Sucesso";
+                   $mensagem = "Campanha Cadastrada com Sucesso";
                    $this->load->view('includes/msg_sucesso',$data); 
                 }else if($indice==2){
-                   $data['msg'] = "Não foi possivel cadastrar o Curso"; 
-                   $mensagem = "Não foi possivel cadastrar o Curso"; 
+                   $data['msg'] = "Não foi possivel cadastrar a Campanha"; 
+                   $mensagem = "Não foi possivel cadastrar a Campanha"; 
                     $this->load->view('includes/msg_erro',$data);
                 }
                 $dados = array(
@@ -88,8 +90,8 @@ class Cadastro_campanha_noticia extends CI_Controller {
             $this->lang->load('form_validation','portuguese');
             $alerta = null;
             if($this->input->post('captcha')){
-                $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+         //       $this->load->view('includes/html_header');
+         //       $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_campanha');
                 $this->load->view('includes/html_rodape_entidade');
                 
@@ -121,15 +123,14 @@ class Cadastro_campanha_noticia extends CI_Controller {
             //    var_dump($data);
                     
                 if ($this->campanha->cadastrar($data) == TRUE){
-                    echo" campanha cadastrado    ";
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
                         $query = $this->campanha->get_max_campanha_by_entidade($this->input->post('id_entidade'));
                     
-            //        echo "vaga_id_vaga = " .$query->id_vaga;
-                     //    redirect('cadastro_campanha/cadastro/1');
-                        $this->load->view('upload_form');
+           
+                         redirect('cadastro_campanha_noticia/cadastro/1');
+                        
                } else{
-                   redirect('cadastro_campanha/cadastro/2');
+                   redirect('cadastro_campanha_noticia/cadastro/2');
                  
                }
             }
@@ -140,7 +141,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
                 if ($this->campanha->delete_campanha($id_campanha) == FALSE){
                         $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Não conseguiu apagar o Registro do Curso <br>" 
+                            "mensagem" => "Não conseguiu apagar o Registro da Campanha <br>" 
                              );
                         $dados = array(
                         "alerta" => $alerta,
@@ -151,7 +152,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
             }else{
                 $alerta = array(
                           "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
+                            "mensagem" => "Campanha não identificada <br>" 
                              );
                         $dados = array(
                         "alerta" => $alerta,
@@ -166,7 +167,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
             // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('campanhas',$data);
+            $this->load->view('cadastro_campanhas_noticias',$data);
             $this->load->view('includes/html_rodape_entidade');
     
      }  
@@ -235,6 +236,47 @@ class Cadastro_campanha_noticia extends CI_Controller {
             $this->load->view('includes/html_menu_entidade');
             $this->load->view('campanhas',$data);
             $this->load->view('includes/html_rodape_entidade');
+	}
+        public function uploadify()
+                //upload de foto
+	{     
+		$config['upload_path'] = "./images/";
+		$config['allowed_types'] = '*';
+		$config['max_size'] = 0;
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload("userfile"))
+		{
+			$response = $this->upload->display_errors();
+		}
+		else
+		{
+			$response = $this->upload->data();
+                        
+                        $file_info = "/"."images"."/".$response['file_name'];
+                        $id_entidade = $this->session->userdata('id_entidade');
+                       // echo "id_entidade = ".$id_entidade;
+                        
+                        $query = $this->campanha->get_max_campanha_by_entidade($id_entidade)->row();
+                        $id_campanha = $query->id_campanha;
+                   //     echo "campanha = ".$id_campanha;
+                  //      var_dump($query);
+                        $data = array(
+                            'id_campanha' => $query->id_campanha,
+                            'entidade_id_entidade' => $query->entidade_id_entidade,
+                            'titulo_campanha_noticia' =>$query->titulo_campanha_noticia,
+                            'descricao' => $query->descricao,
+                            'data_inclusao' => $query->data_inclusao,
+                            'data_fim' => $query->data_fim,
+                            'foto_campanha' => $file_info,
+                            'video' => $query->video);
+                        if ($this->campanha->alterar($id_campanha,$data) != TRUE){
+                            echo"erro";
+                        }
+                        
+                        
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
        
         

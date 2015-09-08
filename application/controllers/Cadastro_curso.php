@@ -13,18 +13,18 @@ class Cadastro_curso extends CI_Controller {
                 $this->load->model('entidade', 'entidade');
                 $this->load->model('turno', 'turno');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
-                $this->load->library('upload');
+                
                         
          }	
-        public function index($id_entidade=null)
+        public function index($index=null)
 	{       
-		$this->load->view('includes/html_header');
-               
-                if ($id_entidade !=NULL){
-                   $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade); 
+		$mensagem = "Vaga Cadastrada com Sucesso";
+                $this->load->view('includes/html_header');
+                $id_entidade = $this->session->userdata('id_entidade');
+                $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade); 
         //           $data['msg'] = "Curso Cadastrado com Sucesso";
         //           $this->load->view('includes/msg_sucesso',$data); 
-                }else if($indice==2){
+                if($id_entidade==2){
                    $data['msg'] = "Não foi possivel cadastrar o Curso"; 
                     $this->load->view('includes/msg_erro',$data);
                 }
@@ -36,8 +36,7 @@ class Cadastro_curso extends CI_Controller {
 	}
        
         public function cadastro($indice=null)
-	{       $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+	{      
                 $alerta = NULL;
                 $cod_mensagem = $indice; 
                 $mensagem = NULL;
@@ -55,6 +54,7 @@ class Cadastro_curso extends CI_Controller {
                      "cod_mensagem" => $cod_mensagem,
                      "mensagem" => $mensagem 
                  );
+                $dados['mensagem'] = $mensagem;
                 $this->load->view('cadastro_curso',$dados);
                 $this->load->view('includes/html_rodape_entidade');
                 
@@ -119,130 +119,67 @@ class Cadastro_curso extends CI_Controller {
                 $data['data_postagem'] = $this->input->post('data_postagem');
                 $data['num_horas'] = $this->input->post('num_horas');
                 $data['taxa_inscricao'] = $this->input->post('taxa_inscricao');
-                
                 $data['horario'] = $this->input->post('horario');
-                $data['breve_descricao'] = $this->input->post('breve_descricao');
-                $data['longa_descricao'] = $this->input->post('descricao');
+                $data['descricao'] = $this->input->post('descricao');
+                $data['local'] = $this->input->post('local');
                 $data['entidade_id_entidade'] = $this->input->post('id_entidade');
                 $data['upload_foto'] = NULL;
                 $data['video_youtube'] = $this->input->post('video');
             //    var_dump($data);
                     
                 if ($this->curso->cadastrar($data) == TRUE){
-                    echo" curso cadastrado    ";
+                    
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
                         $query = $this->curso->get_max_curso_by_entidade($this->input->post('id_entidade'));
                     
-            //        echo "vaga_id_vaga = " .$query->id_vaga;
+            /*        echo "vaga_id_vaga = " .$query->id_vaga;
                     
-            $turno['tabela_assoc']= 2;
+                        $turno['tabela_assoc']= 2;
                         $turno['id_vaga_curso']= $query->id_curso;
-                        $arrlength2 = 3;
-                        $arrlength1 = 8;
-                        for($indice1 = 1; $indice1 <  $arrlength1; $indice1++) {
-                            $turno['id_turno'] = $indice1;
-                            $turno['dia_da_semana'] = $indice1;
-                            $turno['manha'] = 0;
-                            $turno['tarde'] = 0;
-                            $turno['manha'] = 0;
-                            for($indice2 = 0; $indice2 <  $arrlength2; $indice2++) {
-                                if ($indice1 == 1){ // segunda
-                                    if ( $this->input->post('seg')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 2){ // terça
-                                    if ( $this->input->post('terca')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 3){ // quarta
-                                    if ( $this->input->post('quarta')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 4){ // quinta
-                                    if ( $this->input->post('quinta')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 5){ // sexta
-                                    if ( $this->input->post('sexta')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 6){ // sabado
-                                    if ( $this->input->post('sab')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                                if ($indice1 == 7){ // segunda
-                                    if ( $this->input->post('dom')[$indice2]){
-                                        if ($indice2 == 0){ 
-                                            $turno['manha'] = 1;
-                                        }
-                                        if ($indice2 == 1){ 
-                                            $turno['tarde'] = 1;
-                                        }
-                                        if ($indice2 == 2){ 
-                                            $turno['noite'] = 1;
-                                        }
-                                    }
-                                }
-                            }
-                            // grava o registro do dia 
-                            $this->turno->cadastrar($turno);
-                        } 
-                     //    redirect('cadastro_curso/cadastro/1');
-                        $this->load->view('upload_form');
+                        $arrlength1 = 3;
+                    for($indice = 0; $indice <  $arrlength1; $indice++) {
+                        $turno['id_turno'] = $indice ; 
+                        $turno['segunda'] = 0; 
+                        $turno['terca'] = 0;
+                        $turno['quarta'] = 0; 
+                        $turno['quinta'] = 0; 
+                        $turno['sexta'] = 0; 
+                        $turno['sabado'] = 0; 
+                        $turno['domingo'] = 0;
+                        
+                            
+                        if ( $this->input->post('seg')[$indice]){
+                             $turno['segunda'] = 1; 
+                        }
+                        if ( $this->input->post('terca')[$indice]){
+                            $turno['terca'] = 1; 
+                        }
+                        if ( $this->input->post('quarta')[$indice]){
+                             $turno['quarta'] = 1; 
+                        }
+                        if ( $this->input->post('quinta')[$indice]){
+                             $turno['quinta'] = 1; 
+                        }
+                        if ( $this->input->post('sexta')[$indice]){
+                             $turno['sexta'] = 1;       
+                        }
+                        if ( $this->input->post('sab')[$indice]){
+                             $turno['sabado'] = 1;
+                        }            
+                        if ( $this->input->post('dom')[$indice]){
+                             $turno['domingo'] = 1;
+                        }  
+                            // grava o registro do turno
+                        $this->turno->cadastrar($turno);
+                    } */
+                       
+                        $data['msg'] = "Curso Cadastrado com Sucesso";
+                        $this->load->view('includes/msg_sucesso',$data);
+                        $mensagem = "Vaga Cadastrada com Sucesso";
+                        $data['mensagem'] = $mensagem;
+                        $this->load->view('cadastro_curso',$data);
+                        $this->load->view('includes/html_rodape_entidade');
+                        
                } else{
                    redirect('cadastro_curso/cadastro/2');
                  
@@ -350,6 +287,53 @@ class Cadastro_curso extends CI_Controller {
             $this->load->view('includes/html_menu_entidade');
             $this->load->view('cursos',$data);
             $this->load->view('includes/html_rodape_entidade');
+	}
+        public function uploadify()
+                //upload de foto
+	{     
+		$config['upload_path'] = "./images/";
+		$config['allowed_types'] = '*';
+		$config['max_size'] = 0;
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload("userfile"))
+		{
+			$response = $this->upload->display_errors();
+		}
+		else
+		{
+			$response = $this->upload->data();
+                        
+                        $file_info = "/"."images"."/".$response['file_name'];
+                        $id_entidade = $this->session->userdata('id_entidade');
+                       // echo "id_entidade = ".$id_entidade;
+                        
+                        $query = $this->curso->get_max_curso_by_entidade($id_entidade)->row();
+                        $id_curso = $query->id_curso;
+                        echo "curso = ".$id_curso;
+                        var_dump($query);
+                        $data = array(
+                            'id_curso' => $query->id_curso  ,
+                            'id_nome' => $query->nome,
+                            'inscricao_ate' => $query->inscricao_ate,
+                            'inicio' => $query->inicio,
+                            'fim' => $query->fim,
+                            'data_postagem' => $query->data_postagem,
+                            'num_horas' => $query->num_horas,
+                            'taxa_inscricao' => $query->taxa_inscricao,
+                            'horario' => $query->horario,
+                            'descricao' => $query->descricao,
+                            'local' => $query->local,
+                            'entidade_id_entidade' => $query->entidade_id_entidade,
+                            '´upload_foto' => $file_info,
+                            'video_youtube' => $query->video_youtube);
+                        if ($this->curso->alterar($id_curso,$data) != TRUE){
+                            echo"erro";
+                        }
+                        
+                        
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
        
         

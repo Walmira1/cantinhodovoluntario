@@ -51,6 +51,9 @@ class Pesquisa_vaga extends CI_Controller {
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade);   
+             //var_dump($data['sum_vaga']);
+             //exit;
                 }else {
                     $alerta = array(
                           "class"=>"danger",
@@ -104,7 +107,7 @@ class Pesquisa_vaga extends CI_Controller {
         //        var_dump($dados['vagas']);
         //        exit;
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
-                
+            
             $data['cidades'] = $this->db->get('cidade')->result();
             $data['estados'] = $this->cidade->get_estado();
             $this->load->view('includes/html_header');

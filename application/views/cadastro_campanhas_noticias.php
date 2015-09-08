@@ -22,7 +22,7 @@
     </div>
     <div class="row" style="margin-top: 0.313em; margin-left: 0.938em;">
         <a href="<?= base_url(); ?>cadastro_campanha_noticia/cadastro"><button type="button" class="btn btn-primary btn-lg" style="float: right">
-            Incluir nova Camapanha ou Noticia</button></a>
+            Incluir nova Campanha ou Noticia</button></a>
     </div>
     <!-- [INI]Cursos[/INI] -->
         <div class="row clearfix">
@@ -52,7 +52,7 @@
                             <?php 
                             foreach($campanhas as $campanha) {?> 
                             <tr>
-                                <td ><?= $campanha->tiulo_campanha_noticia;?></td>
+                                <td ><?= $campanha->titulo_campanha_noticia;?></td>
                                 <td ><?= $campanha->data_inclusao;?></td>
                                 <td ><?= $campanha->data_fim;?></td>
                                 <td> <a href="<?= base_url(); ?>cadastro_campanha_noticia/delete/<?= $campanha->id_campanha;?>"><button type="button" class="btn btn-primary btn-sm" onclick=" return confirma()" style="float: right;">Excluir</button></a> </td>

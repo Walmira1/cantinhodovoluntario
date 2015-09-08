@@ -194,49 +194,49 @@
                             <tr id="tabela_turno">
                                 <td >Manhã</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="seg[]" value="1">
+                                    <input type="checkbox" name="seg[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="terca[]" value="1">
+                                    <input type="checkbox" name="terca[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="quarta[]" value="1">
+                                    <input type="checkbox" name="quarta[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="quinta[]" value="1">
+                                    <input type="checkbox" name="quinta[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="sexta[]" value="1">
+                                    <input type="checkbox" name="sexta[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="sab[]" value="1">
+                                    <input type="checkbox" name="sab[1]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="dom[]" value="1">
+                                    <input type="checkbox" name="dom[1]" >
                                 </td>
                             </tr>
                             <tr id="tabela_turno">
                                 <td >Tarde</td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="seg[]" value="2">
+                                    <input type="checkbox" name="seg[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="terca[]" value="2">
+                                    <input type="checkbox" name="terca[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="quarta[]" value="2">
+                                    <input type="checkbox" name="quarta[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="quinta[]" value="2">
+                                    <input type="checkbox" name="quinta[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="sexta[]" value="2">
+                                    <input type="checkbox" name="sexta[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="sab[]" value="2">
+                                    <input type="checkbox" name="sab[2]" >
                                 </td>
                                 <td class="tabela_turno">
-                                    <input type="checkbox" name="dom[]" value="2">
+                                    <input type="checkbox" name="dom[2]" >
                                 </td>
                             </tr>
                             <tr id="tabela_turno">

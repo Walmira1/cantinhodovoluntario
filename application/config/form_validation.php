@@ -65,9 +65,16 @@ $config =
                     'data_postagem'        => array('field' => 'data_postagem',      'label' => 'Data de Postagem',       'rules'  => 'required'),
                   //  'dias_semana'         => array('field' => 'dias_semana',        'label' => 'Dias da Semana',       'rules'  => 'required'),
                     'horario'              => array('field' => 'horario',            'label' => 'Horário',                'rules'  => 'required'),
-                    'breve_descricao'      => array('field' => 'breve_descricao',     'label' => 'Breve Descrição',       'rules'  => 'required'),
+                    'local          '      => array('field' => 'local',              'label' => 'Local do Curso',         'rules'  => 'required'),
+                    'descricao'            => array('field' => 'descricao',          'label' => 'Descrição',              'rules'  => 'required')
+        ),
+        'cadastro_campanha_form'=> array(
+                    'titulo'               => array('field' => 'titulo',             'label' => 'Titulo do Curso',        'rules'  => 'required'),
+                    'data_inclusao'        => array('field' => 'data_inclusao',      'label' => 'Data da Inclusão',        'rules'  => 'required'),
+                    'data_fim'             => array('field' => 'data_fim',           'label' => 'Data de Fim',             'rules'  => 'required]'),
                     'descricao'            => array('field' => 'descricao',          'label' => 'Descrição',              'rules'  => 'required')
         )
+        
     );
 
 

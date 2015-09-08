@@ -41,13 +41,38 @@ class Campanha extends CI_Model {
     }
     public function get_max_campanha_by_entidade($id_entidade){
         if ($id_entidade != NULL){
-            $this->db->select('id_campanha');
             $this->db->where('entidade_id_entidade', $id_entidade);
             $this->db->order_by("id_campanha", "desc"); 
             $this->db->limit(1);
-            return $this->db->get('campanha')->row();
+            return $this->db->get('campanha');
         }else {
             return FALSE;
+        }
+    }
+    public function alterar($id_campanha= NULL, $dados=NULL){
+        if (($id_campanha != NULL) && ($dados != NULL)){
+            $data = array(
+                    'id_campanha'               => $dados['id_campanha'],
+                    'entidade_id_entidade'      => $dados['entidade_id_entidade'],
+                    'titulo_campanha_noticia'   => $dados['titulo_campanha_noticia'] ,
+                    'descricao'                 => $dados['descricao'],
+                    'data_inclusao'             => $dados['data_inclusao'],
+                    'data_fim'                  => $dados['data_fim'],
+                    'foto_campanha'             => $dados['foto_campanha'],
+                    'video'                     => $dados['video']
+                    );
+            $this->db->where('id_campanha', $id_campanha);
+            $this->db->update('campanha', $data); 
+            if ($this->db->affected_rows()>0){
+        //retorna ok
+                    return TRUE;
+            }else{
+        //return false
+        echo "Não altereou nenhum registro";
+                    return FALSE;
+                }
+        }else{
+                    return FALSE;
         }
     }
     

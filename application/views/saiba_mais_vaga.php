@@ -27,7 +27,7 @@
                             <div style="float: left; margin-left: 20px; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Inscrever-se</button></div>
                             <div style="float: left; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Imprimir</button></div>
                             <strong>Divulgue </strong>
-                            <div style="float: left;"><img src="<?php echo base_url()?>img/facebook.png" alt="Facebook" style="width: 32px" /></div>
+                            <div style="float: left;"><img src="<?php echo base_url()?>assets/img/facebook.png" alt="Facebook" style="width: 32px" /></div>
                         </div> 
                         <br /><br />
                         <div>
@@ -311,8 +311,8 @@
                             </div>
                             <a href="<?php echo $entidade->site_entidade;?>" ><?php echo $entidade->nome;?></a>
                             <br /><br />
-                            <input type="text" disabled="disabled" style="width: 40px" value="10" />
-                            Novas Oportunidades
+                            <input type="text" disabled="disabled" style="width: 40px" value="<?php echo $sum_vaga->numero_vagas;?>" />
+                            Novas Oportunidades    
                             <br /><br />
                             Endereço: <?php echo $entidade->endereco;?>
                             <br /><br />

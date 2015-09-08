@@ -199,13 +199,6 @@
                            <img  class="img-responsive" src="<?= base_url(); ?>assets/img/picture.png" style="width: 90px;" alt="" /> </a> !-->
                         <input type="submit" class="btn btn-primary btn-lg" style="margin-left: 60%; margin-top: 50px;" value="Cadastrar" />
                 </form>
-        <!--        <h4>Logo e Foto da Instituição</h4>
-                        
-                        <form method="POST" class="myForm" enctype="multipart/form-data">
-                                <!-- add your span and pther stuff here
-                                <input type="file" id="foto1" name="userfile" />
-                                <input type="button" id="teste" value="submit"/>
-                        </form>  -->
             </div>
         </div>
     </div>  

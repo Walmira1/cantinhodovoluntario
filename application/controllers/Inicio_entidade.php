@@ -20,8 +20,7 @@ class Inicio_entidade extends CI_Controller {
 	{      
             if($id_entidade != NULL){
                 $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
-                $query = get_vaga_by_entidade_id_entidade($query->id_entidade)->row();
-                $data[vagas] = $query[0];
+                $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
 		$this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
                 $this->load->view('inicio_entidade',$data);

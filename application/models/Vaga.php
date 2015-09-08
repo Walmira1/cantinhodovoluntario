@@ -140,6 +140,16 @@ class Vaga extends CI_Model {
         return  $this->db->get();
         
     }
+    public function select_sum_vaga($id_entidade){
+        if ($id_entidade != NULL){
+            $this->db->select_sum('numero_vagas');
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            return $this->db->get('vaga');
+        }else {
+            return NULL;
+        }
+        
+    }
    
 }
 
