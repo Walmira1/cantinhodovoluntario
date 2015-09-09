@@ -151,37 +151,37 @@ class Cadastro_vaga extends CI_Controller {
                         $turno['tabela_assoc']= 1;
                         $turno['id_vaga_curso']= $query->id_vaga;
                         $arrlength1 = 3;
-                        for($indice = 0; $indice <  $arrlength1; $indice++) {
-                            $turno['id_turno'] = $indice + 1; 
-                            $turno['segunda'] = 0; 
-                            $turno['terca'] = 0;
-                            $turno['quarta'] = 0; 
-                            $turno['quinta'] = 0; 
-                            $turno['sexta'] = 0; 
-                            $turno['sabado'] = 0; 
-                            $turno['domingo'] = 0;
-                            
-                                if ( $this->input->post('seg')[$indice]){
-                                    $turno['segunda'] = 1; 
-                                }
-                                if ( $this->input->post('terca')[$indice]){
-                                    $turno['terca'] = 1; 
-                                }
-                                if ( $this->input->post('quarta')[$indice]){
-                                    $turno['quarta'] = 1; 
-                                }
-                                if ( $this->input->post('quinta')[$indice]){
-                                    $turno['quinta'] = 1; 
-                                }
-                                if ( $this->input->post('sexta')[$indice]){
-                                    $turno['sexta'] = 1;       
-                                }
-                                if ( $this->input->post('sab')[$indice]){
-                                    $turno['sabado'] = 1;
-                                }            
-                                if ( $this->input->post('dom')[$indice]){
-                                    $turno['domingo'] = 1;
-                                }          
+                            for($indice = 0; $indice <  $arrlength1; $indice++) {
+                                $turno['id_turno'] = $indice + 1; 
+                                $turno['segunda'] = 0; 
+                                $turno['terca'] = 0;
+                                $turno['quarta'] = 0; 
+                                $turno['quinta'] = 0; 
+                                $turno['sexta'] = 0; 
+                                $turno['sabado'] = 0; 
+                                $turno['domingo'] = 0;
+
+                                    if ( $this->input->post('seg')[$indice]){
+                                        $turno['segunda'] = 1; 
+                                    }
+                                    if ( $this->input->post('terca')[$indice]){
+                                        $turno['terca'] = 1; 
+                                    }
+                                    if ( $this->input->post('quarta')[$indice]){
+                                        $turno['quarta'] = 1; 
+                                    }
+                                    if ( $this->input->post('quinta')[$indice]){
+                                        $turno['quinta'] = 1; 
+                                    }
+                                    if ( $this->input->post('sexta')[$indice]){
+                                        $turno['sexta'] = 1;       
+                                    }
+                                    if ( $this->input->post('sab')[$indice]){
+                                        $turno['sabado'] = 1;
+                                    }            
+                                    if ( $this->input->post('dom')[$indice]){
+                                        $turno['domingo'] = 1;
+                                    }          
                             
                             // grava o registro do dia 
                             $this->turno->cadastrar($turno);

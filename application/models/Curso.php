@@ -27,6 +27,17 @@ class Curso extends CI_Model {
         }
         
     }
+    
+    public function get_curso($id_curso=NULL){
+        //Busca com condição
+        if ($id_curso != NULL){
+            $this->db->where('id_curso', $id_curso);
+            return $this->db->get('curso');
+            
+        }
+        
+    }
+    
     public function delete_curso($id_curso=NULL){
         //Busca com condição
         if ($id_curso != NULL){
@@ -82,7 +93,12 @@ class Curso extends CI_Model {
                     return FALSE;
         }
     }
-    
+    public function get_all_curso(){
+        //Busca sem condição
+            $this->db->select('*');
+            return $this->db->get('curso');
+        
+    }
    
 }
 

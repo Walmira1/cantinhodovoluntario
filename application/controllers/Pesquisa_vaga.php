@@ -51,7 +51,7 @@ class Pesquisa_vaga extends CI_Controller {
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
-                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade);   
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
              //var_dump($data['sum_vaga']);
              //exit;
                 }else {
@@ -117,24 +117,50 @@ class Pesquisa_vaga extends CI_Controller {
         }
             
 	
-      public function volta_entidade()
+      public function entidade($id_entidade=null)
 	{   
-            /* Carrega a biblioteca do CodeIgniter responsável pela validação dos formulários */
-         //   $this->load->library('form_validation');
-            /* Define as regras para validação
-               Referencia:
+            /* Pesquisa as vagas para uma determinada entidade
         http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
               */
              
              //var_dump($this->input->post());
-            $alerta = null;
-            $id_entidade = $this->session->userdata('id_entidade');
-            $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
-                   // redirect('cadastro_entidade/index/3');
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('inicio_entidade',$data);
-            $this->load->view('includes/html_rodape_entidade');
+            if($id_entidade != NULL){
+                $alerta = null;
+                $query = $this->entidade->get_id($id_entidade)->row();
+                   
+                   // redirect recarrega a página ou seja perdi o array dados  
+                   // para não perder os dados crio uma variavel de sessão
+                        $dados = array(
+                            'id_entidade' => $query->id_entidade,
+                            'logotipo_entidade' => $query->logotipo_entidade,
+                            'upload_foto' => $query->upload_foto,
+                            'site_entidade' => $query->site_entidade,
+                            'user_nome' => $query->nome,
+                            'user_logado' => TRUE
+                           
+                        );
+                $this->session->set_userdata($dados);
+                $data['entidade'] = $query;
+                $query = $this->vaga->select_all_vaga_entidade($id_entidade);
+                if ($query->num_rows() > 0){
+                        $data['vagas'] = $query->result();
+                        $query = $this->vaga->select_sum_vaga($id_entidade); 
+                        $data['sum_vaga'] = $query->row();
+                        
+                }else{
+                    $data['vagas'] = NULL;
+                    $data['sum_vaga'] = NULL;
+                }
+                               
+             //   var_dump($data['sum_vaga']);
+             //   exit;
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_voluntario');
+                $this->load->view('entidade_vaga',$data);
+                $this->load->view('includes/html_rodape_voluntario');
+            }else{
+                $data['mensagem'] = "erro";                
+            }
 	}
        
         

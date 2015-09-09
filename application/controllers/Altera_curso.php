@@ -22,7 +22,7 @@ class Altera_curso extends CI_Controller {
             $cod_mensagem = null;
             $mensagem = null;
             if ($id_curso != null){
-                $query = $this->curso->select_curso($id_curso) ;
+                $query = $this->curso->get_curso($id_curso) ;
                 if ($query->num_rows() == 1){
                     $data['curso'] = $query->row(0,'curso') ;
                 }else {
@@ -49,7 +49,9 @@ class Altera_curso extends CI_Controller {
                 $data['turno'] = $query->row();
             //    var_dump($data['turno_vaga']);
             //    exit;
-            } 
+            } else {
+                $data['turno'] = NULL;
+            }
             $data['alerta'] =  $alerta;
             $data['cod_mensagem'] =  $cod_mensagem;
             $data['mensagem'] =  $mensagem;

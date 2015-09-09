@@ -1,4 +1,4 @@
-<div class="row clearfix">
+    <div class="row clearfix">
         <div class="col-md-12 column">
             <?php  
             if($this->session->userdata('upload_foto')== NULL){
@@ -26,10 +26,10 @@
                     <?php  echo $alerta["mensagem"]; ?>
              </div>    
         <?php  }?> 
-        <form  method="post"  action="cadastrar">
+        <form  method="post"  action="<?= base_url(); ?>altera_curso/altera">
             <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
             <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
-            <input type="hidden" name="id_vaga" value="<?php echo $curso->id_curso?>"/>
+            <input type="hidden" name="id_curso" value="<?php echo $curso->id_curso?>"/>
             <input type="hidden" name="captcha"/> 
 	<div class="row clearfix">
             <div class="col-md-12 column">
@@ -40,14 +40,14 @@
                             Titulo:
                             <br />
                             <?php echo form_error('titulo','<div class="erro">','</div>'); ?>
-                            <input type="text" name="titulo" required="" value ="<?php echo $curso->titulo;?>"  autofocus/>
+                            <input type="text" name="titulo" required="" value ="<?php echo $curso->nome;?>" autofocus/>
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Video_youtube:
                     <br />
                     <?php echo form_error('video','<div class="erro">','</div>'); ?>
-                    <input type="text" name="video" value ="<?php echo $curso->video;?>"  />
+                    <input type="text" name="video" value ="<?php echo $curso->video_youtube;?>"  />
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
@@ -61,7 +61,7 @@
                     Taxa de Inscrição:
                     <br />
                     <?php echo form_error('taxa_inscr','<div class="erro">','</div>'); ?>
-                    <input type="text" name="taxa_inscr"  required="" data-thousands="." data-decimal="," data-prefix="R$ "  value ="<?php echo $curso->taxa_inscr;?>" />
+                    <input type="text" name="taxa_inscr"  required="" data-thousands="." data-decimal="," data-prefix="R$ "  value ="<?php echo $curso->taxa_inscricao;?>" />
                 </div>
             </div>
         </div>
@@ -128,7 +128,173 @@
                                     Dom.
                                 </td>
                             </tr>
-                            <tr id="tabela_turno">
+                            <?php if ($turno != NULL){
+                            foreach ($turno as $turno){
+                                if($turno->id_turno == 1){
+                                    echo '<tr id="tabela_turno">';
+                                    echo '<td >Manhã</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="seg[]" value="1"';
+                                    if($turno->segunda == 1){
+                                        echo ' checked';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="terca[]" value="1" ';
+                                    if($turno->terca == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quarta[]" value="1"';
+                                    if($turno->quarta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quinta[]" value="1"';
+                                    if($turno->quinta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sexta[]" value="1"' ;
+                                    if($turno->sexta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sab[]" value="1"' ;
+                                    if($turno->sabado == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">'; 
+                                    echo '<input type="checkbox" name="dom[]" value="1"';
+                                    if($turno->domingo == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '</tr>';
+                                }
+                                if($turno->id_turno == 2){
+                                    echo '<tr id="tabela_turno">';
+                                    echo '<td >Tarde</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="seg[]" value="2"';
+                                    if($turno->segunda == 1){
+                                        echo ' checked';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="terca[]" value="2" ';
+                                    if($turno->terca == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quarta[]" value="2"';
+                                    if($turno->quarta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quinta[]" value="2"';
+                                    if($turno->quinta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sexta[]" value="2"' ;
+                                    if($turno->sexta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sab[]" value="2"' ;
+                                    if($turno->sabado == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">'; 
+                                    echo '<input type="checkbox" name="dom[]" value="2"';
+                                    if($turno->domingo == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '</tr>';
+                                }
+                                if($turno->id_turno == 3){
+                                    echo '<tr id="tabela_turno">';
+                                    echo '<td >Noite</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="seg[]" value="3"';
+                                    if($turno->segunda == 1){
+                                        echo ' checked';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="terca[]" value="3" ';
+                                    if($turno->terca == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quarta[]" value="3"';
+                                    if($turno->quarta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="quinta[]" value="3"';
+                                    if($turno->quinta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sexta[]" value="3"' ;
+                                    if($turno->sexta == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">';
+                                    echo '<input type="checkbox" name="sab[]" value="3"' ;
+                                    if($turno->sabado == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '<td class="tabela_turno">'; 
+                                    echo '<input type="checkbox" name="dom[]" value="3"';
+                                    if($turno->domingo == 1){
+                                        echo ' checked ';
+                                    } 
+                                    echo '>';
+                                    echo '</td>';
+                                    echo '</tr>';
+                                }
+                            }                                 
+                            }else{?>
+                                <tr id="tabela_turno">
                                 <td >Manhã</td>
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="seg[]" value="1">
@@ -145,7 +311,7 @@
                                 <td class="tabela_turno">
                                     <input type="checkbox" name="sexta[]" value="1">
                                 </td>
-                                <td style="text-align: center;">
+                                <td class="tabela_turno">
                                     <input type="checkbox" name="sab[]" value="1">
                                 </td>
                                 <td class="tabela_turno">
@@ -200,8 +366,9 @@
                                     <input type="checkbox" name="dom[]" value="3">
                                 </td>
                             </tr>
+                            <?php } ?>
                         </table>
-                </div>
+                    </div>
                 <div class="col-md-6 column incluir_curso" style="margin-bottom: 20px;">
                             <br />
                             Horário:
@@ -209,25 +376,30 @@
                             <?php echo form_error('horario','<div class="erro">','</div>'); ?>
                             <input type="text" name="horario" required="" value ="<?php echo $curso->horario;?>"/>
                 </div>
+                <div class="col-md-6 column incluir_curso" style="margin-bottom: 20px;">
+                            <br />
+                            Local:
+                            <br />
+                            <?php echo form_error('local','<div class="erro">','</div>'); ?>
+                            <input type="text" name="local" required="" value ="<?php echo $curso->local;?>"/>
+                </div>
             </div>    
         </div>
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <div style="margin-left: 2%; margin-top: 15px;">
-                            Breve descrição:
-                            <br />
-                            <?php echo form_error('breve_descricao','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="breve_descricao" required="" value ="<?php echo $curso->breve_descricao;?>"></textarea>
-                </div>
+                
                 <div style="margin-left: 2%; margin-top: 15px;">
                             Descrição:
                             <br />
-                            <?php echo form_error('perfil_voluntario','<div class="erro">','</div>'); ?>
-                            <textarea style="width: 96%; min-height: 120px" name="descricao" required="" value ="<?php echo $curso->descricao;?>"></textarea>
+                            <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
+                            <?php echo '<textarea style="width: 96%; min-height: 120px" name="descricao" 
+                                      class="editar">'.$curso->descricao.'</textarea>'?>
                 </div>
                 
                 <div>                                                   
-                        <input type="submit" class="btn btn-primary btn-lg " style="margin-top: 20px; margin-left: 75%;" value="Incluir Curso" />                         
+                        <input type="submit" class="btn btn-primary btn-lg " style="margin-top: 20px; margin-left: 75%;" value="Alterar Curso" />                         
+                        <br/>
+                        <br/>
                 </div>
                
             </div>

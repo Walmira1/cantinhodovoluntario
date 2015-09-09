@@ -11,6 +11,7 @@ class Inicio extends CI_Controller {
     */
 		$this->load->model('cidade', 'cidade');
                 $this->load->model('curso', 'curso');
+                $this->load->model('campanha', 'campanha');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -20,6 +21,9 @@ class Inicio extends CI_Controller {
 	{       
                 $dados['cidades'] = $this->db->get('cidade')->result();
                 $dados['estados'] = $this->cidade->get_estado();
+                $dados['campanhas'] = $this->campanha->get_all_campanha()->result();
+                $dados['cursos'] = $this->curso->get_all_curso()->result();
+                        
 		$this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_voluntario');
                 $this->load->view('home',$dados);

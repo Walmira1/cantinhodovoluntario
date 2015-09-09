@@ -140,11 +140,24 @@ class Vaga extends CI_Model {
         return  $this->db->get();
         
     }
-    public function select_sum_vaga($id_entidade){
+    public function select_sum_vaga($id_entidade=NULL){
         if ($id_entidade != NULL){
             $this->db->select_sum('numero_vagas');
             $this->db->where('entidade_id_entidade', $id_entidade);
             return $this->db->get('vaga');
+        }else {
+            return NULL;
+        }
+        
+    }
+     public function select_all_vaga_entidade($id_entidade=NULL){
+        //Busca todas as vagas de uma entidade
+        if ($id_entidade != NULL){
+        $this->db->select('vaga.id_vaga, vaga.vaga_de, vaga.entidade_id_entidade, entidade.logotipo_entidade, entidade.nome, entidade.endereco,entidade.site_entidade,entidade.cidade');
+        $this->db->from('vaga');
+        $this->db->where('vaga.entidade_id_entidade',$id_entidade);
+        $this->db->join('entidade', 'entidade.id_entidade = vaga.entidade_id_entidade');
+        return  $this->db->get();
         }else {
             return NULL;
         }

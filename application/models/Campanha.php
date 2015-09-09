@@ -75,6 +75,14 @@ class Campanha extends CI_Model {
                     return FALSE;
         }
     }
+    public function get_all_campanha(){
+        //Busca sem condição
+            $this->db->select('*');
+            return $this->db->get('campanha');
+            
+       
+        
+    }
     
    
 }

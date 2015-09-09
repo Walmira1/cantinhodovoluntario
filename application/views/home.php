@@ -173,58 +173,45 @@
 	<div class="col-md-12 column col_cursos">
 		<div id="lista_cursos">
 			<div class="row clearfix">
+                            <?php foreach($campanhas as $campanha){ ?>
 				<div class="col-md-4 column ">	
 					<a href="saiba_mais_campanha1.html">			
-						<img class="img-responsive"  src="<?= base_url(); ?>assets/img/Dogs-and-cats.jpg"  >
+						<img class="img-responsive"  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
 					</a>
 					<div class="titulo_curso">	
 						<a href="saiba_mais_campanha1.html">
-							Padrinho Virtual. Amigo Real  
+							<?php echo $campanha->titulo_campanha_noticia ?> 
 						</a>
 					</div>					
 					<p class="article-paragraph ">
-						Sabe aquela velha história de morrer de pena dos animais abandonados? 
-						Na verdade, quem sente pena não morre, mas aquele animal que é alvo da pena, pode morrer sim! Morre aguardando uma ação, uma pequena ajuda. Com a Campanha Padrinhos Virtuais você pode mudar essa fala já tão batida e a situação de abandono de muitos animais.
+						<?php echo $campanha->descricao ?>
 					</p>
 					<span>
 						<a class="btn saiba_mais" href="saiba_mais_campanha1.html">Saiba mais »</a>
 					</span>		
-				</div>
-				<div class="col-md-4 column ">	
-					<a href="saiba_mais_curso.html">		
-					<img class="img-responsive"  src="<?= base_url(); ?>assets/img/images.jpg"  >	
-					</a>	
-					<div class="titulo_curso">	
-						<a href="saiba_mais_campanha.html">
-						Curso de BREC - Busca e Resgate em estruturas colapsadas 
-						</a>					 
-					</div>						
-					<p class="article-paragraph ">
-						Este curso é direcionado a profissionais da emergencia como bombeiros, policiais, enfermeiros, médicos e socorristas e 
-						tem como objetivo orientar quanto aos procedimentos e referências internacionais no âmbito do resgate técnico. 	
-					</p>
-					<span>
-						<a class="btn saiba_mais" href="saiba_mais_campanha.html">Saiba mais »</a>
-					</span>	
-				</div> 
-				<div class="col-md-4 column ">
-					<a href="saiba_mais_campanha.html">			
-						<img class="img-responsive"  src="<?= base_url(); ?>assets/img/agasalho1.jpg" >
+				</div>                            
+                            <?php }?>
+                            <?php foreach($cursos as $curso){ ?>
+                                <div class="col-md-4 column ">	
+					<a href="saiba_mais_campanha1.html">			
+						<img class="img-responsive"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
 					</a>
 					<div class="titulo_curso">	
-						<a href="saiba_mais_campanha.html">
-						Campanha do agasalho 2015 - Aqueça um coração
-						</a>				 
-					</div>		
+						<a href="saiba_mais_campanha1.html">
+							<?php echo $curso->nome ?> 
+						</a>
+					</div>					
 					<p class="article-paragraph ">
-						Iniciou hoje a Campanha do Agasalho 2015 que se encerrará em 19 de junho de 2015. Os agasalhos arrecadados serão doados a uma instituição de assistência social na Guarnição de Porto Alegre-RS.</b> Quem quiser fazer a doação é só entregar na portaria da 8ª CSM no Centro Histórico 
+						<?php echo $curso->descricao ?>
 					</p>
 					<span>
-						<a class="btn saiba_mais" href="saiba_mais_campanha.html">Saiba mais »</a>
-					</span>
-				</div>
+						<a class="btn saiba_mais" href="saiba_mais_campanha1.html">Saiba mais »</a>
+					</span>		
+				</div>                            
+                            <?php }?>
 			</div>
-			<div class="row clearfix">
+		</div>
+	<div class="row clearfix">
 				<div class="col-md-4 column ">
 					
 					<a href="saiba_mais_campanha.html">			
