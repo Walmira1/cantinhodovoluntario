@@ -28,21 +28,8 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.png">
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function confirma() {
-             if (confirm("Tem certeza que deseja realmente excluir este registro?\nEsta operação não poderá ser desfeita!")) return true; else return false;
-        }
-    </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.maskMoney.js" type="text/javascript"></script>
-        
-    <script>
-        $(function() {
-            $('#taxa_inscr').maskMoney();
-        })
-    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 </head>
 
-<body>
+
 

@@ -68,6 +68,19 @@ $config =
                     'local          '      => array('field' => 'local',              'label' => 'Local do Curso',         'rules'  => 'required'),
                     'descricao'            => array('field' => 'descricao',          'label' => 'Descrição',              'rules'  => 'required')
         ),
+        'altera_curso_form'=> array(
+                    'titulo'               => array('field' => 'titulo',             'label' => 'Titulo do Curso',        'rules'  => 'required'),
+                    'num_horas'            => array('field' => 'num_horas',          'label' => 'Numero de Horas',        'rules'  => 'required'),
+                    'taxa_inscr'           => array('field' => 'taxa_inscr',         'label' => 'Taxa de Inscrição',      'rules'  => 'required]'),
+                    'inscricao_ate'        => array('field' => 'inscricao_ate',      'label' => 'Periodo de Inscrição',   'rules'  => 'required'),
+                    'data_inicio'          => array('field' => 'data_inicio',        'label' => 'Data de Inicio',         'rules'  => 'required'),
+                    'data_fim'             => array('field' => 'data_fim',           'label' => 'Data de Finalização',    'rules'  => 'required'),
+                    'data_postagem'        => array('field' => 'data_postagem',      'label' => 'Data de Postagem',       'rules'  => 'required'),
+                  //  'dias_semana'         => array('field' => 'dias_semana',        'label' => 'Dias da Semana',       'rules'  => 'required'),
+                    'horario'              => array('field' => 'horario',            'label' => 'Horário',                'rules'  => 'required'),
+                    'local          '      => array('field' => 'local',              'label' => 'Local do Curso',         'rules'  => 'required'),
+                    'descricao'            => array('field' => 'descricao',          'label' => 'Descrição',              'rules'  => 'required')
+        ),
         'cadastro_campanha_form'=> array(
                     'titulo'               => array('field' => 'titulo',             'label' => 'Titulo do Curso',        'rules'  => 'required'),
                     'data_inclusao'        => array('field' => 'data_inclusao',      'label' => 'Data da Inclusão',        'rules'  => 'required'),

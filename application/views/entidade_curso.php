@@ -1,4 +1,4 @@
-<body onload="carregar()">   
+<body onload="carregar()">
     <div class="row clearfix">
             <div class="col-md-12 column">
                 <?php  
@@ -16,7 +16,7 @@
 			<div id="breadcrump">
                            <a href="<?= base_url(); ?>inicio">Home ></a>
                            <a href="<?= base_url(); ?>Entidades/index">Entidades Cadastradas ></a>
-			   <a href="">Ver Vagas</a>
+			   <a href="">Ver Campanha</a>
 			</div>	
 		</div>
 		<!-- [FIM]BreadCrump[/FIM] -->
@@ -27,13 +27,13 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="col_info_instituicao">
+                    <br /><br />
                     <?php if($entidade->logotipo_entidade != NULL){ ?>
                         <a href="<?php echo $entidade->site_entidade;?>" ><img src="<?php echo base_url().$entidade->logotipo_entidade;?>" style="width: 70%;" alt="Logotipo da  Instituição" /></a>
                     <?php }else{ ?>
                         <a href="<?php echo $entidade->site_entidade;?>" ><img src="<?=base_url();?>assets/img/criancas_2.png" style="width: 70%;" alt="Logotipo da  Instituição" /></a>
                     <?php } ?>   
-                    
-                    <div >
+                   <div >
                         <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
                         <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
                         <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
@@ -56,49 +56,51 @@
                     E-mail: <?php echo $entidade->email;?>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div id="margem_tabela"> 
-                <table class=" table table-responsive">
-                    <thead>   
-                    <tr id="dias_semana">
-                        <th>Funcao</th>
-                        <th>Local</th>
-                        <th>Cidade</th>
-                        <th></th>
-                    </tr>
-                    </thead> 
-                <tbody>
-                <?php if ($vagas != NULL){?>
-                <?php foreach($vagas as $vaga) {?>
-                    <tr >
-                        <td ><?= $vaga->vaga_de;?></td>
-                        <td ><?= $vaga->endereco;?></td>
-                        <td ><?= $vaga->cidade;?></td>
-                        <td> <a href="<?= base_url(); ?>pesquisa_vaga/vaga/<?= $vaga->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Saiba mais</button></a> </td>
-                        
-                    </tr>
-                <?php }?>
-                <?php }?>
-                </tbody>
-                </table> 
-                </div>  
-            
+            <div class="col-md-1">
             </div>
+            <?php if($cursos != NULL){ ?>
+            <?php foreach($cursos as $curso){ ?>
+                    <div class="col-md-4 column ">
+                        <br /><br />
+			<a href="saiba_mais_curso1.html">			
+				<img class="img-responsive"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
+			</a>
+			<div class="titulo_curso">	
+				<a href="saiba_mais_curso.html">
+					<?php echo $curso->nome ?> 
+						</a>
+			</div>					
+			<p class="article-paragraph ">
+				<?php echo $curso->descricao ?>
+			</p>
+			<span>
+				<a class="btn saiba_mais" href="saiba_mais_curso1.html">Saiba mais »</a>
+			</span>		
+                    </div>                            
+            <?php }?>
+            <?php }else{?>
+                    <div class="col-md-8 column ">
+                        <br /><br />
+                        Não existem cursos para esta entidade
+                    </div>
+            <?php }?>
         </div>
     </div>
-	<!-- [FIM]Vagas[/FIM] -->
+	<!-- [FIM]cmapnhas[/FIM] -->
         
         <!-- [INI]Paginação[/INI] -->
-        <div class="row clearfix">
+        <div class="row clearfix" >
             <div class="col-md-12 column">
                 <div class="paginacao">
                    < 1, 2, 3, 4, 5 .... 12 >
+                
                 </div>
                 <div id="mapa_campanha"></div> 
             </div>
         </div>
         <!-- [FIM]Paginação[/FIM] -->
-        <script type="text/javascript">
+
+<script type="text/javascript">
 	var map = null; 
     	function carregar(){
 		//Endereço da marcação
@@ -142,5 +144,4 @@
     </script>
 
 
-        
-	
+

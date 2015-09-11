@@ -83,6 +83,19 @@ class Campanha extends CI_Model {
        
         
     }
+    public function select_all_campanha_entidade($id_entidade=NULL){
+        //Busca todas as campanhas de uma entidade
+        if ($id_entidade != NULL){
+            $this->db->select('campanha.id_campanha, campanha.titulo_campanha_noticia, foto_campanha,campanha.descricao, campanha.entidade_id_entidade, entidade.logotipo_entidade, entidade.nome, entidade.endereco,entidade.site_entidade,entidade.cidade');
+            $this->db->from('campanha');
+            $this->db->where('campanha.entidade_id_entidade',$id_entidade);
+            $this->db->join('entidade', 'entidade.id_entidade = campanha.entidade_id_entidade');
+            return  $this->db->get();
+        }else {
+            return NULL;
+        }
+        
+    }
     
    
 }

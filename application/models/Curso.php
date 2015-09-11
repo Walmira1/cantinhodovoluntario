@@ -66,7 +66,7 @@ class Curso extends CI_Model {
             $data = array(
                     'id_curso'       => $dados['id_curso'],
                     'nome'           => $dados['nome'],
-                    'inscricao_ate'  => $dados['iscricao_ate'],
+                    'inscricao_ate'  => $dados['inscricao_ate'],
                     'inicio'         => $dados['inicio'],
                     'fim'           => $dados['fim'] ,
                     'data_postagem' => $dados['data_postagem'] ,
@@ -97,6 +97,17 @@ class Curso extends CI_Model {
         //Busca sem condição
             $this->db->select('*');
             return $this->db->get('curso');
+        
+    }
+    public function select_all_curso_entidade($id_entidade=NULL){
+        //Busca todas os cursos  de uma entidade
+        //Busca com condição
+        if ($id_entidade != NULL){
+            $this->db->where('entidade_id_entidade', $id_entidade);
+            return $this->db->get('curso');
+        }else {
+            return NULL;
+        }
         
     }
    

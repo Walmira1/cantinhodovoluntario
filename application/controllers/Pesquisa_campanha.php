@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Pesquisa_vaga extends CI_Controller {
+class Pesquisa_campanha extends CI_Controller {
 
     	public function __construct(){
                 parent::__construct();
@@ -9,10 +8,10 @@ class Pesquisa_vaga extends CI_Controller {
        Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
-		$this->load->model('vaga', 'vaga');
+		$this->load->model('campanha', 'campanha');
                 $this->load->model('entidade', 'entidade');
-                $this->load->model('cidade', 'cidade');
-                $this->load->model('turno', 'turno');
+                $this->load->model('vaga', 'vaga');
+                
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -23,36 +22,26 @@ class Pesquisa_vaga extends CI_Controller {
                $dados['estados'] = $this->cidade->get_estado();
                $this->load->view('includes/html_header');
                $this->load->view('includes/html_menu_voluntario');
-               $this->load->view('pesquisa_vaga',$dados);
+               $this->load->view('pesquisa_campanha',$dados);
                $this->load->view('includes/html_rodape_voluntario');
                
                                 
 	}
-        public function vaga($id_vaga=null)
+        public function campanha($id_campanha=null)
 	{       
-            if ($id_vaga != NULL){
-                $query = $this->vaga->select_vaga($id_vaga) ;
+            if ($id_campanha != NULL){
+                $query = $this->campanha->select_campanha($id_campanha) ;
                 if ($query->num_rows() == 1){
-                    $data['vaga'] = $query->row(0,'vaga') ;
-         //           var_dump($data['vagas']);
+                    $data['campanha'] = $query->row(0,'campanha') ;
+         //           var_dump($data['campanhas']);
         //        exit;
-                    $id_entidade = $data['vaga']->entidade_id_entidade;
-                    $tabela = 1;
-                    $query = $this->turno->select_turno_vaga($id_vaga,$tabela);
-            
-                    if ($query->num_rows() > 0){
-                        $data['turno'] = $query->result();
-           //     var_dump($data['turno']);
-           //     exit;
-                    }else{
-                         $data['turno'] = NULL;
-                    }
+                    $id_entidade = $data['campanha']->entidade_id_entidade;
                     $query = $this->entidade->get_id($id_entidade);
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
-                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
-             //var_dump($data['sum_vaga']);
+                    $data['sum_campanha'] = $this->campanha->select_sum_campanha($id_entidade)->row();  
+             //var_dump($data['sum_campanha']);
              //exit;
                 }else {
                     $alerta = array(
@@ -67,7 +56,7 @@ class Pesquisa_vaga extends CI_Controller {
             }
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_voluntario');
-            $this->load->view('saiba_mais_vaga',$data);
+            $this->load->view('saiba_mais_campanha',$data);
             $this->load->view('includes/html_rodape_voluntario');
                 
                 
@@ -83,7 +72,7 @@ class Pesquisa_vaga extends CI_Controller {
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
-                $this->load->view('cadastro_vaga');
+                $this->load->view('cadastro_campanha');
                 $this->load->view('includes/html_rodape_entidade');
                 
             }
@@ -91,20 +80,19 @@ class Pesquisa_vaga extends CI_Controller {
             $data['atividade_id_atividade_projeto'] = $this->input->post('atividade');
             $data['tipo_carga_horaria'] = $this->input->post('tipo_carga_horaria');
             $data['numero_horas'] = $this->input->post('numero_horas');
-            $data['estado'] = $this->input->post('estado');
-            $data['cidade'] = $this->input->post('cidade');
+            
             if (($this->input->post('area') == 0) &&
                ($this->input->post('atividade') == 0) &&
                ($this->input->post('tipo_carga_horaria') == 0) &&
                ($this->input->post('numero_horas') ==  null)    
             ){
-            // busca todas as vagas existentes
-                    $query = $this->vaga->select_all_vaga() ;
+            // busca todas as campanhas existentes
+                    $query = $this->campanha->select_all_campanha() ;
                     if ($query->num_rows() > 0){
-                        $data['vagas'] = $query->result();
+                        $data['campanhas'] = $query->result();
                     }
             }
-        //        var_dump($dados['vagas']);
+        //        var_dump($dados['campanhas']);
         //        exit;
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
             
@@ -112,14 +100,14 @@ class Pesquisa_vaga extends CI_Controller {
             $data['estados'] = $this->cidade->get_estado();
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('pesquisa_vaga',$data);
+            $this->load->view('pesquisa_campanha',$data);
             $this->load->view('includes/html_rodape_entidade');
         }
             
 	
       public function entidade($id_entidade=null)
 	{   
-            /* Pesquisa as vagas para uma determinada entidade
+            /* Pesquisa as campanhas para uma determinada entidade
         http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
               */
              
@@ -136,27 +124,27 @@ class Pesquisa_vaga extends CI_Controller {
                             'upload_foto' => $query->upload_foto,
                             'site_entidade' => $query->site_entidade,
                             'user_nome' => $query->nome,
-                            'user_logado' => TRUE
+                            'user_logado' => NULL
                            
                         );
                 $this->session->set_userdata($dados);
                 $data['entidade'] = $query;
-                $query = $this->vaga->select_all_vaga_entidade($id_entidade);
+                $query = $this->campanha->select_all_campanha_entidade($id_entidade);
                 if ($query->num_rows() > 0){
-                        $data['vagas'] = $query->result();
+                        $data['campanhas'] = $query->result();
                         $query = $this->vaga->select_sum_vaga($id_entidade); 
                         $data['sum_vaga'] = $query->row();
                         
                 }else{
-                    $data['vagas'] = NULL;
+                    $data['campanhas'] = NULL;
                     $data['sum_vaga'] = NULL;
                 }
                                
-             //   var_dump($data['sum_vaga']);
+             //   var_dump($data['sum_campanha']);
              //   exit;
                 $this->load->view('includes/html_header_mapa');
                 $this->load->view('includes/html_menu_voluntario');
-                $this->load->view('entidade_vaga',$data);
+                $this->load->view('entidade_campanha',$data);
                 $this->load->view('includes/html_rodape_voluntario');
             }else{
                 $data['mensagem'] = "erro";                
@@ -169,3 +157,5 @@ class Pesquisa_vaga extends CI_Controller {
 
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
+
+

@@ -36,14 +36,18 @@
                 <tbody>
                 <?php foreach($entidades as $ent) {?>
                     <tr >
-                        <td ><?php echo '<img class="img-responsive"  src="'.base_url().$ent->logotipo_entidade;?>"/> </td>
+                        <?php if($ent->logotipo_entidade != NULL){?>
+                            <td ><?php echo '<img class="img-responsive"  src="'.base_url().$ent->logotipo_entidade;?>"/> </td>
+                        <?php }else{ ?>
+                            <td ><img class="img-responsive"  src="<?=base_url();?>assets/img/criancas_2.png"/> </td>
+                        <?php } ?>    
                         <td ><?= $ent->nome;?></td>
                         <td ><?= $ent->cidade;?></td>
                         <td ><?= $ent->email;?></td>
-                        <td ><?= $ent->site_entidade;?></td>
+                        <td ><?= $ent->site_entidade;?>  </td>
                         <td ><?= $ent->telefone;?></td>
                         <td> <a href="<?= base_url(); ?>pesquisa_vaga/entidade/<?= $ent->id_entidade;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Vagas</button></a> </td>
-                        <td> <a href="<?= base_url(); ?>pesquisa_camapnha/entidade/<?= $ent->id_entidade;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Campanhas</button></a> </td>
+                        <td> <a href="<?= base_url(); ?>pesquisa_campanha/entidade/<?= $ent->id_entidade;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Campanhas</button></a> </td>
                         <td> <a href="<?= base_url(); ?>pesquisa_curso/entidade/<?= $ent->id_entidade;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Cursos</button></a> </td>
                     
                     </tr>

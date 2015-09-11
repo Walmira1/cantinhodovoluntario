@@ -4,7 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet">
     <script type="text/javascript"
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSK-df3eSoqkEVxMQ1mYFBp9iYOFFgfQM&sensor=SET_TO_TRUE_OR_FALSE">
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTaBtOBnWAv-OyDVBgHqDTIzmOMu2j_CE&sensor=TRUE">
     </script>
     <script type="text/javascript">
       function initialize() {

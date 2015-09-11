@@ -62,6 +62,8 @@ class Altera_curso extends CI_Controller {
         }  
         public function altera()
 	{  
+              var_dump($this->input->post());
+            exit;
             $alerta = NULL;
             $cod_mensagem = null;
             $mensagem = null;
@@ -69,12 +71,12 @@ class Altera_curso extends CI_Controller {
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
-                $this->load->view('alterar_vaga');
+                $this->load->view('altera_curso');
                 $this->load->view('includes/html_rodape_entidade');
                 
             }
           //Verifica se o form passou nos testes de validação  
-            if ($this->form_validation->run('cadastro_vaga_form')==FALSE) {
+            if ($this->form_validation->run('altera_curso_form')==FALSE) {
                       // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
                  $alerta = array(
                     "class"=>"danger",
@@ -83,45 +85,39 @@ class Altera_curso extends CI_Controller {
             }else{
                 $data1 = null;
                 $data1 = array(
-            	'vaga_de' => $this->input->post('vaga_de'),
-                'descricao' => $this->input->post('descricao'),
-                'data_inicio' => $this->input->post('data_inicio'),
-                'data_fim' => $this->input->post('data_fim'),
-                'numero_horas' => $this->input->post('numero_horas'),
-                'tipo_carga_horaria' => $this->input->post('tipo_carga_horaria'),
+            	'nome' => $this->input->post('titulo'),
+                'inscricao_ate' => $this->input->post('inscricao_ate'),
+                'inicio' => $this->input->post('data_inicio'),
+                'fim' => $this->input->post('data_fim'),
                 'data_postagem' => $this->input->post('data_postagem'),
-                'numero_vagas' => $this->input->post('numero_vagas'),
+                'num_horas' => $this->input->post('num_horas'),
+                'taxa_inscricao' => $this->input->post('taxa_inscr'),
+                'horario'=> $this->input->post('horario'),
+                'descricao' => $this->input->post('descricao'),
+                'local' => $this->input->post('local'),
                 'entidade_id_entidade' => $this->input->post('id_entidade'),
-                'atividade_id_area' => $this->input->post('area'),
-                'atividade_id_atividade_projeto' => $this->input->post('atividade'),
-                'perfil_voluntario' => $this->input->post('perfil_voluntario')
+                'upload_foto' => $this->input->post('upload_foto'),
+                'video_youtube'=>  $this->input->post('video')
                 );
                 $id_curso = $this->input->post('id_curso');
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
                 // var_dump($this->input->post());
                 $tabela = 1;
-                
+                $id_curso = $this->input->post('id_curso');
                 if ($this->curso->alterar_curso($id_curso,$data1) == TRUE){
-                    $query = $this->curso->select_vaga($id_curso) ;
+                    $query = $query = $this->curso->get_curso($id_curso) ;
                     if ($query->num_rows() == 1){
-                    $data['curso'] = $query->row(0,'curso') ;
+                         $data['curso'] = $query->row(0,'curso') ;
                      }
-                    if ($this->turno->select_vaga($id_curso, $tabela) == TRUE) {
-                        
-                        if ($this->turno->delete_vaga($id_curso, $tabela) == FALSE) { 
+                     $tabela = 2;
+                     if ($this->turno->delete_vaga($id_curso, $tabela) == FALSE) { 
                            $alerta = array(
                            "class"=>"danger",
-                    "mensagem" => "Atenção falha no delete do banco<br>" . validation_errors()
+                    "mensagem" => "Atenção falha no delete do banco<br>" 
                            );
                         }
-      // vou ler a ultima vaga cadastrada para a entidade para buscar o id_curso
-                       
-            //        var_dump($query);
-            //        exit;
-            //        echo "vaga_id_curso = " .$query->id_curso;
-                    }
-                    
-                    $turno['tabela_assoc']= 1;
+      
+                    $turno['tabela_assoc']= 2;
                         $turno['id_vaga_curso']= $id_curso;
                         $arrlength2 = 3;
                         $arrlength1 = 8;
@@ -227,11 +223,11 @@ class Altera_curso extends CI_Controller {
                             // grava o registro do dia 
                             $this->turno->cadastrar($turno);
                         }
-                     $mensagem = "Vaga Alterada com Sucesso";
+                     $mensagem = "Curso Alterado com Sucesso";
                } else{
                    $alerta = array(
                            "class"=>"danger",
-                    "mensagem" => "Atenção erro na atualização do registro<br>" . validation_errors()
+                    "mensagem" => "Atenção erro na atualização do registro<br>" 
                         );
                     }
             }
@@ -240,7 +236,7 @@ class Altera_curso extends CI_Controller {
             $data['mensagem'] = $mensagem;
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_curso',$data);
+            $this->load->view('altera_curso',$data);
             $this->load->view('includes/html_rodape_entidade');
             
 	}
