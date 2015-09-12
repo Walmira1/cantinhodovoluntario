@@ -1,35 +1,51 @@
-    <body onload="carregar()">
+<body onload="carregar()">
         <!-- [INI]Imagem instituição[/INI] -->
-        <div class="row clearfix" >
-            <div class="col-md-12 column">
+    <div class="row clearfix">
+            
+        <div class="col-md-12 column">
             <?php  
-            if($this->session->userdata('upload_foto')== NULL){
-                    echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_instituicao" alt="imagem da instituição" />';
+            if($curso->upload_foto == NULL){
+                    echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_cursos" alt="imagem da instituição" />';
                 }else{   
-                    echo '<img src="'.base_url().$entidade->upload_foto.'" class="imagem_cursos" alt="" />';
+                    echo '<img src="'.base_url().$curso->upload_foto.'" class="imagem_cursos" alt="" />';
                 }
-            ?>  
-            </div>
+            ?> 
+            
+        </div>
+   
 	</div>
         <!-- [FIM]Imagem instituição[/FIM] -->
-        <div class="row clearfix">
+    <div class="row clearfix">
         <!-- [INI]BreadCrump[/INI] -->
         <div class="col-md-12 column">
             <div id="breadcrump">
                <a href="<?= base_url(); ?>inicio">Home ></a>
-               <a href="<?= base_url(); ?>pesquisa_vaga/pesquisa/">Ver Vagas ></a>
+               <a href="<?= base_url(); ?>entidades">Entidades></a>
+               <a href="<?= base_url(); ?>pesquisa_curso/entidade/<?php echo $entidade->id_entidade;?>">Entidades></a>
                            <a href="#">Saiba Mais</a>
             </div>  
         </div>
         <!-- [FIM]BreadCrump[/FIM] -->
     </div>
 	<!-- [INI]Vaga[/INI] -->
-        <div class="row">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="descricao_vaga">                   
+                <div style="width: 100%; margin-bottom: 20px;">
+                    <div style="float: left; font-weight: bold; font-size: 24px;"><?php echo $curso->nome;?>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- [FIM]noticia[/FIM] -->
+    
+    <div class="row">
             <div class="col-md-12">
                 <div class="descricao_vaga">
                     <div class="col-md-9">
                         <div style="width: 100%; margin-bottom: 20px;">
-                            <div style="float: left; font-weight: bold; font-size: 24px;">Descrição da Oportunidade</div>
+                            <div style="float: left; font-weight: bold; font-size: 24px;">Descrição do Curso</div>
                             <div style="float: left; margin-left: 20px; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Inscrever-se</button></div>
                             <div style="float: left; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Imprimir</button></div>
                             <strong>Divulgue </strong>
@@ -37,67 +53,42 @@
                         </div> 
                         <br /><br />
                         <div>
-                             <div class="box">
-                                 Vaga de 
-                                <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->vaga_de;?>" />
-                            </div>
-                            <div class="box">
-                                Tipo de Compromisso
-                                <br />
-                                 <?php
-                            $tipo_compromisso = null;
-                            switch($vaga->tipo_compromisso){
-                            case 1: $tipo_compromisso = "Ocasional";break;
-                            case 2: $tipo_compromisso = "Regular";break;
-                            }
-                            ?>
-                                <input type="text" disabled="disabled" value="<?php echo $tipo_compromisso;?>" />
-                            </div>
-                            <div class="box">
-                                 Número de Vagas
-                                <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->numero_vagas;?>" />
-                            </div>
-                            <div class="box">
-                                Número de horas
-                                <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->numero_horas;?>" />
-                            </div>
-                            <div class="box">
-                                Horas
-                                <br />
-                            <?php
-                            $comprometimento = NULL;
-                            switch($vaga->comprometimento){
-                            case 1: $area = "Diário";break;
-                            case 2: $area = "Semanal";break;
-                            case 3: $area = "Quinzenal";break;
-                            case 4: $area = "Mensal";break;
-                            case 5: $area = "Fins de Semana";break;
-                            }
-                            ?>
-                                <input type="text" disabled="disabled" value="<?php echo $comprometimento;?>" />  
-                            </div>
                             <div class="box">
                                 Data Inicio
                                 <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->data_inicio;?>" />  
+                                <input type="text" disabled="disabled" value="<?php echo $curso->inicio;?>" />  
                             </div>
                             <div class="box">
                                 Data Fim
                                 <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->data_fim;?>" />  
+                                <input type="text" disabled="disabled" value="<?php echo $curso->fim;?>" />  
                             </div>
                             <div class="box">
-                                Data Postagem
+                                Inscrições até ..
                                 <br />
-                                <input type="text" disabled="disabled" value="<?php echo $vaga->data_postagem;?>" />  
+                                <input type="text" disabled="disabled" value="<?php echo $curso->inscricao_ate;?>" />  
                             </div>
+                            <div class="box">
+                                Número de horas do curso
+                                <br />
+                                <input type="text" disabled="disabled" value="<?php echo $curso->num_horas;?>" />
+                            </div>
+                            <div class="box">
+                                Horário das
+                                <br />
+                                <input type="text" disabled="disabled" value="<?php echo $curso->horario;?>" />
+                            </div>
+                            
+                            <div class="box">
+                                Taxa de Inscrição
+                                <br />
+                                <input type="text" disabled="disabled" value="<?php echo $curso->taxa_inscricao;?>" />
+                            </div>
+                            
                         </div>
                         <div>
                             <br />
-                            <table class="table table-condensed" style="max-width:10%;" name="dias_semana">
+                            <table class="table table-condensed" style="max-width:10%;" >
                             <tr id="dias_semana">
                                 <td>
                                 </td>
@@ -125,7 +116,7 @@
                             </tr>
                             <?php if ($turno != NULL){
                             foreach ($turno as $turno){
-                                if($turno->id_turno == 1){
+                                if($turno->id_turno == 2){
                                     echo '<tr id="tabela_turno">';
                                     echo '<td >Manhã</td>';
                                     echo '<td class="tabela_turno">';
@@ -290,20 +281,21 @@
                             }                                 
                             }?>
                         </table>
-                            
                         </div>
-                        <div><h3>Sobre a Oportunidade</h3></div>
+                        <div><h3>Sobre o Curso</h3></div>
                         <div>
-                            <?php echo $vaga->descricao;?>
+                            <?php echo $curso->descricao;?>
                         </div>
                         <div><h3>Sobre a Instituição</h3></div>
                         <div>
                             <?php echo $entidade->descricao;?>
                         </div>
-                        <div><h3>Considerações Finais</h3></div>
-                        <div style="margin-bottom: 30px;">
-                            <?php echo $vaga->perfil_voluntario;?>
+                        
+                        <div><h3>Local do Curso</h3></div>
+                        <div>
+                            <?php echo $curso->local;?>
                         </div>
+
                     </div>
                     <div class="col-md-3">
                         <div class="col_info_instituicao">
@@ -334,7 +326,7 @@
                 </div>
             </div>
         </div>
-	<!-- [FIM]Vaga[/FIM] -->
+    <!-- [FIM]Vaga[/FIM] -->
     <!-- [INI]Paginação[/INI] -->
         <div class="row clearfix">
             <div class="col-md-12 column">                
@@ -342,12 +334,11 @@
                 </div>
             </div>
         </div>
-        <!-- [FIM]Paginação[/FIM] -->
-        <script type="text/javascript">
+    <script type="text/javascript">
 	var map = null; 
     	function carregar(){
 		//Endereço da marcação
-		var endereco = "<?php echo $entidade->endereco. ",". $entidade->cidade. " ".$entidade->estado; ?>"
+		var endereco = "<?php echo $curso->local. ",". $entidade->cidade. " ".$entidade->estado; ?>"
 		geocoder = new google.maps.Geocoder();		
 		geocoder.geocode({'address':endereco}, function(results, status){ 
 			if( status = google.maps.GeocoderStatus.OK){
@@ -373,7 +364,7 @@
       			mapTypeId: google.maps.MapTypeId.HYBRID
     		};
 		// Parâmetros do texto que será exibido no clique do marcador;
-  		var contentString = '<strong><?php echo $entidade->endereco. " ". $entidade->cidade?></strong>';
+  		var contentString = '<strong><?php echo $curso->local. " ". $entidade->cidade?></strong>';
 		var infowindow = new google.maps.InfoWindow({
 			content: contentString,
 			maxWidth: 700
@@ -385,7 +376,6 @@
 
     	}
     </script>
+
     </body>
-
-
-	
+    

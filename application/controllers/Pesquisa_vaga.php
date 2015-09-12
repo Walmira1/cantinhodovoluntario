@@ -21,6 +21,8 @@ class Pesquisa_vaga extends CI_Controller {
 	{       
                $dados['cidades'] = $this->db->get('cidade')->result();
                $dados['estados'] = $this->cidade->get_estado();
+               $dados['vagas'] = NULL;
+               $dados['entidade'] = NULL;
                $this->load->view('includes/html_header');
                $this->load->view('includes/html_menu_voluntario');
                $this->load->view('pesquisa_vaga',$dados);
@@ -65,7 +67,7 @@ class Pesquisa_vaga extends CI_Controller {
                 }
                 
             }
-            $this->load->view('includes/html_header');
+            $this->load->view('includes/html_header_mapa');
             $this->load->view('includes/html_menu_voluntario');
             $this->load->view('saiba_mais_vaga',$data);
             $this->load->view('includes/html_rodape_voluntario');

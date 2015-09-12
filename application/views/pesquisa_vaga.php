@@ -138,6 +138,7 @@
                     </tr>
                 </thead> 
                 <tbody>
+                <?php if($vagas != NULL) {?>
                 <?php foreach($vagas as $vaga) {?>
                     <tr >
                         <td ><?php echo '<a href="'.$vaga->site_entidade.'"> <img class="img-responsive"  src="'.base_url().$vaga->logotipo_entidade;?>"> </a></td>
@@ -145,10 +146,11 @@
                         <td ><?= $vaga->vaga_de;?></td>
                         <td ><?= $vaga->endereco;?></td>
                         <td ><?= $vaga->cidade;?></td>
-                        <td> <a href="<?= base_url(); ?>pesquisa_vaga/vaga/<?= $vaga->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" style="float: right;">Saiba mais</button></a> </td>
+                        <td> <a href="<?= base_url(); ?>pesquisa_vaga/vaga/<?= $vaga->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" ">Saiba mais</button></a> </td>
                         
                     </tr>
-                <?php }?>
+                <?php }?>  <!-- foreach  -->
+                <?php }?>  <!-- if not null  -->
                 </tbody>
             </table> 
         </div>  
@@ -158,12 +160,14 @@
         <!-- [INI]Paginação[/INI] -->
         <div class="row clearfix">
             <div class="col-md-12 column">
+                <?php if($vagas != NULL) {?>
                 <div class="paginacao">
                    < 1, 2, 3, 4, 5 .... 12 >
                 </div>
                 <div class="mapa">
                     <iframe src="http://mapbuildr.com/frame/cbqyfr" frameborder="0" height="400" width="550"></iframe>
                 </div>
+                <?php }?>
             </div>
         </div>
         <!-- [FIM]Paginação[/FIM] -->

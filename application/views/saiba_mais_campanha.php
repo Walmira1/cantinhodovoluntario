@@ -1,45 +1,14 @@
-
-<body>
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-2 column nosso_logo">
-            <a href="index.html">
-                <img alt="" src="img/cantinho.png" class="logo_cantinho">
-            </a>
-        </div>
-		<div class="col-md-6 column">
-			<h3 id="logo">
-				Cantinho do Voluntário
-			</h3>
-		</div>
-		<div class="col-md-4 column">
-			<div class="login">
-				<a href="" >
-					Faça Login ou
-				</a> 
-				<button type="button" class="btn btn-primary btn-sm">Cadastre-se</button>
-			</div>
-		</div>
-	</div>
-	<div class="row clearfix">
-		<!-- [INI]Menu[/INI] -->
-		<div class="col-md-12 column">
-			<div id="mapa">
-			   <a href="cadastro_entidade.html">Instituições</a>
-			   <a href="ver_vagas.html">Vagas</a>    
-			   <a href="testemunhos.html">Testemunhos</a>
-			   <a href="instituicoes.html">Instituições Registradas</a>
-			   <a href="sobre.html">Sobre</a>			   
-			   <a href="termos.html">Termos e Condições</a>
-			</div>	
-		</div>
-		<!-- [FIM]Menu[/FIM] -->
-	</div>
-    
-        <!-- [INI]Imagem instituição[/INI] -->
+   
+       <!-- [INI]Imagem instituição[/INI] -->
     <div class="row clearfix">
             <div class="col-md-12 column">
-                <img src="img/Agasalho_02.jpg"  class="imagem_campanha" alt=""/>
+            <?php  
+            if($campanha->foto_campanha == NULL){
+                    echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_cursos" alt="imagem da instituição" />';
+                }else{   
+                    echo '<img src="'.base_url().$campanha->foto_campanha.'" class="imagem_cursos" alt="" />';
+                }
+            ?> 
             </div>
 	</div>
         <!-- [FIM]Imagem instituição[/FIM] -->
@@ -60,13 +29,13 @@
                 <div class="descricao_vaga">
                     <div class="col-md-8">
                         <div style="max-width: 100%; margin-bottom: 20px;">
-                            <div style="float: left; font-weight: bold; font-size: 24px;">Campanha do agasalho 2015 - Aqueça um coração
+                            <div style="float: left; font-weight: bold; font-size: 24px;"><?php echo $campanha->titulo_campanha_noticia;?>
                             </div>                      
                            </br>
                         </div> 
                         <div>
                          <p class="article-paragrafo ">
-                        Iniciou hoje a Campanha do Agasalho 2015 que se encerrará em 19 de junho de 2015. Os agasalhos arrecadados serão doados a uma instituição de assistência social na Guarnição de Porto Alegre-RS.</b> Quem quiser fazer a doação é só entregar na portaria da 8ª CSM no Centro Histórico 
+                        <?php echo $campanha->descricao;?>
                          </p>  
                         </div> 
                     </div>
@@ -74,20 +43,35 @@
                         <div>
                         <strong>Divulgue </strong>
                         </div>
-                        <div style="float: left;"><img src="img/Facebook_creatures.png" alt="Facebook" 
+                        <div style="float: left;"><img src="<?php echo base_url()?>assets/img/facebook.png" alt="Facebook" 
                             style="max-width: 5em;" />
                         </div>
                     </div>
-                    <div class="col-md-3 col_instituicao_curso">
-                            <a href="#" ><img class="img-responsive" src="img/campanha_agasalho_2015.jpg" 
-                                 alt="Logo Instituição" /></a>
-                            <div>
-                                <img src="img/star_yellow.png" class="clas_star" alt="">
-                                <img src="img/star_yellow.png" class="clas_star" alt=""> 
-                                <img src="img/star_yellow.png" class="clas_star" alt=""> 
-                                <img src="img/star_yellow.png" class="clas_star" alt=""> 
-                                <img src="img/star_yellow.png" class="clas_star" alt=""> 
+                    <div class="col-md-3">
+                        <div class="col_info_instituicao">
+                            <a href="<?php echo $entidade->site_entidade;?>" ><img src="<?php echo base_url().$entidade->logotipo_entidade;?>" style="width: 70%;" alt="Logotipo da  Instituição" /></a>
+                            <div >
+                                <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                                <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                                <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                                <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                                <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
                             </div>
+                            <a href="<?php echo $entidade->site_entidade;?>" ><?php echo $entidade->nome;?></a>
+                            <br /><br />
+                            <input type="text" disabled="disabled" style="width: 40px" value="<?php echo $sum_vaga->numero_vagas;?>" />
+                            Novas Oportunidades    
+                            <br /><br />
+                            Endereço: <?php echo $entidade->endereco;?>
+                            <br /><br />
+                            Cidade:  <?php echo $entidade->cidade;?>
+                            <br /><br />
+                            Telefone: <?php echo $entidade->telefone;?>
+                            <br /><br />
+                            Responsável:
+                            <br /><br />
+                            E-mail: <?php echo $entidade->email;?>
+                        </div>
                         
                     </div>
                 </div>
@@ -148,36 +132,4 @@
             </div>
         </div>
     </div>
-	<!-- [INI]Rodapé[/INI] -->
-	<div class="row clearfix">
-        <div class="col-md-12 column">
-            <div id="rodape">
-                <div class="rodape_links">
-                    <a href="cadastro_entidade.html">Instituições</a>
-                    <a href="ver_vagas.html">Vagas</a>
-                    <a href="testemunhos.html">Testemunhos</a>
-                    <a href="instituicoes.html">Instituições Registradas</a>
-                    <a href="sobre.html">Sobre</a>
-                    <a href="contatos.html">Contatos</a>               
-                    <a href="informa_cursos.html">Cursos</a>
-                    <a href="campanhas_noticias.html">Noticias/Campanhas</a>
-                </div>
-                <div>
-                    <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >
-                         <strong>Nossa Página no Face </strong>
-                    </a>
-                    <a href="https://www.facebook.com/pages/Cantinho-do-Volunt%C3%A1rio/793095697472047" >
-                          <img src="img/Facebook_creatures.png" alt="Facebook" 
-                                  style="max-width: 4.5em"/>
-                    </a>           
-                </div>
-                <h10 id="rodape_logo">
-                Cantinho do Voluntario@2015
-                </h10>
-            </div>  
-        </div>
-    </div>
-	<!-- [FIM]Rodapé[/FIM] -->
-</div>
-</body>
-</html>
+	

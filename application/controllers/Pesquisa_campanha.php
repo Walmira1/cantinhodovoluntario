@@ -30,7 +30,7 @@ class Pesquisa_campanha extends CI_Controller {
         public function campanha($id_campanha=null)
 	{       
             if ($id_campanha != NULL){
-                $query = $this->campanha->select_campanha($id_campanha) ;
+                $query = $this->campanha->get_campanha($id_campanha) ;
                 if ($query->num_rows() == 1){
                     $data['campanha'] = $query->row(0,'campanha') ;
          //           var_dump($data['campanhas']);
@@ -40,7 +40,7 @@ class Pesquisa_campanha extends CI_Controller {
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
-                    $data['sum_campanha'] = $this->campanha->select_sum_campanha($id_entidade)->row();  
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
              //var_dump($data['sum_campanha']);
              //exit;
                 }else {

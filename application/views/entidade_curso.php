@@ -1,13 +1,13 @@
 <body onload="carregar()">
     <div class="row clearfix">
             <div class="col-md-12 column">
-                <?php  
+            <?php  
             if($this->session->userdata('upload_foto')== NULL){
                     echo '<img src="'.base_url()."assets/img/maosnovas.jpg".'" class="imagem_cursos" alt="" />';
                 }else{   
                     echo '<img src="'.base_url().$this->session->userdata('upload_foto').'" class="imagem_cursos" alt="" />';
                 }
-        ?>   
+            ?>   
             </div>
      </div>
     <div class="row clearfix">
@@ -15,8 +15,8 @@
 		<div class="col-md-12 column">
 			<div id="breadcrump">
                            <a href="<?= base_url(); ?>inicio">Home ></a>
-                           <a href="<?= base_url(); ?>Entidades/index">Entidades Cadastradas ></a>
-			   <a href="">Ver Campanha</a>
+                           <a href="<?= base_url(); ?>entidades/index">Entidades Cadastradas ></a>
+			   <a href="">Cursos por Entidade</a>
 			</div>	
 		</div>
 		<!-- [FIM]BreadCrump[/FIM] -->

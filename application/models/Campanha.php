@@ -27,6 +27,16 @@ class Campanha extends CI_Model {
         }
         
     }
+    public function get_campanha($id_campanha=NULL){
+        //Busca com condição
+        if ($id_campanha != NULL){
+            $this->db->where('id_campanha', $id_campanha);
+            return $this->db->get('campanha');
+        }else{
+            return false;
+        }
+        
+    }
     public function delete_campanha($id_campanha=NULL){
         //Busca com condição
         if ($id_campanha != NULL){

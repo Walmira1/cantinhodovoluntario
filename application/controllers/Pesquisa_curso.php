@@ -11,6 +11,7 @@ class Pesquisa_curso extends CI_Controller {
 		$this->load->model('curso', 'curso');
                 $this->load->model('entidade', 'entidade');
                 $this->load->model('vaga', 'vaga');
+                $this->load->model('turno', 'turno');
                 
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
@@ -28,19 +29,28 @@ class Pesquisa_curso extends CI_Controller {
                                 
 	}
         public function curso($id_curso=null)
-	{       
+	{   
+           
             if ($id_curso != NULL){
-                $query = $this->curso->select_curso($id_curso) ;
+                $query = $this->curso->get_curso($id_curso) ;
                 if ($query->num_rows() == 1){
                     $data['curso'] = $query->row(0,'curso') ;
-         //           var_dump($data['cursos']);
-        //        exit;
                     $id_entidade = $data['curso']->entidade_id_entidade;
                     $query = $this->entidade->get_id($id_entidade);
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
-                    $data['sum_curso'] = $this->curso->select_sum_curso($id_entidade)->row();  
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
+                    $tabela = 2;
+                    $query = $this->turno->select_turno_vaga($id_curso,$tabela);
+            
+                    if ($query->num_rows() > 0){
+                        $data['turno'] = $query->result();
+           //     var_dump($data['turno']);
+           //     exit;
+                    }else{
+                         $data['turno'] = NULL;
+                    }
              //var_dump($data['sum_curso']);
              //exit;
                 }else {
@@ -53,8 +63,11 @@ class Pesquisa_curso extends CI_Controller {
                    
                 }
                 
-            }
-            $this->load->view('includes/html_header');
+            }else{
+                $data['curso'] = NULL;
+                }
+            
+            $this->load->view('includes/html_header_mapa');
             $this->load->view('includes/html_menu_voluntario');
             $this->load->view('saiba_mais_curso',$data);
             $this->load->view('includes/html_rodape_voluntario');
