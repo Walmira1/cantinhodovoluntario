@@ -153,6 +153,8 @@ class Altera_cadastro extends CI_Controller {
                         $query = $this->vaga->get_vaga_by_id_entidade($id_entidade);
                         $dados['vagas'] = $query;
                         $dados['alerta'] = $alerta;
+                        $id_entidade = $this->session->userdata('id_entidade');
+                        $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
                         $this->load->view('includes/html_header');
                         $data['msg'] = "Entidade Alterada com Sucesso";
                         $this->load->view('includes/msg_sucesso',$data); 

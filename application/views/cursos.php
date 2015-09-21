@@ -29,13 +29,35 @@
         <div class="row clearfix">
         <div class="col-md-12 column">
                 <div class="col-md-3 column">
-                   <?php 
-                        if($this->session->userdata('logotipo_entidade')== NULL) {
-                                 echo '<img class="img-responsive" src="'.base_url()."assets/img/criancas_4.png".'" class="imagem_cursos img_responsive" alt="" />';
-                        }else{
-                                echo '<img class="img-responsive" src="'.base_url().$this->session->userdata('logotipo_entidade').'" class="logo_instituicao" alt="foto da entidade" />';
-                        } 
-                    ?>
+                    <div class="col_info_instituicao">
+                        <?php if($entidade->logotipo_entidade != NULL){ ?>
+                        <a href="<?php echo $entidade->site_entidade;?>" ><img src="<?php echo base_url().$entidade->logotipo_entidade;?>" style="width: 70%;" alt="Logotipo da  Instituição" /></a>
+                        <?php }else{ ?>
+                        <a href="<?php echo $entidade->site_entidade;?>" ><img src="<?=base_url();?>assets/img/criancas_2.png" style="width: 70%;" alt="Logotipo da  Instituição" /></a>
+                        <?php } ?>   
+                    
+                        <div>
+                        <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                        <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                        <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                        <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                        <img  class="clas_star" alt="estrela amarela" src="<?= base_url(); ?>assets/img/star_yellow.png" >
+                        </div>
+        <!--             <a href="<//?php echo $entidade->site_entidade;?>"><?//php echo $entidade->nome;?></a>-->
+                        <br /><br />
+                        <input type="text" disabled="disabled" style="width: 40px" value="<?php if($sum_vaga != null){ echo $sum_vaga->numero_vagas;}else{echo "0";}?>" />
+                        Novas Oportunidades    
+                        <br /><br />
+                        Endereço: <?php echo $entidade->endereco;?>
+                        <br /><br />
+                        Cidade:  <?php echo $entidade->cidade;?>
+                        <br /><br />
+                        Telefone: <?php echo $entidade->telefone;?>
+                        <br /><br />
+                        Responsável:
+                        <br /><br />
+                        E-mail: <?php echo $entidade->email;?>
+                    </div>
                 </div>
                 <div class="col-md-9 column">
                     <div id="margem_tabela"> 
@@ -50,7 +72,7 @@
                             </tr>
                             </thead> 
                             <tbody>
-                            <?php 
+                            <?php if ($cursos != NULL){
                             foreach($cursos as $curso) {?> 
                             <tr>
                                 <td ><?= $curso->nome;?></td>
@@ -58,6 +80,10 @@
                                 <td ><?= $curso->fim;?></td>
                                 <td> <a href="<?= base_url(); ?>cadastro_curso/delete/<?= $curso->id_curso;?>"><button type="button" class="btn btn-primary btn-sm" onclick=" return confirma()" style="float: right;">Excluir</button></a> </td>
                                 <td> <a href="<?= base_url(); ?>altera_curso/index/<?= $curso->id_curso;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
+                            </tr>
+                            <?php }}else{?>
+                            <tr>
+                                <td >Não foram cadastrados cursos</td>
                             </tr>
                             <?php }?>
                             </tbody>

@@ -55,7 +55,7 @@
         </div>
 
         <div class="uploadify-queue" id="file-queue"></div>
-        <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('user_id')?>"/>
+        <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
         <strong>Escolha uma foto para divulgação da entidade </strong>
         <input type="file" name="userfile" id="upload_btn" />
         <strong>Escolha uma foto para divulgação da entidade </strong>

@@ -21,7 +21,10 @@
 		</div>
 		<!-- [FIM]BreadCrump[/FIM] -->
     </div>
-        
+    <div class="row" style="margin-top: 0.313em; margin-left: 0.938em;">
+        <a href="<?= base_url(); ?>entidades/index"><button type="button" class="btn btn-primary btn-lg" style="float: right">
+            voltar as entidades</button></a>
+    </div>      
 	<!-- [INI]Vagas[/INI] -->
     <div class="row clearfix">
         <div class="col-md-12">
@@ -62,11 +65,11 @@
             <?php foreach($cursos as $curso){ ?>
                     <div class="col-md-4 column ">
                         <br /><br />
-			<a href="saiba_mais_curso1.html">			
+			<a href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">			
 				<img class="img-responsive"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
 			</a>
 			<div class="titulo_curso">	
-				<a href="saiba_mais_curso.html">
+				<a href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">
 					<?php echo $curso->nome ?> 
 						</a>
 			</div>					
@@ -74,7 +77,7 @@
 				<?php echo $curso->descricao ?>
 			</p>
 			<span>
-				<a class="btn saiba_mais" href="saiba_mais_curso1.html">Saiba mais »</a>
+				<a class="btn saiba_mais" href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">Saiba mais »</a>
 			</span>		
                     </div>                            
             <?php }?>

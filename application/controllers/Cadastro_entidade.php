@@ -19,9 +19,11 @@ class Cadastro_entidade extends CI_Controller {
         public function index($indice=null)
 	{       
 		$this->load->view('includes/html_header');
-               
+                $id_entidade = $this->session->userdata('id_entidade');
+                $data['entidade'] = $this->entidade->get_id($id_entidade)->row(); 
+                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
                 if ($indice==1){
-                    
+                   
                    $data['msg'] = "Entidade Cadastrada com Sucesso";
                    $this->load->view('includes/msg_sucesso',$data); 
                    $this->load->view('includes/html_menu_entidade');
@@ -199,6 +201,9 @@ class Cadastro_entidade extends CI_Controller {
                     $id_entidade = null;
                     $id_entidade = $query->id_entidade;
                     $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                    $id_entidade = $this->session->userdata('id_entidade');
+                    $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
                    // redirect('cadastro_entidade/index/3');
                     $this->load->view('includes/html_header');
                     $this->load->view('includes/html_menu_entidade');

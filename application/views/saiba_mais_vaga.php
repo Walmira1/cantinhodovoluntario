@@ -32,8 +32,7 @@
                             <div style="float: left; font-weight: bold; font-size: 24px;">Descrição da Oportunidade</div>
                             <div style="float: left; margin-left: 20px; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Inscrever-se</button></div>
                             <div style="float: left; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Imprimir</button></div>
-                            <strong>Divulgue </strong>
-                            <div style="float: left;"><img src="<?php echo base_url()?>assets/img/facebook.png" alt="Facebook" style="width: 32px" /></div>
+              
                         </div> 
                         <br /><br />
                         <div>

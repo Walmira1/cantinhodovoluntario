@@ -447,7 +447,7 @@
                             <br />
                             <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
                         <?php echo '<textarea style="width: 96%; min-height: 120px" name="descricao"
-                            class="editar">'.$vaga->descricao.'></textarea>'?>
+                            class="editar">'.$vaga->descricao.'</textarea>'?>
                     </div>
                     <div style="margin-left: 2%; margin-top: 15px;">
                             Perfil do Candidato:

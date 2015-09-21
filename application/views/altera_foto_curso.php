@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -32,8 +32,8 @@
   <title></title>
 </head>
 <body>
-    <div class="container">
-	<div class="row clearfix">
+<div class="container">
+    <div class="row clearfix">
 		<div class="col-md-2 column nosso_logo    ">
 			<a href="<?= base_url(); ?>inicio">
                 <img class="img-responsive" alt="" src="<?= base_url(); ?>assets/img/cantinho.png" >
@@ -51,8 +51,8 @@
                 </a> 
             </div>
         </div>
-	</div>
-	<div class="row clearfix">
+    </div>
+    <div class="row clearfix">
 		<!-- [INI]Menu[/INI] -->
 		<div class="col-md-12 column">
             <div id="mapa">
@@ -65,7 +65,7 @@
             </div>  
         </div>
 		<!-- [FIM]Menu[/FIM] --> 
-	</div>
+    </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <?php  
@@ -77,14 +77,14 @@
         ?>   
         </div>
     </div>
-
     <div class="row clearfix">
         <!-- [INI]BreadCrump[/INI] -->
         <div class="col-md-12 column">
             <div id="breadcrump">
                <a href="<?= base_url(); ?>inicio">Home ></a>
-               <a href="inicio_instituicao/<?php $this->session->userdata('id_instituicao')?>">Instituição ></a>
-               <a href="#">Incluir Curso</a>
+               <a href="<?= base_url(); ?>inicio_entidade/index/<?= $this->session->userdata('id_entidade')?>">Instituição ></a>
+              <a href=<?= base_url(); ?>cadastro_campanha_noticia/index/<?= $this->session->userdata('id_entidade')?>">Campanhas e Noticias da Instituição ></a>
+               <a href="#">Incluir Campanha ou Curso</a>
             </div>  
         </div>
         <!-- [FIM]BreadCrump[/FIM] -->
@@ -95,7 +95,7 @@
                     <?php  echo $alerta["mensagem"]; ?>
              </div>    
         <?php  }?> 
-        <form  method="post"  action="<?= base_url(); ?>altera_curso/altera">
+        
             <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
             <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
             <input type="hidden" name="id_curso" value="<?php echo $curso->id_curso?>"/>
@@ -115,22 +115,21 @@
                     <br />
                     Video_youtube:
                     <br />
-                    <?php echo form_error('video','<div class="erro">','</div>'); ?>
-                    <input type="text" name="video" value ="<?php echo $curso->video_youtube;?>"  />
+                    <input type="text" name="video" value ="<?php echo $curso->video_youtube;?>" readonly="true"  />
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Numero de Horas:
                     <br />
-                    <?php echo form_error('num_horas','<div class="erro">','</div>'); ?>
-                    <input type="text" name="num_horas" required="" value ="<?php echo $curso->num_horas;?>"/>
+                    
+                    <input type="text" name="num_horas" required="" value ="<?php echo $curso->num_horas;?>" readonly="true"/>
                 </div>
                 <div class="col-md-3 column incluir_curso">
                     <br />
                     Taxa de Inscrição:
                     <br />
-                    <?php echo form_error('taxa_inscr','<div class="erro">','</div>'); ?>
-                    <input type="text" name="taxa_inscr"  required="" data-thousands="." data-decimal="," data-prefix="R$ "  value ="<?php echo $curso->taxa_inscricao;?>" />
+                    
+                    <input type="text" name="taxa_inscr"  required="" readonly="true" value ="<?php echo $curso->taxa_inscricao;?>" />
                 </div>
             </div>
         </div>
@@ -140,37 +139,37 @@
                             <br />
                             Inscrição até:
                             <br />
-                            <?php echo form_error('inscricao_ate','<div class="erro">','</div>'); ?>
-                            <input type="date" min="<?php echo date('Y-m-d');?>" name="inscricao_ate" required="" value ="<?php echo $curso->inscricao_ate;?>" />
+                            
+                            <input type="date" min="<?php echo date('Y-m-d');?>" name="inscricao_ate" required="" value ="<?php echo $curso->inscricao_ate;?>" readonly="true"/>
                     </div>
                     <div class="col-md-3 column incluir_curso">
                             <br />
                             Data Inicio:
                             <br />
-                            <?php echo form_error('data_inicio','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_inicio" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->inicio;?>"/>
+                            
+                            <input type="date" name="data_inicio" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->inicio;?>" readonly="true"/>
                     </div>
                     
                     <div class="col-md-3 column incluir_curso">
                             <br />
                             Data Fim:
                             <br />
-                            <?php echo form_error('data_fim','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_fim" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->fim;?>"/>
+                           
+                            <input type="date" name="data_fim" min="<?php echo date('Y-m-d');?>" required=""  value ="<?php echo $curso->fim;?>" readonly="true"/>
                     </div>
                     <div class="col-md-3 column incluir_curso" style="margin-bottom: 20px;">
                             <br />
                             Data de postagem:
                             <br />
-                            <?php echo form_error('data_postagem','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_postagem" required="" value ="<?php echo $curso->data_postagem;?>"/>
+                            
+                            <input type="date" name="data_postagem" required="" value ="<?php echo $curso->data_postagem;?>" readonly="true"/>
                     </div>  
                 </div>
         </div>
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="col-md-6 column" id="margem_tabela">
-                         <?php echo form_error('dias_semana','<div class="erro">','</div>'); ?>
+                         
                         <table class="table table-condensed" style="max-width:10%;" name="dias_semana">
                             <tr id="dias_semana">
                                 <td>
@@ -442,15 +441,15 @@
                             <br />
                             Horário:
                             <br />
-                            <?php echo form_error('horario','<div class="erro">','</div>'); ?>
-                            <input type="text" name="horario" required="" value ="<?php echo $curso->horario;?>"/>
+                          
+                            <input type="text" name="horario" required="" value ="<?php echo $curso->horario;?>" readonly="true"/>
                 </div>
                 <div class="col-md-6 column incluir_curso" style="margin-bottom: 20px;">
                             <br />
                             Local:
                             <br />
-                            <?php echo form_error('local','<div class="erro">','</div>'); ?>
-                            <input type="text" name="local" required="" value ="<?php echo $curso->local;?>"/>
+                            
+                            <input type="text" name="local" required="" value ="<?php echo $curso->local;?>" readonly="true"/>
                 </div>
             </div>    
         </div>
@@ -460,27 +459,28 @@
                 <div style="margin-left: 2%; margin-top: 15px;">
                             Descrição:
                             <br />
-                            <?php echo form_error('descricao','<div class="erro">','</div>'); ?>
-                            <?php echo '<textarea style="width: 96%; min-height: 120px" name="descricao" 
+                           
+                            <?php echo '<textarea style="width: 96%; min-height: 120px" name="descricao" readonly="true"
                                       class="editar">'.$curso->descricao.'</textarea>'?>
                 </div>
                 
-                <div>                                                   
-                        <input type="submit" class="btn btn-primary btn-lg " style="margin-top: 20px; margin-left: 75%;" value="Alterar Curso" />                         
-                        <br/>
+                <div>   
                         <br/>
                 </div>
                
             </div>
         </div>
-        </form>
-        <div class="uploadify-queue" id="file-queue"></div>
-            <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('user_id')?>"/>
-             <strong>Escolha uma foto para divulgação do Curso </strong>
-             <input type="file" name="userfile" id="upload_btn" />
-             <a href="<?= base_url(); ?>cadastro_entidade/cadastro"><button type="button" class="btn btn-primary btn-lg" style="float: right"/>Sair</button> </a>  
+      
         
-   <script type='text/javascript' >
+        <div>
+            <a href="<?= base_url(); ?>cadastro_campanha_noticia/index/<?= $this->session->userdata('id_entidade')?>"><button type="button" class="btn btn-primary btn-lg " style="margin-top: 20px; margin-left: 75%;">Volta a Instituição</button></a>
+        </div>
+        <div class="uploadify-queue" id="file-queue"></div>
+        <input type="file" name="userfile" id="upload_btn" />
+        <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
+        <strong>Escolha uma foto para divulgação do Curso </strong>
+        
+    <script type='text/javascript' >
     $(function() {
      $('#upload_btn').uploadify({
       'debug'   : false,
@@ -491,7 +491,7 @@
       'queueID'  : 'file-queue',
       'buttonClass'  : 'button',
       'height'   : 120,
-      'buttonText' : "Curso",
+      'buttonText' : "Foto Curso",
       'multi'   : true,
       'auto'   : true,
 
@@ -518,5 +518,3 @@
      });
     </script>
     </div>
-    </div>
-

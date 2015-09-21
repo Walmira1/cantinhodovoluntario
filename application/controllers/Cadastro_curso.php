@@ -12,22 +12,27 @@ class Cadastro_curso extends CI_Controller {
 		$this->load->model('curso', 'curso');
                 $this->load->model('entidade', 'entidade');
                 $this->load->model('turno', 'turno');
+                $this->load->model('vaga', 'vaga');
+                
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
          }	
         public function index($index=null)
 	{       
-		$mensagem = "Vaga Cadastrada com Sucesso";
-                $this->load->view('includes/html_header');
+		$mensagem = "Curso cadastrado com Sucesso";
+                
                 $id_entidade = $this->session->userdata('id_entidade');
+                $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
                 $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade); 
+                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
         //           $data['msg'] = "Curso Cadastrado com Sucesso";
         //           $this->load->view('includes/msg_sucesso',$data); 
                 if($id_entidade==2){
                    $data['msg'] = "Não foi possivel cadastrar o Curso"; 
                     $this->load->view('includes/msg_erro',$data);
                 }
+                $this->load->view('includes/html_header');
                $this->load->view('includes/html_menu_entidade');
                $this->load->view('cursos',$data);
                $this->load->view('includes/html_rodape_entidade');
@@ -40,6 +45,7 @@ class Cadastro_curso extends CI_Controller {
                 $alerta = NULL;
                 $cod_mensagem = $indice; 
                 $mensagem = NULL;
+                $this->load->view('includes/html_header');
                 if ($indice==1){
                    $data['msg'] = "Curso Cadastrado com Sucesso";
                    $mensagem = "Curso Cadastrada com Sucesso";
@@ -55,6 +61,7 @@ class Cadastro_curso extends CI_Controller {
                      "mensagem" => $mensagem 
                  );
                 $dados['mensagem'] = $mensagem;
+                $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_curso',$dados);
                 $this->load->view('includes/html_rodape_entidade');
                 
@@ -89,7 +96,7 @@ class Cadastro_curso extends CI_Controller {
             $this->lang->load('form_validation','portuguese');
             $alerta = null;
             if($this->input->post('captcha')){
-                $this->load->view('includes/html_header');
+                
                 $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_curso');
                 $this->load->view('includes/html_rodape_entidade');
@@ -106,7 +113,7 @@ class Cadastro_curso extends CI_Controller {
                     );
                  
                 $data['alerta'] = $alerta;
-                $this->load->view('includes/html_header');
+                
                 $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_curso',$data);
                 $this->load->view('includes/html_rodape_entidade');
@@ -130,10 +137,9 @@ class Cadastro_curso extends CI_Controller {
                 if ($this->curso->cadastrar($data) == TRUE){
                     
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
-                        $query = $this->curso->get_max_curso_by_entidade($this->input->post('id_entidade'));
-                    
-            /*        echo "vaga_id_vaga = " .$query->id_vaga;
-                    
+                        $query = $this->curso->get_max_curso_by_entidade($this->input->post('id_entidade'))->row();
+                        $id_curso = $query->id_curso;
+                        $data['curso'] = $query;
                         $turno['tabela_assoc']= 2;
                         $turno['id_vaga_curso']= $query->id_curso;
                         $arrlength1 = 3;
@@ -171,13 +177,15 @@ class Cadastro_curso extends CI_Controller {
                         }  
                             // grava o registro do turno
                         $this->turno->cadastrar($turno);
-                    } */
-                       
+                    } 
+                        $data['alerta'] = $alerta;
+                        $tabela = 2;
+                        $data['turno'] = $this->turno->select_turno_vaga($id_curso,$tabela)->result();
                         $data['msg'] = "Curso Cadastrado com Sucesso";
                         $this->load->view('includes/msg_sucesso',$data);
-                        $mensagem = "Vaga Cadastrada com Sucesso";
+                        $mensagem = "Curso Cadastrado com Sucesso";
                         $data['mensagem'] = $mensagem;
-                        $this->load->view('cadastro_curso',$data);
+                        $this->load->view('altera_foto_curso',$data);
                         $this->load->view('includes/html_rodape_entidade');
                         
                } else{
@@ -215,6 +223,8 @@ class Cadastro_curso extends CI_Controller {
             $id_entidade = NULL;
             $id_entidade = $this->session->userdata('id_entidade');
             $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade);
+            $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+            $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
             // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
@@ -222,53 +232,7 @@ class Cadastro_curso extends CI_Controller {
             $this->load->view('includes/html_rodape_entidade');
     
      }  
-     public function altera_curso($id_curso =null){
-            $alerta = NULL;
-            $data = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL
-            );
-            if ($id_curso != null){
-                $query = $this->curso->select_curso($id_curso) ;
-                if ($query->num_rows() == 1){
-                $data['curso'] = $query->row(0,'curso') ;
-                }else {
-                    $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Curso não identificado <br>" 
-                             );
-                    $data = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL
-                    );
-                }
-            }else{
-                $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Curso não identificado <br>" 
-                             );
-                $data = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL
-            );
-                        
-            } 
-            
-    /*        $query = $this->vaga_turno->select_vaga($id_vaga);
-            
-            if ($query->num_rows() > 0){
-                $data['turno_vaga'] = $query->row();
-            //    var_dump($data['turno_vaga']);
-            //    exit;
-            } */
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_curso',$data);
-            $this->load->view('includes/html_rodape_entidade');
-     }  
+     
       public function volta_curso()
 	{   
             /* Carrega a biblioteca do CodeIgniter responsável pela validação dos formulários */
@@ -282,12 +246,15 @@ class Cadastro_curso extends CI_Controller {
             $alerta = null;
             $id_entidade = $this->session->userdata('id_entidade');
             $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade);
+            $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+            $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
                    // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
             $this->load->view('cursos',$data);
             $this->load->view('includes/html_rodape_entidade');
 	}
+        
         public function uploadify()
                 //upload de foto
 	{     
@@ -306,12 +273,8 @@ class Cadastro_curso extends CI_Controller {
                         
                         $file_info = "/"."images"."/".$response['file_name'];
                         $id_entidade = $this->session->userdata('id_entidade');
-                       // echo "id_entidade = ".$id_entidade;
-                        
                         $query = $this->curso->get_max_curso_by_entidade($id_entidade)->row();
                         $id_curso = $query->id_curso;
-                        echo "curso = ".$id_curso;
-                        var_dump($query);
                         $data = array(
                             'id_curso' => $query->id_curso  ,
                             'id_nome' => $query->nome,
@@ -321,8 +284,8 @@ class Cadastro_curso extends CI_Controller {
                             'data_postagem' => $query->data_postagem,
                             'num_horas' => $query->num_horas,
                             'taxa_inscricao' => $query->taxa_inscricao,
-                            'horario' => $query->horario,
                             'descricao' => $query->descricao,
+                            'horario' => $query->horario,
                             'local' => $query->local,
                             'entidade_id_entidade' => $query->entidade_id_entidade,
                             '´upload_foto' => $file_info,
@@ -330,8 +293,7 @@ class Cadastro_curso extends CI_Controller {
                         if ($this->curso->alterar($id_curso,$data) != TRUE){
                             echo"erro";
                         }
-                        
-                        
+                       
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

@@ -21,7 +21,10 @@
 		</div>
 		<!-- [FIM]BreadCrump[/FIM] -->
     </div>
-        
+    <div class="row" style="margin-top: 0.313em; margin-left: 0.938em;">
+        <a href="<?= base_url(); ?>entidades/index"><button type="button" class="btn btn-primary btn-lg" style="float: right">
+            voltar as entidades</button></a>
+    </div>    
 	<!-- [INI]Vagas[/INI] -->
     <div class="row clearfix">
         <div class="col-md-12">
@@ -78,6 +81,10 @@
                         
                     </tr>
                 <?php }?>
+                <?php }else{?>
+                    <tr >
+                        <td >Não existem vagas cadastradas para esta entidade</td>
+                    </tr>
                 <?php }?>
                 </tbody>
                 </table> 

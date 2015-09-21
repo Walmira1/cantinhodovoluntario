@@ -174,9 +174,9 @@
 		<div id="lista_cursos">
 			<div class="row clearfix">
                             <?php foreach($campanhas as $campanha){ ?>
-				<div class="col-md-4 column ">	
+                                <div class="col-md-4 column ">	
 					<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">			
-						<img class="img-responsive"  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
+						<img class="img-curso"  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
 					</a>
 					<div class="titulo_curso">	
 						<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">
@@ -188,13 +188,13 @@
 					</p>
 					<span>
 						<a class="btn saiba_mais" href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha;?>">Saiba mais »</a>
-					</span>		
-				</div>                            
-                            <?php }?>
+					</span>
+                                </div>
+                            <?php }?>                            
                             <?php foreach($cursos as $curso){ ?>
-                                <div class="col-md-4 column" >	
+                                <div class="col-md-4 column ">
 					<a href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">			
-						<img class="img-responsive"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
+						<img class="img-curso"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
 					</a>
 					<div class="titulo_curso">	
 						<a href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">
@@ -207,9 +207,10 @@
 					<span>
 						<a class="btn saiba_mais" href="<?= base_url(); ?>pesquisa_curso/curso/<?php echo $curso->id_curso;?>">Saiba mais »</a>
 					</span>		
-				</div>                            
+                                </div>                            
                             <?php }?>
-			</div>
+                        </div> 
+                    </div>
 		</div>
 	</div>
 	<!-- [FIM]Curso[/FIM] -->

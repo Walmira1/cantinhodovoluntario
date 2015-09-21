@@ -77,6 +77,24 @@
                 </div>
             </div>
         </div>
+        <?php if($campanha->video) {?>
+        <div class="col-md-12 column ">
+            <div class="row clearfix">    
+                <div class="col-md-2 column ">
+                </div> 
+                <div class="col-md-6 column ">
+                    <div class="embed-responsive embed-responsive-4by3">
+                            <object data="" width="420" height="315">
+                                <param name="movie" value="<?php echo $campanha->video;?>"/>
+                                        <embed width="420" height="315" src="<?php echo $campanha->video;?>" /> 
+                             </object>
+                    </div> 
+                </div>
+                <div class="col-md-4 column ">
+                </div> 
+            </div> 
+        </div> 
+        <?php } ?>
 	<!-- [FIM]noticia[/FIM] -->
     <div class="col-md-12 column col_cursos">
         <div id="lista_cursos">
@@ -132,4 +150,7 @@
             </div>
         </div>
     </div>
+    
+        
+    
 	

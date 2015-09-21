@@ -56,6 +56,8 @@ class Cadastro_campanha_noticia extends CI_Controller {
                      "cod_mensagem" => $cod_mensagem,
                      "mensagem" => $mensagem 
                  );
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_campanha',$dados);
                 $this->load->view('includes/html_rodape_entidade');
                 
@@ -90,8 +92,8 @@ class Cadastro_campanha_noticia extends CI_Controller {
             $this->lang->load('form_validation','portuguese');
             $alerta = null;
             if($this->input->post('captcha')){
-         //       $this->load->view('includes/html_header');
-         //       $this->load->view('includes/html_menu_entidade');
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
                 $this->load->view('cadastro_campanha');
                 $this->load->view('includes/html_rodape_entidade');
                 
@@ -124,10 +126,11 @@ class Cadastro_campanha_noticia extends CI_Controller {
                     
                 if ($this->campanha->cadastrar($data) == TRUE){
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
+                        $data['alerta'] = $alerta;
                         $query = $this->campanha->get_max_campanha_by_entidade($this->input->post('id_entidade'));
-                    
-           
-                         redirect('cadastro_campanha_noticia/cadastro/1');
+                        $data['campanha'] = $query->row();
+                        $this->load->view('altera_foto_campanha',$data);
+                        $this->load->view('includes/html_rodape_entidade');
                         
                } else{
                    redirect('cadastro_campanha_noticia/cadastro/2');
@@ -179,7 +182,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
                         "mensagem" => NULL
             );
             if ($id_campanha != null){
-                $query = $this->campanha->select_campanha($id_campanha) ;
+                $query = $this->campanha->get_campanha($id_campanha);
                 if ($query->num_rows() == 1){
                 $data['campanha'] = $query->row(0,'campanha') ;
                 }else {
@@ -213,30 +216,11 @@ class Cadastro_campanha_noticia extends CI_Controller {
             //    var_dump($data['turno_vaga']);
             //    exit;
             } */
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_campanha',$data);
+            
+            $this->load->view('altera_campanha',$data);
             $this->load->view('includes/html_rodape_entidade');
      }  
-      public function volta_campanha()
-	{   
-            /* Carrega a biblioteca do CodeIgniter responsável pela validação dos formulários */
-         //   $this->load->library('form_validation');
-            /* Define as regras para validação
-               Referencia:
-        http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
-              */
-             
-             //var_dump($this->input->post());
-            $alerta = null;
-            $id_entidade = $this->session->userdata('id_entidade');
-            $data['campanhas'] = $this->campanha->get_campanha_by_entidade_id_entidade($id_entidade);
-                   // redirect('cadastro_entidade/index/3');
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('campanhas',$data);
-            $this->load->view('includes/html_rodape_entidade');
-	}
+      
         public function uploadify()
                 //upload de foto
 	{     
@@ -255,12 +239,8 @@ class Cadastro_campanha_noticia extends CI_Controller {
                         
                         $file_info = "/"."images"."/".$response['file_name'];
                         $id_entidade = $this->session->userdata('id_entidade');
-                       // echo "id_entidade = ".$id_entidade;
-                        
                         $query = $this->campanha->get_max_campanha_by_entidade($id_entidade)->row();
                         $id_campanha = $query->id_campanha;
-                   //     echo "campanha = ".$id_campanha;
-                  //      var_dump($query);
                         $data = array(
                             'id_campanha' => $query->id_campanha,
                             'entidade_id_entidade' => $query->entidade_id_entidade,
@@ -273,8 +253,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
                         if ($this->campanha->alterar($id_campanha,$data) != TRUE){
                             echo"erro";
                         }
-                        
-                        
+                       
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

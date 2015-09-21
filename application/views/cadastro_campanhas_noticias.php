@@ -56,7 +56,7 @@
                                 <td ><?= $campanha->data_inclusao;?></td>
                                 <td ><?= $campanha->data_fim;?></td>
                                 <td> <a href="<?= base_url(); ?>cadastro_campanha_noticia/delete/<?= $campanha->id_campanha;?>"><button type="button" class="btn btn-primary btn-sm" onclick=" return confirma()" style="float: right;">Excluir</button></a> </td>
-                                <td> <a href="<?= base_url(); ?>altera_campanha_noticia/index<?= $campanha->id_campanha;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
+                                <td> <a href="<?= base_url(); ?>cadastro_campanha_noticia/altera_campanha/<?= $campanha->id_campanha;?>"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Alterar</button></a></td>
                             </tr>
                             <?php }?>
                             </tbody>

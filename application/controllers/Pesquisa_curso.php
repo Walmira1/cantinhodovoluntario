@@ -12,6 +12,7 @@ class Pesquisa_curso extends CI_Controller {
                 $this->load->model('entidade', 'entidade');
                 $this->load->model('vaga', 'vaga');
                 $this->load->model('turno', 'turno');
+                $this->load->model('cidade', 'cidade');
                 
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
@@ -19,8 +20,7 @@ class Pesquisa_curso extends CI_Controller {
          }	
         public function index($indice=null)
 	{       
-               $dados['cidades'] = $this->db->get('cidade')->result();
-               $dados['estados'] = $this->cidade->get_estado();
+               
                $this->load->view('includes/html_header');
                $this->load->view('includes/html_menu_voluntario');
                $this->load->view('pesquisa_curso',$dados);

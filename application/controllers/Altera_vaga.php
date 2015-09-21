@@ -140,41 +140,42 @@ class Altera_vaga extends CI_Controller {
                     
                     $turno['tabela_assoc']= 1;
                     $turno['id_vaga_curso']= $id_vaga;
-                    $arrlength1 = 3;
-                    for($indice = 0; $indice <  $arrlength1; $indice++) {
-                        $turno['id_turno'] = $indice + 1; 
-                        $turno['segunda'] = 0; 
-                        $turno['terca'] = 0;
-                        $turno['quarta'] = 0; 
-                        $turno['quinta'] = 0; 
-                        $turno['sexta'] = 0; 
-                        $turno['sabado'] = 0; 
-                        $turno['domingo'] = 0;
+                        $arrlength1 = 3;
+                            for($indice = 0; $indice <  $arrlength1; $indice++) {
+                                $turno['id_turno'] = $indice + 1; 
+                                $turno['segunda'] = 0; 
+                                $turno['terca'] = 0;
+                                $turno['quarta'] = 0; 
+                                $turno['quinta'] = 0; 
+                                $turno['sexta'] = 0; 
+                                $turno['sabado'] = 0; 
+                                $turno['domingo'] = 0;
+
+                                    if ( $this->input->post('seg')[$indice]){
+                                        $turno['segunda'] = 1; 
+                                    }
+                                    if ( $this->input->post('terca')[$indice]){
+                                        $turno['terca'] = 1; 
+                                    }
+                                    if ( $this->input->post('quarta')[$indice]){
+                                        $turno['quarta'] = 1; 
+                                    }
+                                    if ( $this->input->post('quinta')[$indice]){
+                                        $turno['quinta'] = 1; 
+                                    }
+                                    if ( $this->input->post('sexta')[$indice]){
+                                        $turno['sexta'] = 1;       
+                                    }
+                                    if ( $this->input->post('sab')[$indice]){
+                                        $turno['sabado'] = 1;
+                                    }            
+                                    if ( $this->input->post('dom')[$indice]){
+                                        $turno['domingo'] = 1;
+                                    }          
                             
-                        if ( $this->input->post('seg')[$indice]){
-                             $turno['segunda'] = 1; 
-                        }
-                        if ( $this->input->post('terca')[$indice]){
-                            $turno['terca'] = 1; 
-                        }
-                        if ( $this->input->post('quarta')[$indice]){
-                             $turno['quarta'] = 1; 
-                        }
-                        if ( $this->input->post('quinta')[$indice]){
-                             $turno['quinta'] = 1; 
-                        }
-                        if ( $this->input->post('sexta')[$indice]){
-                             $turno['sexta'] = 1;       
-                        }
-                        if ( $this->input->post('sab')[$indice]){
-                             $turno['sabado'] = 1;
-                        }            
-                        if ( $this->input->post('dom')[$indice]){
-                             $turno['domingo'] = 1;
-                        }  
-                            // grava o registro do turno
-                        $this->turno->cadastrar($turno);
-                    } 
+                            // grava o registro do dia 
+                            $this->turno->cadastrar($turno);
+                        } 
                } else{
                    $alerta = array(
                            "class"=>"danger",
@@ -188,6 +189,8 @@ class Altera_vaga extends CI_Controller {
             $id_entidade = NULL;
             $id_entidade = $this->session->userdata('id_entidade');
             $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+            $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+            $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
             $this->load->view('inicio_entidade',$data);
@@ -222,6 +225,8 @@ class Altera_vaga extends CI_Controller {
             $id_entidade = NULL;
             $id_entidade = $this->session->userdata('id_entidade');
             $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+            $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+            $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
             // redirect('cadastro_entidade/index/3');
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
@@ -232,36 +237,7 @@ class Altera_vaga extends CI_Controller {
             $this->load->view('inicio_entidade',$data);
             $this->load->view('includes/html_rodape_entidade');
      }  
-/*     public function altera_vaga($id_vaga =null){
-            if ($id_vaga != null){
-                $query = $this->vaga->select_vaga($id_vaga) ;
-                if ($query->num_rows() == 1){
-                $data['vaga'] = $query->row(0,'vaga') ;
-                }       
-            }else{
-                $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
-                             );
-                        $dados = array(
-                        "alerta" => $alerta,
-                        "cod_mensagem" => NULL,
-                        "mensagem" => NULL
-                 );
-            } 
-            
-           $query = $this->turno->select_vaga($id_vaga);
-            
-            if ($query->num_rows() > 0){
-                $data['turno_vaga'] = $query->row();
-            //    var_dump($data['turno_vaga']);
-            //    exit;
-            } var_dump($this->input->post());
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('alterar_vaga',$data);
-            $this->load->view('includes/html_rodape_entidade');
-     } */ 
+
         
 }
 
