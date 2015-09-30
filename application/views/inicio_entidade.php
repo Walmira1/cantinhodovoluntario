@@ -19,6 +19,12 @@
         </div>
         <!-- [FIM]BreadCrump[/FIM] -->
     </div>
+    <?php if($mensagem != null) {?>
+        <div class="alert alert-success">
+            <?php  echo $mensagem;?> 
+            <?php   $mensagem = NULL;?> 
+        </div>  
+    <?php }?>
     <div class="row" style="margin-top:0.313em; margin-left:0.938em;">
         <a href="<?= base_url(); ?>cadastro_vaga/cadastro"><button type="button" class="btn btn-primary btn-lg" style="float: right">
             Incluir nova vaga</button></a>

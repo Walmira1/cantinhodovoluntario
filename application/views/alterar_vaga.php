@@ -34,7 +34,7 @@
                     
                 </div>  
                 <div>
-                    <a href="<?= base_url(); ?>cadastro_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>
+                    <a href="<?= base_url(); ?>alterar_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>
                     
                 </div>    
                 <?php  }?> 
@@ -42,7 +42,7 @@
                     <form  method="post"  action="<?= base_url(); ?>altera_vaga/altera">
                      <!-- tenho uma variavel escondida na qual coloco de onde eu vim para saber ...-->
                     <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
-                    <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
+                    <input type="hidden" name="id_entidade" value="<?php echo $vaga->entidade_id_entidade?>"/>
                     <input type="hidden" name="id_vaga" value="<?php echo $vaga->id_vaga?>"/>
                     <input type="hidden" name="atividade" value="<?php echo $vaga->atividade_id_atividade_projeto?>"/>
                     <input type="hidden" name="area" value="<?php echo $vaga->atividade_id_area?>"/>
@@ -202,171 +202,150 @@
                                 </td>
                             </tr>
                             <?php if ($turno != NULL){
-                            foreach ($turno as $turno){
-                                if($turno->id_turno == 1){
-                                    echo '<tr id="tabela_turno">';
-                                    echo '<td >Manhã</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="seg[]" value="1"';
-                                    if($turno->segunda == 1){
-                                        echo ' checked';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="terca[]" value="1" ';
-                                    if($turno->terca == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quarta[]" value="1"';
-                                    if($turno->quarta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quinta[]" value="1"';
-                                    if($turno->quinta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sexta[]" value="1"' ;
-                                    if($turno->sexta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sab[]" value="1"' ;
-                                    if($turno->sabado == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">'; 
-                                    echo '<input type="checkbox" name="dom[]" value="1"';
-                                    if($turno->domingo == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '</tr>';
-                                }
-                                if($turno->id_turno == 2){
-                                    echo '<tr id="tabela_turno">';
-                                    echo '<td >Tarde</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="seg[]" value="2"';
-                                    if($turno->segunda == 1){
-                                        echo ' checked';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="terca[]" value="2" ';
-                                    if($turno->terca == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quarta[]" value="2"';
-                                    if($turno->quarta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quinta[]" value="2"';
-                                    if($turno->quinta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sexta[]" value="2"' ;
-                                    if($turno->sexta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sab[]" value="2"' ;
-                                    if($turno->sabado == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">'; 
-                                    echo '<input type="checkbox" name="dom[]" value="2"';
-                                    if($turno->domingo == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '</tr>';
-                                }
-                                if($turno->id_turno == 3){
-                                    echo '<tr id="tabela_turno">';
-                                    echo '<td >Noite</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="seg[]" value="3"';
-                                    if($turno->segunda == 1){
-                                        echo ' checked';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="terca[]" value="3" ';
-                                    if($turno->terca == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quarta[]" value="3"';
-                                    if($turno->quarta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="quinta[]" value="3"';
-                                    if($turno->quinta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sexta[]" value="3"' ;
-                                    if($turno->sexta == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">';
-                                    echo '<input type="checkbox" name="sab[]" value="3"' ;
-                                    if($turno->sabado == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '<td class="tabela_turno">'; 
-                                    echo '<input type="checkbox" name="dom[]" value="3"';
-                                    if($turno->domingo == 1){
-                                        echo ' checked ';
-                                    } 
-                                    echo '>';
-                                    echo '</td>';
-                                    echo '</tr>';
-                                }
-                            }                                 
-                            }else{?>
+                            foreach ($turno as $turno){?>
+                               <?php if($turno->id_turno == 1){?>
+                                        <tr id="tabela_turno">
+                                        <td >Manhã</td>
+                                        <td class="tabela_turno">
+                                        <input type="checkbox" name="seg[]" value="1"
+                                    <?php if($turno->segunda == 1){?>
+                                        checked
+                                    <?php }?>
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="terca[]" value="1"
+                                    <?php if($turno->terca == 1){?>
+                                        checked  
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quarta[]" value="1"
+                                    <?php if($turno->quarta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quinta[]" value="1"
+                                    <?php if($turno->quinta == 1){?>
+                                         checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sexta[]" value="1"
+                                     <?php if($turno->sexta == 1){?>
+                                         checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sab[]" value="1"
+                                    <?php if($turno->sabado == 1){?>
+                                         checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno"> 
+                                    <input type="checkbox" name="dom[]" value="1"
+                                    <?php if($turno->domingo == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    </tr>
+                                <?php }?>
+                                <?php if($turno->id_turno == 2){?>
+                                    <tr id="tabela_turno">
+                                    <td >Tarde</td>
+                                    <td class="tabela_turno">
+                                        <input type="checkbox" name="seg[]" value="2" 
+                                    <?php if($turno->segunda == 1){?>
+                                        checked
+                                    <?php }?>
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="terca[]" value="2" 
+                                    <?php if($turno->terca == 1){?>
+                                         checked
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quarta[]" value="2"
+                                    <?php if($turno->quarta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quinta[]" value="2"
+                                    <?php if($turno->quinta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sexta[]" value="2"
+                                    <?php if($turno->sexta == 1){?>
+                                         checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sab[]" value="2"
+                                    <?php if($turno->sabado == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno"> 
+                                    <input type="checkbox" name="dom[]" value="2"
+                                    <?php if($turno->domingo == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    </tr>
+                                <?php }?>
+                                <?php if($turno->id_turno == 3){?>
+                                    <tr id="tabela_turno">
+                                    <td >Noite</td>
+                                    <td class="tabela_turno">
+                                     <input type="checkbox" name="seg[]" value="3"
+                                    <?php if($turno->segunda == 1){?>
+                                         checked
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="terca[]" value="3" 
+                                    <?php if($turno->terca == 1){?>
+                                        checked 
+                                    <?php }?>
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quarta[]" value="3"
+                                    <?php if($turno->quarta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="quinta[]" value="3"
+                                    <?php if($turno->quinta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sexta[]" value="3"
+                                    <?php if($turno->sexta == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno">
+                                    <input type="checkbox" name="sab[]" value="3"
+                                    <?php if($turno->sabado == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    <td class="tabela_turno"> 
+                                    <input type="checkbox" name="dom[]" value="3"
+                                    <?php if($turno->domingo == 1){?>
+                                        checked 
+                                    <?php }?> 
+                                    ></td>
+                                    </tr>
+                                <?php }?>                
+                            <?php }?>
+                            <?php }else{?>
                                 <tr id="tabela_turno">
                                 <td >Manhã</td>
                                 <td class="tabela_turno">

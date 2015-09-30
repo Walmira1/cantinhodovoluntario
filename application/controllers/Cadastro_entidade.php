@@ -199,6 +199,7 @@ class Cadastro_entidade extends CI_Controller {
                     );
                     $this->session->set_userdata($dados);
                     $id_entidade = null;
+                    $data['mensagem'] = null;
                     $id_entidade = $query->id_entidade;
                     $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
                     $id_entidade = $this->session->userdata('id_entidade');

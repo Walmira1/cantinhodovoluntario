@@ -22,9 +22,12 @@ class Entidade extends CI_Model {
         }
     }
     public function get_id($id_entidade=NULL){
+         
         if ($id_entidade != NULL):
-            $this->db->where('id_entidade', $id_entidade);
-            return $this->db->get('entidade');
+           $this->db->where('id_entidade', $id_entidade);
+           return $this->db->get('entidade');
+     //       var_dump($query);
+           
         else:
             return FALSE;
         endif;

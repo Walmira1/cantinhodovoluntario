@@ -11,8 +11,9 @@ class Cadastro_vaga extends CI_Controller {
     */
 		$this->load->model('vaga', 'vaga');
                 $this->load->model('turno', 'turno');
-       // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
-                $this->load->library('upload');
+                $this->load->model('entidade', 'entidade');
+       // Ferramenta de debug profile - nativa do codeigniter         
+                $this->output->enable_profiler(TRUE);
                         
          }	
         public function index($indice=null)
@@ -67,7 +68,7 @@ class Cadastro_vaga extends CI_Controller {
                Referencia:
         http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
               */
-             echo "dados do formulario";
+      //       echo "dados do formulario";
      //        var_dump($this->input->post());
      //        echo "========================================================================"; 
        /*      if($this->input->post('entrar')== "Incluir Vaga"){
@@ -123,7 +124,7 @@ class Cadastro_vaga extends CI_Controller {
                 $data['atividade_id_atividade_projeto'] = $this->input->post('atividade');
                 $data_ent['atividade_id_atividade_projeto'] = $this->input->post('atividade');
                 $data['perfil_voluntario'] = $this->input->post('perfil_voluntario');
-                echo "dados para cadastrar ";
+      //           pd($this->input->post('seg[]'));
                 
          // verifica a se area e atividade são compativeis pela tabela  de atvidades
                 if ($this->vaga->get_atividade($this->input->post('area'),$this->input->post('atividade'))== FALSE){
@@ -144,15 +145,15 @@ class Cadastro_vaga extends CI_Controller {
                     if ($this->vaga->cadastrar($data) == TRUE){
       // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
                         $query = $this->vaga->get_max_vaga_by_entidade($this->input->post('id_entidade'));
-            //          var_dump($this->input->post('dias_semana'));
+                      var_dump($query);
             //          exit;
             //        echo "vaga_id_vaga = " .$query->id_vaga;
                     
                         $turno['tabela_assoc']= 1;
                         $turno['id_vaga_curso']= $query->id_vaga;
-                        $arrlength1 = 3;
-                            for($indice = 0; $indice <  $arrlength1; $indice++) {
-                                $turno['id_turno'] = $indice + 1; 
+                       $arrlength1 = 4;
+                            for($indice = 1; $indice <  $arrlength1; $indice++) {
+                                $turno['id_turno'] = $indice; 
                                 $turno['segunda'] = 0; 
                                 $turno['terca'] = 0;
                                 $turno['quarta'] = 0; 
@@ -160,29 +161,62 @@ class Cadastro_vaga extends CI_Controller {
                                 $turno['sexta'] = 0; 
                                 $turno['sabado'] = 0; 
                                 $turno['domingo'] = 0;
-
-                                    if ( $this->input->post('seg')[$indice]){
-                                        $turno['segunda'] = 1; 
-                                    }
-                                    if ( $this->input->post('terca')[$indice]){
-                                        $turno['terca'] = 1; 
-                                    }
-                                    if ( $this->input->post('quarta')[$indice]){
-                                        $turno['quarta'] = 1; 
-                                    }
-                                    if ( $this->input->post('quinta')[$indice]){
-                                        $turno['quinta'] = 1; 
-                                    }
-                                    if ( $this->input->post('sexta')[$indice]){
-                                        $turno['sexta'] = 1;       
-                                    }
-                                    if ( $this->input->post('sab')[$indice]){
-                                        $turno['sabado'] = 1;
-                                    }            
-                                    if ( $this->input->post('dom')[$indice]){
-                                        $turno['domingo'] = 1;
-                                    }          
-                            
+                                for($ind = 0; $ind < count($this->input->post('seg')); $ind++){
+                                    if ($this->input->post('seg')[$ind] == $indice){
+                                         $turno['segunda'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['segunda'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('terca')); $ind++){
+                                    if ($this->input->post('terca')[$ind] == $indice){
+                                         $turno['terca'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['terca'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('quarta')); $ind++){
+                                    if ($this->input->post('quarta')[$ind] == $indice){
+                                         $turno['quarta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['quarta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('quinta')); $ind++){
+                                    if ($this->input->post('quinta')[$ind] == $indice){
+                                         $turno['quinta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['quinta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('sexta')); $ind++){
+                                    if ($this->input->post('sexta')[$ind] == $indice){
+                                         $turno['sexta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['sexta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('sab')); $ind++){
+                                    if ($this->input->post('sab')[$ind] == $indice){
+                                         $turno['sabado'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['sabado'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('dom')); $ind++){
+                                    if ($this->input->post('dom')[$ind] == $indice){
+                                         $turno['domingo'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['domingo'] = 0;
+                                    } 
+                                }
                             // grava o registro do dia 
                             $this->turno->cadastrar($turno);
                         } 
@@ -239,9 +273,11 @@ class Cadastro_vaga extends CI_Controller {
             }                 
                      
             $id_entidade = NULL;
+            $data['mensagem'] = NULL;
             $id_entidade = $this->session->userdata('id_entidade');
+            $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
             $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
-            // redirect('cadastro_entidade/index/3');
+            $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
             $this->load->view('includes/html_header');
             $this->load->view('includes/html_menu_entidade');
             if ($alerta == NULL){
@@ -264,13 +300,20 @@ class Cadastro_vaga extends CI_Controller {
              
              //var_dump($this->input->post());
             $alerta = null;
-            $id_entidade = $this->session->userdata('id_entidade');
-            $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+            
+                $id_entidade = $this->session->userdata('id_entidade');
+                $data['mensagem'] = NULL;
+                $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
+                
+                $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+              //  var_dump($data['entidade']);
                    // redirect('cadastro_entidade/index/3');
-            $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
-            $this->load->view('inicio_entidade',$data);
-            $this->load->view('includes/html_rodape_entidade');
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('inicio_entidade',$data);
+                $this->load->view('includes/html_rodape_entidade');
+            
 	}
        
         

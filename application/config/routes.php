@@ -41,7 +41,6 @@
 */
 
 $route['default_controller'] = "inicio";
-$route['cadastro_entidade/[:num]'] = "cadastro_entidade/index/$1";
 $route['404_override'] = '';
 
 

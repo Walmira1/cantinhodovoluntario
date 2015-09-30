@@ -33,7 +33,7 @@
                 <div class="alert alert-success">
                     <?php  echo $mensagem;?> 
                     <?php   $mensagem = NULL;?> 
-                </div>  
+                </div> 
                 <div>
                     <a href="<?= base_url(); ?>cadastro_vaga/volta_entidade"><button type="button" class="btn btn-primary btn-sm" style="margin-left: 50%;">Volta a Instituição</button></a>
                     
@@ -279,7 +279,7 @@
                             </textarea>
                     </div>   
                     <div style="margin-top: 20px; margin-left: 65%;">
-                         <input type="submit" class="btn btn-primary btn-lg "  value="Incluir Vaga" name="entrar"  />  
+                         <input type="submit" class="btn btn-primary btn-lg "  value="Incluir Vaga"   />  
                     </div>
                 
                 </form>

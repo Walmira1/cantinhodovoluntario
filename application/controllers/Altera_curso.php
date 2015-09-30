@@ -118,38 +118,72 @@ class Altera_curso extends CI_Controller {
       
                     $turno['tabela_assoc']= 2;
                         $turno['id_vaga_curso']= $id_curso;
-                        $arrlength1 = 3;
-                    for($indice = 0; $indice <  $arrlength1; $indice++) {
-                        $turno['id_turno'] = $indice + 1; 
-                        $turno['segunda'] = 0; 
-                        $turno['terca'] = 0;
-                        $turno['quarta'] = 0; 
-                        $turno['quinta'] = 0; 
-                        $turno['sexta'] = 0; 
-                        $turno['sabado'] = 0; 
-                        $turno['domingo'] = 0;
-                            
-                        if ( $this->input->post('seg')[$indice]){
-                             $turno['segunda'] = 1; 
-                        }
-                        if ( $this->input->post('terca')[$indice]){
-                            $turno['terca'] = 1; 
-                        }
-                        if ( $this->input->post('quarta')[$indice]){
-                             $turno['quarta'] = 1; 
-                        }
-                        if ( $this->input->post('quinta')[$indice]){
-                             $turno['quinta'] = 1; 
-                        }
-                        if ( $this->input->post('sexta')[$indice]){
-                             $turno['sexta'] = 1;       
-                        }
-                        if ( $this->input->post('sab')[$indice]){
-                             $turno['sabado'] = 1;
-                        }            
-                        if ( $this->input->post('dom')[$indice]){
-                             $turno['domingo'] = 1;
-                        }  
+                        $arrlength1 = 4;
+                            for($indice = 1; $indice <  $arrlength1; $indice++) {
+                                $turno['id_turno'] = $indice; 
+                                $turno['segunda'] = 0; 
+                                $turno['terca'] = 0;
+                                $turno['quarta'] = 0; 
+                                $turno['quinta'] = 0; 
+                                $turno['sexta'] = 0; 
+                                $turno['sabado'] = 0; 
+                                $turno['domingo'] = 0;
+                                for($ind = 0; $ind < count($this->input->post('seg')); $ind++){
+                                    if ($this->input->post('seg')[$ind] == $indice){
+                                         $turno['segunda'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['segunda'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('terca')); $ind++){
+                                    if ($this->input->post('terca')[$ind] == $indice){
+                                         $turno['terca'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['terca'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('quarta')); $ind++){
+                                    if ($this->input->post('quarta')[$ind] == $indice){
+                                         $turno['quarta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['quarta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('quinta')); $ind++){
+                                    if ($this->input->post('quinta')[$ind] == $indice){
+                                         $turno['quinta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['quinta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('sexta')); $ind++){
+                                    if ($this->input->post('sexta')[$ind] == $indice){
+                                         $turno['sexta'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['sexta'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('sab')); $ind++){
+                                    if ($this->input->post('sab')[$ind] == $indice){
+                                         $turno['sabado'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['sabado'] = 0;
+                                    } 
+                                }
+                                for($ind = 0; $ind < count($this->input->post('dom')); $ind++){
+                                    if ($this->input->post('dom')[$ind] == $indice){
+                                         $turno['domingo'] = 1;
+                                         $ind = 3;
+                                    }else{
+                                        $turno['domingo'] = 0;
+                                    } 
+                                }
                             // grava o registro do turno
                         $this->turno->cadastrar($turno);
                     } 
