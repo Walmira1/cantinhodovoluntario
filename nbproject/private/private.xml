@@ -3,6 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/views/pesquisa_campanha.php</file>
+            <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/controllers/Cadastro_campanha_noticia.php</file>
+            <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/models/Campanha.php</file>
+            <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/views/entidade_campanha.php</file>
+            <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/views/altera_campanha.php</file>
             <file>file:/C:/xampp/htdocs/Cantinhodovoluntario/application/controllers/Pesquisa_campanha.php</file>
         </group>
     </open-files>

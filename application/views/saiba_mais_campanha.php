@@ -96,58 +96,34 @@
         </div> 
         <?php } ?>
 	<!-- [FIM]noticia[/FIM] -->
-    <div class="col-md-12 column col_cursos">
-        <div id="lista_cursos">
-            <div class="row clearfix">
-                <div class="col-md-4 column ">  
-                   <a href="saiba_mais_campanha.html">          
-                      <img class="img-responsive"  src="img/agasalho1.jpg" class="foto-campanha" >
-                    </a>
-                    <div class="titulo_curso">  
-                        <a href="saiba_mais_campanha.html">
-                        Campanha do agasalho 2015 - Aqueça um coração   
-                        </a>             
-                    </div>      
-                    <p class="article-paragraph ">
-                        Iniciou hoje a Campanha do Agasalho 2015 que se encerrará em 19 de junho de 2015. Os agasalhos arrecadados serão doados a uma instituição de assistência social na Guarnição de Porto Alegre-RS.</b> Quem quiser fazer a doação é só entregar na portaria da 8ª CSM no Centro Histórico 
-                    </p>
-                    <span>
-                        <a class="btn saiba_mais" href="saiba_mais_campanha.html">Saiba mais »</a>
-                    </span>
-                </div>
-                <div class="col-md-4 column ">
-                    <a href="saiba_mais_campanha1.html">
-                       <img class="img-responsive" src="img/campanha-do-agasalho-para-animais.jpg" class="foto-campanha" >
-                    </a>
-                    <div class="titulo_curso">  
-                        <a href="saiba_mais_campanha1.html">
-                            Campanha do agasalho para animais   
-                        </a>                 
-                    </div>      
-                    <p class="article-paragraph ">
-                        A USPA, presidida por Álvaro Pacheco, está realizando a campanha do agasalho para a doação aos animais (cães e gatos). As doações podem ser feitas na feirinha que acontece aos finais de semana no Shopping Center Salto.
-                    </p>
-                    <span>
-                        <a class="btn saiba_mais" href="saiba_mais_campanha.html">Saiba mais »</a>
-                    </span>
-                </div>
-                <div class="col-md-4 column "  >
-                    <a href="saiba_mais_campanha1.html">
-                      <img  class="img-responsive" src="img/criancasorrindo.jpg" class="foto-campanha" >
-                    </a>
-                    <div class="titulo_curso">  
-                        <a href="saiba_mais_campanha1.html">
-                           O seu sorriso pode mudar o dia de alguém  
-                        </a>                     
-                    </div>      
-                    <p class="article-paragraph ">
-                        Oferecer um sorriso torna feliz o coração. Enriquece quem o recebe sem empobrecer quem o doa, dura somente um instante, mas sua lembrança permanece por longo tempo. Ninguém é tão rico a ponto de dispensá-lo, nem tão pobre que não possa doá-lo.             
-                    </p>
-                    <span>
-                        <a class="btn saiba_mais" href="saiba_mais_campanha1.html">Saiba mais »</a>
-                    </span>
-                </div>
-            </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <?php if($campanhas != NULL){ ?>
+            <?php foreach($campanhas as $campanha){ ?>
+                    <div class="col-md-4 column ">
+                        <br /><br />
+			<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">		
+				<img class="img-curso   "  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
+			</a>
+			<div class="titulo_curso">	
+				<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">
+							<?php echo $campanha->titulo_campanha_noticia; ?> 
+				</a>
+			</div>					
+			<p class="article-paragraph ">
+				<?php echo $campanha->descricao ?>
+			</p>
+			<span>
+				<a class="btn saiba_mais" href="saiba_mais_campanha1.html">Saiba mais »</a>
+			</span>		
+                    </div>                            
+            <?php }?>
+            <?php }else{?>
+                    <div class="col-md-8 column ">
+                        <br /><br />
+                        Não existem campanhas para esta entidade
+                    </div>
+            <?php }?>
         </div>
     </div>
     

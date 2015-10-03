@@ -7,7 +7,7 @@
                                 	<a href="<?= base_url(); ?>cadastro_entidade">Instituições</a>
                                         <a href="<?= base_url(); ?>ver_vagas">Vagas</a>
                                         <a href="<?= base_url(); ?>testemunhos">Testemunhos</a>
-                                        <a href="<?= base_url(); ?>instituicoes">Instituições Registradas</a>					    			   
+                                        <a href="<?= base_url(); ?>entidades/index">Instituições Reg.</a>					    			   
                                         <a href="<?= base_url(); ?>campanhas_noticias">Noticias/Campanhas</a>
                                         <a href="<?= base_url(); ?>informa_cursos">Cursos</a>
                                         <a href="<?= base_url(); ?>sobre">Sobre</a>

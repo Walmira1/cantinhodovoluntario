@@ -95,7 +95,12 @@
                     <?php  echo $alerta["mensagem"]; ?>
              </div>    
         <?php  }?> 
-        
+        <?php if($mensagem != null) {?>
+        <div class="alert alert-success">
+            <?php  echo $mensagem;?> 
+            <?php   $mensagem = NULL;?> 
+        </div>  
+        <?php }?>
             <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
             <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
             <input type="hidden" name="id_campanha" value="<?php echo $campanha->id_campanha?>"/>

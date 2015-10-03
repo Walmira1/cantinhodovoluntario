@@ -20,7 +20,7 @@ class Pesquisa_curso extends CI_Controller {
          }	
         public function index($indice=null)
 	{       
-               
+               $dados['cursos'] = $this->curso->get_all_curso()->result();
                $this->load->view('includes/html_header');
                $this->load->view('includes/html_menu_voluntario');
                $this->load->view('pesquisa_curso',$dados);
@@ -84,9 +84,9 @@ class Pesquisa_curso extends CI_Controller {
             $cod_mensagem = null;
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('includes/html_menu_voluntario');
                 $this->load->view('cadastro_curso');
-                $this->load->view('includes/html_rodape_entidade');
+                $this->load->view('includes/html_rodape_voluntario');
                 
             }
             $data['atividade_id_area'] = $this->input->post('area');
@@ -113,9 +113,9 @@ class Pesquisa_curso extends CI_Controller {
             $data['cidades'] = $this->db->get('cidade')->result();
             $data['estados'] = $this->cidade->get_estado();
             $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
+            $this->load->view('includes/html_menu_voluntario');
             $this->load->view('pesquisa_curso',$data);
-            $this->load->view('includes/html_rodape_entidade');
+            $this->load->view('includes/html_rodape_voluntario');
         }
             
 	

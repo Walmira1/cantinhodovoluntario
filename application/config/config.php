@@ -16,7 +16,7 @@
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/Cantinhodovoluntario';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

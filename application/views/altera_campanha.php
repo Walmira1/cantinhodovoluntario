@@ -96,7 +96,7 @@
                     <?php  echo $alerta["mensagem"]; ?>
              </div>    
         <?php  }?> 
-        <form  method="post"  action="<?= base_url(); ?>cadastro_campanha_noticia/cadastrar">
+        <form  method="post"  action="<?= base_url(); ?>cadastro_campanha_noticia/alterar">
             <input type="hidden" name="pagina" value="<?php echo $this->session->userdata('deondevim')?>"/>
             <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
             <input type="hidden" name="id_campanha" value="<?php echo $campanha->id_campanha?>"/>
@@ -124,7 +124,7 @@
                             Data Inclusão:
                             <br />
                             <?php echo form_error('data_inclusao','<div class="erro">','</div>'); ?>
-                            <input type="date" name="data_inclusao" min="<?php echo date('Y-m-d');?>" required="" value ="<?php echo $campanha->data_inclusao;?>" />
+                            <input type="date" name="data_inclusao"  required="" value ="<?php echo $campanha->data_inclusao;?>" />
                 </div>
                 <div class="col-md-3 column incluir_curso">
                             <br />

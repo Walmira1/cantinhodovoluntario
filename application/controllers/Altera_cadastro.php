@@ -150,24 +150,32 @@ class Altera_cadastro extends CI_Controller {
                         $this->session->set_userdata($dados);
                         $query = $this->entidade->get_id($id_entidade);
                         $dados['entidade'] = $query->row(0,'entidade');
-                        $query = $this->vaga->get_vaga_by_id_entidade($id_entidade);
-                        $dados['vagas'] = $query;
                         $dados['alerta'] = $alerta;
                         $id_entidade = $this->session->userdata('id_entidade');
-                        $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
+                        $dados['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                        $dados['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
                         $this->load->view('includes/html_header');
                         $data['msg'] = "Entidade Alterada com Sucesso";
+                        $dados['mensagem'] = "Entidade Alterada com Sucesso";
                         $this->load->view('includes/msg_sucesso',$data); 
                         $this->load->view('includes/html_menu_entidade');
                         $this->load->view('inicio_entidade',$dados);
                         $this->load->view('includes/html_rodape_entidade');
-               }else{
-                    $data['msg'] = "Não foi possivel Alterar a Entidade"; 
-                    $this->load->view('includes/msg_erro',$data);
+               } else{
+                    $data['msg'] = "Não foram alterados dados da  Entidade"; 
+                    $dados['mensagem'] = "Não foram alterados dados da  Entidade";
+                    //$this->load->view('includes/msg_erro',$data);
                     $query = $this->entidade->get_id($id_entidade);
                     $dados['entidade'] = $query->row(0,'entidade');
-                    $dados['alerta'] = $alerta;
-                    $this->load->view('altera_cadastro_entidade',$dados);
+                    $id_entidade = $this->session->userdata('id_entidade');
+                    $dados['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                    $dados['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
+                    $dados['alerta'] = NULL;
+                /*    $this->load->view('altera_cadastro_entidade',$dados);
+                    $this->load->view('includes/html_rodape_entidade'); */
+                    $this->load->view('includes/html_header');
+                    $this->load->view('includes/html_menu_entidade');
+                    $this->load->view('inicio_entidade',$dados);
                     $this->load->view('includes/html_rodape_entidade');
                 }
                 

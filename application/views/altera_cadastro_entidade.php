@@ -54,7 +54,7 @@
 	</div>
         <div class="col-md-2 column">
         <div class="sair">
-                <a href="#" >
+                <a href="<?= base_url(); ?>inicio_entidade/index/<?=$this->session->userdata('id_entidade')?>" >
                     Sair
                 </a> 
         </div>

@@ -19,8 +19,10 @@ class Inicio_entidade extends CI_Controller {
         public function index($id_entidade=NULL)
 	{      
             if($id_entidade != NULL){
+                $data['mensagem'] = NULL;
                 $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
                 $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
 		$this->load->view('includes/html_header');
                 $this->load->view('includes/html_menu_entidade');
                 $this->load->view('inicio_entidade',$data);

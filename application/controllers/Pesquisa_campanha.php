@@ -40,7 +40,9 @@ class Pesquisa_campanha extends CI_Controller {
                     if ($query->num_rows() == 1){
                         $data['entidade'] = $query->row(0,'entidade') ;
                     }
-                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
+                    $data['campanhas'] = $this->campanha->get_campanha_by_entidade_id_entidade($id_entidade);
+                    
              //var_dump($data['sum_campanha']);
              //exit;
                 }else {
@@ -71,9 +73,9 @@ class Pesquisa_campanha extends CI_Controller {
             $cod_mensagem = null;
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('includes/html_menu_voluntario');
                 $this->load->view('cadastro_campanha');
-                $this->load->view('includes/html_rodape_entidade');
+                $this->load->view('includes/html_rodape_voluntario');
                 
             }
             $data['atividade_id_area'] = $this->input->post('area');
@@ -99,9 +101,9 @@ class Pesquisa_campanha extends CI_Controller {
             $data['cidades'] = $this->db->get('cidade')->result();
             $data['estados'] = $this->cidade->get_estado();
             $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
+            $this->load->view('includes/html_menu_voluntario');
             $this->load->view('pesquisa_campanha',$data);
-            $this->load->view('includes/html_rodape_entidade');
+            $this->load->view('includes/html_rodape_voluntario');
         }
             
 	

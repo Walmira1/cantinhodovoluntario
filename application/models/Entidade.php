@@ -100,8 +100,6 @@ class Entidade extends CI_Model {
         //retorna ok
                     return TRUE;
             }else{
-        //return false
-        echo "Não altereou nenhum registro";
                     return FALSE;
                 }
         }else{

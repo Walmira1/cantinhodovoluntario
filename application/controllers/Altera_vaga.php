@@ -27,7 +27,7 @@ class Altera_vaga extends CI_Controller {
 		$this->load->model('vaga', 'vaga');
                 $this->load->model('turno', 'turno');
                 $this->load->model('entidade', 'entidade');
-                $this->output->enable_profiler(TRUE);
+           //     $this->output->enable_profiler(TRUE);
                
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                

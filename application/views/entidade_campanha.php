@@ -65,11 +65,11 @@
             <?php foreach($campanhas as $campanha){ ?>
                     <div class="col-md-4 column ">
                         <br /><br />
-			<a href="saiba_mais_campanha1.html">			
+			<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">			
 				<img class="img-responsive"  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
 			</a>
 			<div class="titulo_curso">	
-				<a href="saiba_mais_campanha1.html">
+				<a href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">
 					<?php echo $campanha->titulo_campanha_noticia ?> 
 						</a>
 			</div>					
@@ -77,7 +77,7 @@
 				<?php echo $campanha->descricao ?>
 			</p>
 			<span>
-				<a class="btn saiba_mais" href="saiba_mais_campanha1.html">Saiba mais »</a>
+				<a class="btn saiba_mais" href="<?= base_url(); ?>pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">Saiba mais »</a>
 			</span>		
                     </div>                            
             <?php }?>

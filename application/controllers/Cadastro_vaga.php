@@ -13,7 +13,7 @@ class Cadastro_vaga extends CI_Controller {
                 $this->load->model('turno', 'turno');
                 $this->load->model('entidade', 'entidade');
        // Ferramenta de debug profile - nativa do codeigniter         
-                $this->output->enable_profiler(TRUE);
+           //     $this->output->enable_profiler(TRUE);
                         
          }	
         public function index($indice=null)

@@ -9,9 +9,9 @@ class Inicio extends CI_Controller {
        Obs: O primeiro parametro 'teste_model' é o nome que deve estar o arquivo do model.
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
-		$this->load->model('cidade', 'cidade');
-                $this->load->model('curso', 'curso');
-                $this->load->model('campanha', 'campanha');
+		$this->load->model('Cidade', 'cidade');
+                $this->load->model('Curso', 'curso');
+                $this->load->model('Campanha', 'campanha');
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         

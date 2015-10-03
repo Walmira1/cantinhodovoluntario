@@ -9,10 +9,6 @@ class Cadastro_voluntario extends CI_Controller {
             O segundo parametro 'teste' é somente um apelido para o model para não precisar digitar o nome completo
     */
 		$this->load->model('voluntario', 'voluntario');
-                
-                $this->load->helper('url');
-              
-               
                         
          }
 	

@@ -73,22 +73,7 @@ class Cadastro_campanha_noticia extends CI_Controller {
         http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
               */
             
-         /*     if($this->input->post('entrar')== "Incluir Vaga"){
-                 echo "o formulario foi submetido";
-                 if ( $this->input->post('seg')[1]){
-                     echo "trabalho na segunda de manha";
-                 }
-                 if ($this->input->post('seg')[2]){
-                     echo "trabalho na segunda de tarde";
-                 }
-                 if ($this->input->post('terca')[2]){
-                     echo "trabalho na terça de tarde";
-                 }
-                else {
-                    echo "Não trabalho na terça de tarde"; 
-                }
-                 exit;
-             } */
+         
             $this->lang->load('form_validation','portuguese');
             $alerta = null;
             if($this->input->post('captcha')){
@@ -129,11 +114,80 @@ class Cadastro_campanha_noticia extends CI_Controller {
                         $data['alerta'] = $alerta;
                         $query = $this->campanha->get_max_campanha_by_entidade($this->input->post('id_entidade'));
                         $data['campanha'] = $query->row();
+                        $data['mensagem'] = "Campanha cadastrada  com sucesso";
                         $this->load->view('altera_foto_campanha',$data);
                         $this->load->view('includes/html_rodape_entidade');
                         
                } else{
                    redirect('cadastro_campanha_noticia/cadastro/2');
+                 
+               }
+            }
+            
+	}
+        public function alterar()
+	{   
+            /* Carrega a biblioteca do CodeIgniter responsável pela validação dos formulários */
+         //   $this->load->library('form_validation');
+            /* Define as regras para validação
+               Referencia:
+        http://www.codeigniter.com/user_guide/libraries/form_validation.html?highlight=form%20validation#rule-reference
+              */
+            
+         
+            $this->lang->load('form_validation','portuguese');
+            $alerta = null;
+            if($this->input->post('captcha')){
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('altera_campanha');
+                $this->load->view('includes/html_rodape_entidade');
+                
+            }
+          //Verifica se o form passou nos testes de validação  
+            if ($this->form_validation->run('cadastro_campanha_form')==FALSE) {
+        //         var_dump($this->input->post());
+                
+                      // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
+                 $alerta = array(
+                    "class"=>"danger",
+                    "mensagem" => "Atenção falha na validação do formulário<br>" . validation_errors()
+                    );
+                 
+                $data['alerta'] = $alerta;
+                $this->load->view('includes/html_header');
+                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('altera_campanha',$data);
+                $this->load->view('includes/html_rodape_entidade');
+            }else{
+                $data['id_campanha'] = $this->input->post('id_campanha');
+                $data['entidade_id_entidade'] = $this->input->post('id_entidade');
+            	$data['titulo_campanha_noticia'] = $this->input->post('titulo');
+                $data['descricao'] = $this->input->post('descricao');
+                $data['data_inclusao'] = $this->input->post('data_inclusao');
+                $data['data_fim'] = $this->input->post('data_fim');
+                $data['foto_campanha'] = NULL;
+                $data['video'] = $this->input->post('video');
+                $id_campanha = $this->input->post('id_campanha');
+                
+            //    var_dump($data);
+                    
+                if ($this->campanha->alterar($id_campanha,$data) == TRUE){
+      // vou ler a ultima vaga cadastrada para a entidade para buscar o id_vaga
+                        $data['alerta'] = $alerta;
+                        $query = $this->campanha->get_campanha($id_campanha);
+                        $data['campanha'] = $query->row();
+                        $data['mensagem'] = "Campanha alterada com sucesso";
+                        $this->load->view('altera_foto_campanha',$data);
+                        $this->load->view('includes/html_rodape_entidade');
+                        
+               } else{
+                   $data['alerta'] = $alerta;
+                    $query = $this->campanha->get_campanha($id_campanha);
+                    $data['campanha'] = $query->row();
+                    $data['mensagem'] = "Não foram alterados dados da campanha";
+                    $this->load->view('altera_foto_campanha',$data);
+                    $this->load->view('includes/html_rodape_entidade');
                  
                }
             }

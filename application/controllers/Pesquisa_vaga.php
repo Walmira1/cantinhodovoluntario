@@ -84,9 +84,9 @@ class Pesquisa_vaga extends CI_Controller {
             $cod_mensagem = null;
             if($this->input->post('captcha')){
                 $this->load->view('includes/html_header');
-                $this->load->view('includes/html_menu_entidade');
+                $this->load->view('includes/html_menu_voluntario');
                 $this->load->view('cadastro_vaga');
-                $this->load->view('includes/html_rodape_entidade');
+                $this->load->view('includes/html_rodape_voluntario');
                 
             }
             $data['atividade_id_area'] = $this->input->post('area');
@@ -113,9 +113,9 @@ class Pesquisa_vaga extends CI_Controller {
             $data['cidades'] = $this->db->get('cidade')->result();
             $data['estados'] = $this->cidade->get_estado();
             $this->load->view('includes/html_header');
-            $this->load->view('includes/html_menu_entidade');
+            $this->load->view('includes/html_menu_voluntario');
             $this->load->view('pesquisa_vaga',$data);
-            $this->load->view('includes/html_rodape_entidade');
+            $this->load->view('includes/html_rodape_voluntario');
         }
             
 	

@@ -56,7 +56,7 @@
 
         <div class="uploadify-queue" id="file-queue"></div>
         <input type="hidden" name="id_entidade" value="<?php echo $this->session->userdata('id_entidade')?>"/>
-        <strong>Escolha uma foto para divulgação da entidade </strong>
+        <strong>Escolha uma foto para divulgação do Logotipo da entidade </strong>
         <input type="file" name="userfile" id="upload_btn" />
         <strong>Escolha uma foto para divulgação da entidade </strong>
         <a href="<?= base_url(); ?>cadastro_entidade/cadastro"><button type="button" class="btn btn-primary btn-lg" style="float: right"/>Sair</button> </a>
