@@ -61,7 +61,11 @@ class Entidade extends CI_Model {
             return FALSE;
 	endif;
     }
-	
+    public function get_all(){
+            $this->db->select('*');
+            return $this->db->get('entidade');
+        
+    }
 
     public function get_byemail($email=NULL){
         if ($email != NULL):

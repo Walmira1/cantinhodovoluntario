@@ -67,8 +67,8 @@ class Pesquisa_curso extends CI_Controller {
                 $data['curso'] = NULL;
                 }
             
-            $this->load->view('includes/html_header_mapa');
-            $this->load->view('includes/html_menu_voluntario');
+     //       $this->load->view('includes/html_header_mapa');
+    //        $this->load->view('includes/html_menu_voluntario');
             $this->load->view('saiba_mais_curso',$data);
             $this->load->view('includes/html_rodape_voluntario');
                 

@@ -2,7 +2,7 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
            
-             <img  class="img-responsive" alt="logotipo do cantinho do voluntário" src="<?= base_url(); ?>assets/img/cantinho.png" >
+             <img  class="img-responsive" alt="logotipo do cantinho do voluntário" src="<?= base_url(); ?>assets/images/cantinho.png" >
            
         </div>
     </div>

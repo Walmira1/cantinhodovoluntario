@@ -12,6 +12,7 @@ class Cadastro_entidade extends CI_Controller {
 		$this->load->model('entidade', 'entidade');
                 $this->load->model('Vaga', 'vaga');
                 $this->load->model('Cidade', 'cidade');
+                $this->output->enable_profiler(TRUE);
        // a classe Manipulação de Imagem é inicializada em seu controller usando a função $this->load_library:         
                 
                         
@@ -22,6 +23,8 @@ class Cadastro_entidade extends CI_Controller {
                 $id_entidade = $this->session->userdata('id_entidade');
                 $data['entidade'] = $this->entidade->get_id($id_entidade)->row(); 
                 $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
+                $dados['cidades'] = $this->db->get('cidade')->result();
+                $dados['estados'] = $this->cidade->get_estado();
                 if ($indice==1){
                    
                    $data['msg'] = "Entidade Cadastrada com Sucesso";
@@ -96,7 +99,8 @@ class Cadastro_entidade extends CI_Controller {
                     );
                $dados = array(
                    "alerta" => $alerta   );
-                
+                $dados['cidades'] = $this->db->get('cidade')->result();
+                $dados['estados'] = $this->cidade->get_estado();
                 $this->load->view('cadastro_entidade',$dados);
                 
             }else{
@@ -184,71 +188,62 @@ class Cadastro_entidade extends CI_Controller {
             if ($this->form_validation->run('login_entidade_form')== TRUE) {
                  $email = $this->input->post('email_login');
                  $senha = $this->input->post('senha');
-                 // chamo o login
-                if ($this->entidade->do_login($email, $senha) == TRUE):
-                    $query = $this->entidade->get_byemail($email)->row();
-           //     var_dump($query);
-           //     exit;
-                    $dados = array(
+                $query = $this->entidade->get_byemail($email)->row();
+                if (($query->senha == $senha) && ($query->ativo == 1)){
+                        $dados = array(
 				'id_entidade' => $query->id_entidade,
 				'logotipo_entidade' => $query->logotipo_entidade,
                                 'upload_foto' => $query->upload_foto,
                                 'site_entidade' => $query->site_entidade,
                                 'user_nome' => $query->nome,
 				'user_logado' => TRUE
-                    );
-                    $this->session->set_userdata($dados);
-                    $id_entidade = null;
-                    $data['mensagem'] = null;
-                    $id_entidade = $query->id_entidade;
-                    $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
-                    $id_entidade = $this->session->userdata('id_entidade');
-                    $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
-                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
+                        );
+                        $this->session->set_userdata($dados);
+                        $id_entidade = null;
+                        $data['mensagem'] = null;
+                        $id_entidade = $query->id_entidade;
+                        $data['vagas'] = $this->vaga->get_vaga_by_entidade_id_entidade($id_entidade);
+                        $id_entidade = $this->session->userdata('id_entidade');
+                        $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+                        $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row(); 
                    // redirect('cadastro_entidade/index/3');
-                    $this->load->view('includes/html_header');
-                    $this->load->view('includes/html_menu_entidade');
-                    $this->load->view('inicio_entidade',$data);
-                    $this->load->view('includes/html_rodape_entidade');
-                else:
-                    $query = $this->entidade->get_byemail($email)->row();
-                    if (empty($query)):
+                        $this->load->view('includes/html_header');
+                        $this->load->view('includes/html_menu_entidade');
+                        $this->load->view('inicio_entidade',$data);
+                        $this->load->view('includes/html_rodape_entidade');
+                }else{
+                        if (empty($query)){
                         $alerta = array(
                           "class"=>"danger",
                             "mensagem" => "Email inexistente<br>" 
                              );
 			//set_msg('errologin', 'Email inexistente', 'erro');
-                    elseif ($query->senha != $senha):
-                        $alerta = array(
-                         "class"=>"danger",
-                         "mensagem" => "Senha incorreta<br>" 
-                            );
+                    
 			//set_msg('errologin', 'Senha incorreta', 'erro');
-			elseif ($query->ativo == 0):
+                        }else {
+                            if ($query->ativo == 0){   
                                 $alerta = array(
-                                         "class"=>"danger",
+                                "class"=>"danger",
                                          "mensagem" => "Usuário Inativo <br>" 
-                                          );
+                                );
 				//set_msg('errologin', 'Este usuário está inativo', 'erro');
-                            else:
+                            }else {
                                 $alerta = array(
                                          "class"=>"danger",
-                                         "mensagem" => "Erro desconhecido <br>" 
+                                         "mensagem" => "Senha Inválida <br>" 
                                           );
-				
 				//set_msg('errologin', 'Erro desconhecido, contate o desenvolvedor', 'erro');
-                            endif;
-                     $dados = array(
-                     "alerta" => $alerta
-                    );
-                    $this->load->view('includes/html_header');
-                
-                    $this->load->view('cadastro_entidade',$dados);
-                     
-                endif;                
-                 
-             }
-            else{
+                            }
+                        } 
+                        $dados = array(
+                        "alerta" => $alerta
+                        );  
+                        $this->load->view('includes/html_header');
+                        $this->load->view('cadastro_entidade',$dados);
+                        $this->load->view('includes/html_rodape_entidade');
+                    }
+                    
+            }else{
                   // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
                  $alerta = array(
                     "class"=>"danger",
@@ -257,48 +252,50 @@ class Cadastro_entidade extends CI_Controller {
                  $dados = array(
                  "alerta" => $alerta
              );
-             $this->load->view('includes/html_header');
                 
-            $this->load->view('cadastro_entidade',$dados);
-            $this->load->view('includes/html_rodape_voluntario');
-             }
+            }     
+             
+             
              // todo o indice vira variavel na view (vamos ter uma variavel "alerta"
              
 	}
- /*       public function nova_senha(){
-		$this->form_validation->set_rules('email', 'EMAIL', 'trim|required|valid_email|strtolower');
-		if ($this->form_validation->run()==TRUE):
-			$email = $this->input->post('email');
-			$query = $this->usuarios->get_byemail($email);
-			if ($query->num_rows()==1):
-				$novasenha = substr(str_shuffle('qwertyuiopasdfghjklzxcvbnm0123456789'), 0, 6);
-				$mensagem = "<p>Você solicitou uma nova senha para acesso ao painel de administração do site, a partir de agora use a seguinte senha para acesso: <strong>$novasenha</strong></p><p>Troque esta senha para uma senha segura e de sua preferência o quanto antes.</p>";
-				if ($this->sistema->enviar_email($email, 'Nova senha de acesso', $mensagem)):
-					$dados['senha'] = md5($novasenha);
-					$this->usuarios->do_update($dados, array('email'=>$email), FALSE);
-					auditoria('Redefinição de senha', 'O usuário solicitou uma nova senha por email');
-					set_msg('msgok', 'Uma nova senha foi enviada para seu email', 'sucesso');
-					redirect('usuarios/nova_senha');
-				else:
-					set_msg('msgerro', 'Erro ao enviar nova senha, contate o administrador', 'erro');
-					redirect('usuarios/nova_senha');
-				endif;
-			else:
-				set_msg('msgerro', 'Este email não possui cadastro no sistema', 'erro');
-				redirect('usuarios/nova_senha');
-			endif;
-		endif;		
-		set_tema('titulo', 'Recuperar senha');
-		set_tema('conteudo', load_modulo('usuarios', 'nova_senha'));
-		set_tema('rodape', '');
-		load_template();
+        public function nova_senha(){
+            $this->form_validation->set_rules('email', 'EMAIL', 'trim|required|valid_email|strtolower');
+            $data['mensagem'] = null;
+            if ($this->form_validation->run()==TRUE):
+                $email = $this->input->post('email_login');
+                $query = $this->entidade->get_entidade_by_email($email);
+		if ($query->num_rows()==1):
+                    $novasenha = substr(str_shuffle('qwertyuiopasdfghjklzxcvbnm0123456789'), 0, 6);
+                    $mensagem = "<p>Você solicitou uma nova senha para acesso ao painel de administração do site, a partir de agora use a seguinte senha para acesso: <strong>$novasenha</strong></p><p>Troque esta senha para uma senha segura e de sua preferência o quanto antes.</p>";
+                    if ($this->sistema->enviar_email($email, 'Nova senha de acesso', $mensagem)):
+                        $dados['senha'] = md5($novasenha);
+			$this->entidade->do_update($dados, array('email'=>$email), FALSE);
+                        $data['mensagem'] = 'Uma nova senha foi enviada para seu email';
+			$this->load->view('includes/html_header');
+                        $this->load->view('cadastro_entidade',$dados);
+                        $this->load->view('includes/html_rodape_entidade');
+			
+                    else:
+                            set_msg('msgerro', 'Erro ao enviar nova senha, contate o administrador', 'erro');
+                    endif;
+		else:
+                    set_msg('msgerro', 'Este email não possui cadastro no sistema', 'erro');
+                    redirect('cadastro_entidade/nova_senha');
+		endif;
+            endif;		
+            set_tema('titulo', 'Recuperar senha');
+            set_tema('conteudo', load_modulo('usuarios', 'nova_senha'));
+            set_tema('rodape', '');
+            load_template();
 	}
+        
         public function inicio(){
             $query = get_id($id_entidade)->row();
             $data[entidade] = $query[0];
             $data[vagas] = $query[0];
             
-        }*/
+        }
 }
 
 

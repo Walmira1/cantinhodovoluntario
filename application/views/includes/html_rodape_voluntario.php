@@ -8,8 +8,8 @@
                                         <a href="<?= base_url(); ?>ver_vagas">Vagas</a>
                                         <a href="<?= base_url(); ?>testemunhos">Testemunhos</a>
                                         <a href="<?= base_url(); ?>entidades/index">Instituições Reg.</a>					    			   
-                                        <a href="<?= base_url(); ?>campanhas_noticias">Noticias/Campanhas</a>
-                                        <a href="<?= base_url(); ?>informa_cursos">Cursos</a>
+                                        <a href="<?= base_url(); ?>pesquisa_campanha">Noticias/Campanhas</a>
+                                        <a href="<?= base_url(); ?>pesquisa_curso">Cursos</a>
                                         <a href="<?= base_url(); ?>sobre">Sobre</a>
                                         <a href="<?= base_url(); ?>contatos.html">Contatos</a>
 				</div>

@@ -1,4 +1,3 @@
-
     <div class="row clearfix">
         <div class="col-md-12 column">
             <img src="<?= base_url(); ?>assets/img/globo.jpg" class="imagem_instituicao" alt="" />
@@ -19,7 +18,8 @@
     
     <div class="row clearfix">
         <div id="margem_tabela"> 
-            <table class=" table table-responsive">
+            <div class="table-responsive">
+            <table class="table">
                 <thead>   
                     <tr id="dias_semana">
                         <th>Logo Entidade</th>
@@ -55,6 +55,7 @@
                 </tbody>
             </table> 
         </div>  
+        </div>
     </div>
     <!-- [FIM]Vagas[/FIM] -->
         

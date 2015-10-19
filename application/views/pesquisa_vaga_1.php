@@ -1,71 +1,25 @@
-                <div class="row clearfix">
-            <div class="col-md-12 column">
-		<div class="carousel slide" id="carousel" data-ride="carousel" data-interval="3000">
-			<ol class="carousel-indicators">
-				<li class="active" data-slide-to="0" data-target="#carousel">
-				</li>
-				<li data-slide-to="1" data-target="#carousel">
-				</li>
-				<li data-slide-to="2" data-target="#carousel">
-				</li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="item active">
-                                    <img  alt="" src="assets/img\maosnovas.jpg" alt="seja a mudança que você quer ver no mundo"> 
-					<div class="carousel-caption">
-						<h4>
-							Primeira ideia
-						</h4>
-						<p>
-						<h3>
-							Seja a mudança que você quer ver no mundo(Gandhi) ... 
-						</h3>	
-						</p>
-					</div>
-				</div>
-				<div class="item">
-                                    <img alt="" src="assets/img/maoscerta.jpg" alt="se você pensa que é muito pequeno para fazer a diferença, experimente dormir com um mosquito">
-					<div class="carousel-caption">
-						<h4>
-							Segunda ideia
-						</h4>
-						<p>
-							<h3>
-							Se você pensa que é muito pequeno para fazer a diferença, esperimente dormir com um mosquito(Gandhi)
-							</h3>
-						</p>
-					</div>
-				</div>
-				<div class="item">
-					<img alt="" src="assets/img/globobranco.jpg">
-					<div class="carousel-caption">
-						<h4>
-							Terceira ideia
-						</h4>
-						<p>
-							<h3>
-							Sei que o meu trabalho é uma gota no oceano, mas sem ele o oceano seria menor (Madre Teresa)
-							</h3>
-						</p>
-					</div>											
-				</div>	
-			</div> <a class="left carousel-control" href="#carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>				
+    <div class="row clearfix">
+		<!-- [INI]BreadCrump[/INI] -->
+		<div class="col-md-12 column">
+			<div id="breadcrump">
+			   <a href="<?= base_url(); ?>inicio">Home ></a>
+			   <a href="">Ver Vagas</a>
+			</div>	
 		</div>
-            </div>
-		<!-- [FIM]Menu[/FIM] -->
+		<!-- [FIM]BreadCrump[/FIM] -->
 	</div>
-        <form method="post" action="pesquisa_vaga/pesquisa">	
-            <div class="pesquisa_index">
-            <div class="row clearfix">    
+        <!-- [INI]Pesquisa[/INI] -->
+        <div class="pesquisa">
+            <form method="post" action="<?= base_url(); ?>pesquisa_vaga/pesquisa">
                 <div class="col-md-12 column ">
-                    <div class="row clearfix">
+                <div class="row clearfix">
 			<!-- [INI]Pesquisa[/INI] -->
                         <div class="col-md-3 ">
 					<h3>
 					Gosto de:
 					</h3>
                             <?php echo form_error('area','<div class="erro">','</div>'); ?>
-                            <select name ="area">
+                            <select name ="area" alt="gosto de">
                                 <option value= "0"> </option>
 				<option value= "1">Educação</option>
 				<option value= "2">Solidariedade Social</option>
@@ -81,8 +35,8 @@
 					Quero trabalhar com:
 					</h3>
 					<?php echo form_error('atividade','<div class="erro">','</div>'); ?>
-                               
-                                <select id="incluir_pessoas" name="atividade">
+                             
+                                <select id="incluir_pessoas" name="atividade" alt="quero trabalhar com">
                                     <option value= "0"> </option>
                                     <option value= "1">Adultos</option>
                                     <option value= "19">Animais</option>
@@ -110,10 +64,10 @@
                             <h3>Tempo disponivel:
                             </h3>
 					<?php echo form_error('tipo_carga_horaria','<div class="erro">','</div>'); ?>
-                        
-                            <select name="tipo_carga_horaria">
-                                <option value= "0"> </option>
-				<option value= "1">Fins de Semana</option>
+                            
+                            <select name="tipo_carga_horaria" alt="tipo de carga horária">
+				<option value= "0"> </option>
+                                <option value= "1">Fins de Semana</option>
 				<option value= "2">Fins de Semana - Sábados</option>
 				<option value= "3">Fins de Semana - Domingos</option>
 				<option value= "4">Todos os dias</option>
@@ -129,11 +83,10 @@
 				<h3>Numero de Horas:
 				</h3> 
                             <?php echo form_error('numero_horas','<div class="erro">','</div>'); ?>
-                            <input type="text" name="numero_horas" value ="<?php echo set_value('numero_horas');?>"/>
+                            <input type="text" name="numero_horas" alt="numero de horas" value ="<?php echo set_value('numero_horas');?>"/>
 			</div>
-                    </div>
                 </div>
-            </div>
+	    </div>
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <div class="col-md-3 column ">
@@ -141,8 +94,8 @@
                             Estado: 
                      </h3>  
                      <?php echo form_error('estado','<div class="erro">','</div>'); ?>
-                          <select id="estado"  name="estado" required="" />
-                          <option value=" ">   </option>
+                          <select id="estado"  name="estado" required="" alt="estado" />
+                          <option value=" ">    </option>
                                 <?php foreach($estados as $estado) {?>
                                 <option value="<?= $estado->uf?>"> <?= $estado->uf; ?></option>
                                 <?php }?>
@@ -153,7 +106,7 @@
                        Cidade:
                     </h3>
                              <?php echo form_error('cidade','<div class="erro">','</div>'); ?>
-                            <select id="cidade"  name="cidade" required="" />
+                            <select id="cidade"  name="cidade" required="" alt="cidade" />
                                 <option value=" ">      </option>
                                 <?php foreach($cidades as $cidade) {?>
                                 <option value="<?= $cidade->cidade?>"> <?= $cidade->cidade; ?></option>
@@ -162,53 +115,66 @@
                     </div>
                     <div class="col-md-6 column ">
                         <input type="submit" class="btn btn-primary btn-lg btn_ver_vagas_index" value = "Ver Vagas" />
-                        
                     </div> 
         	</div>   
             <!-- [INI]Fim[/INI] -->
+            </div>               
+            <!-- [INI]Fim[/INI] -->
+            </form>
+        </div>
+	<!-- [INI]Vagas[/INI] -->
+       
+            <table id="table2" class="tablesaw" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap>
+		
+                <thead>   
+                    <tr id="dias_semana">
+        <!--               <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Logo Entidade</th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Entidade</th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">funcao</th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1"><abbr title="Rotten Tomato Rating">Local</abbr></th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Cidade</th>
+                        <th></th>  -->
+                        <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="5">Logo Entidade</th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Entidade</th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Vaga de </th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Local</abbr></th>
+			<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Cidade</th>
+                        <th></th>
+                    </tr>
+                </thead> 
+                <tbody>
+                <?php if($vagas != NULL) {?>
+                <?php foreach($vagas as $vaga) {?>
+                    <tr >
+                        <td ><?php echo '<a href="'.$vaga->site_entidade.'"> <img class="img-responsive"  src="'.base_url().$vaga->logotipo_entidade;?>"> </a></td>
+                        <td ><?= $vaga->nome;?></td>
+                        <td ><?= $vaga->vaga_de;?></td>
+                        <td ><?= $vaga->endereco;?></td>
+                        <td ><?= $vaga->cidade;?></td>
+                        <td> <a href="<?= base_url(); ?>pesquisa_vaga/vaga/<?= $vaga->id_vaga;?>"><button type="button" class="btn btn-primary btn-sm" ">Saiba mais</button></a> </td>
+                        
+                    </tr>
+                <?php }?>  <!-- foreach  -->
+                <?php }?>  <!-- if not null  -->
+                </tbody>
+            </table> 
+        
+    
+	<!-- [FIM]Vagas[/FIM] -->
+        
+        <!-- [INI]Paginação[/INI] -->
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <?php if($vagas != NULL) {?>
+                <div class="paginacao">
+                   < 1, 2, 3, 4, 5 .... 12 >
+                </div>
+                <div class="mapa">
+                    <iframe src="http://mapbuildr.com/frame/cbqyfr" frameborder="0" height="400" width="550"></iframe>
+                </div>
+                <?php }?>
             </div>
-            </div> 
-        </form>    
-	<!-- [INI]Curso[/INI] -->
-	<div class="col-md-12 column" id="lista_cursos">
-            <div class="row clearfix">
-                    <?php foreach($campanhas as $campanha){ ?>
-                        <div class="col-md-4 column ">	
-                            <a href="pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">			
-                                <img class="img-curso"  <?php echo 'src="'.base_url().$campanha->foto_campanha.'">' ?>  
-                            </a>
-                            <div class="titulo_curso">	
-                                <a href="pesquisa_campanha/campanha/<?php echo $campanha->id_campanha?>">
-					<?php echo $campanha->titulo_campanha_noticia; ?> 
-				</a>
-                            </div>					
-                                <p class="article-paragraph ">
-                                    <?php echo $campanha->descricao ?>
-				</p>
-                                <span>
-                                    <a class="btn saiba_mais" href="pesquisa_campanha/campanha/<?php echo $campanha->id_campanha;?>">Saiba mais »</a>
-				</span>
-                        </div>
-                        <?php }?>                            
-                        <?php foreach($cursos as $curso){ ?>
-                            <div class="col-md-4 column ">
-				<a href="pesquisa_curso/curso/<?php echo $curso->id_curso;?>">			
-                                    <img class="img-curso"  <?php echo 'src="'.base_url().$curso->upload_foto.'">' ?>  
-				</a>
-                            	<div class="titulo_curso">	
-                                	<a href="pesquisa_curso/curso/<?php echo $curso->id_curso;?>">
-					<?php echo $curso->nome; ?> 
-					</a>
-				</div>					
-				<p class="article-paragraph ">
-					<?php echo $curso->descricao; ?>
-				</p>
-				<span>
-					<a class="btn saiba_mais" href="pesquisa_curso/curso/<?php echo $curso->id_curso;?>">Saiba mais »</a>
-				</span>		
-                            </div>                            
-                            <?php }?>
-            </div> 
-	</div>
-	<!-- [FIM]Curso[/FIM] -->
-	<!-- [INI]Rodapé[/INI] -->
+        </div>
+        <!-- [FIM]Paginação[/FIM] -->
+        
+	

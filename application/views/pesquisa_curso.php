@@ -1,6 +1,6 @@
     <div class="row clearfix">
             <div class="col-md-12 column">
-                    <img src="<?= base_url(); ?>assets/img/cisne01.jpg" class="imagem_cursos" alt="" />
+                    <img src="<?= base_url(); ?>assets/img/cisne01.jpg" class="imagem_cursos" alt="imagem de um casal de cisnes" />
             </div>
      </div>
     <div class="row clearfix">

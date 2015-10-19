@@ -1,4 +1,11 @@
-   
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=475771712587276";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
        <!-- [INI]Imagem instituição[/INI] -->
     <div class="row clearfix">
             <div class="col-md-12 column">
@@ -30,7 +37,8 @@
                     <div class="col-md-8">
                         <div style="max-width: 100%; margin-bottom: 20px;">
                             <div style="float: left; font-weight: bold; font-size: 24px;"><?php echo $campanha->titulo_campanha_noticia;?>
-                            </div>                      
+                            </div> 
+                            
                            </br>
                         </div> 
                         <div>
@@ -40,11 +48,9 @@
                         </div> 
                     </div>
                     <div class="col-md-1">
-                        <div>
-                        <strong>Divulgue </strong>
-                        </div>
-                        <div style="float: left;"><img src="<?php echo base_url()?>assets/img/facebook.png" alt="Facebook" 
-                            style="max-width: 5em;" />
+                        <div class="fb-like"></div>
+                        <div class="fb-share-button" 
+                     data-href="http://tcc-voluntario.rhcloud.com/pesquisa_campanha/campanha/<?php echo $campanha->id_campanha;?>" data-layout="button">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -75,6 +81,8 @@
                         
                     </div>
                 </div>
+                
+                
             </div>
         </div>
         <?php if($campanha->video) {?>

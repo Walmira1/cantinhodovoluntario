@@ -39,7 +39,7 @@
                         <!--@$user_profile check when user login is successed -->
                         <!--Display profile photo -->
                         <?php if (@$user_profile): // call var_dump($user_profile) to view all data ?>
-                        <img src="https://graph.facebook.com/<?=$user_profile['id']?>/picture/type=large" style="width 140px; height: 140px;" />
+                        <img src="https://graph.facebook.com/<?=$user_profile['id']?>/picture/type=large" style="width: 140px; height: 140px;" />
                         <!--Display profile photo -->
                         <h2><?=$user_profile['name']?></h2>
                         <a href="<?=$user_profile['link']?>">Visualização do perfil</a>

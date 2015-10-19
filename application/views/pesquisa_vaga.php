@@ -123,9 +123,10 @@
             </form>
         </div>
 	<!-- [INI]Vagas[/INI] -->
-        <div class="row clearfix">
-        <div id="margem_tabela"> 
-            <table class=" table table-responsive">
+    <div class="row clearfix">
+        <div id="margem_tabela">
+            <div class="table-responsive" > 
+                <table class="table">
                 <thead>   
                     <tr id="dias_semana">
                         <th>Logo Entidade</th>
@@ -153,8 +154,9 @@
                 <?php }?>  <!-- if not null  -->
                 </tbody>
             </table> 
-        </div>  
-    </div>
+            </div> 
+        </div>
+    </div> 
 	<!-- [FIM]Vagas[/FIM] -->
         
         <!-- [INI]Paginação[/INI] -->

@@ -1,3 +1,83 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cantinho do Voluntário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta property="og:type"               content="article" />
+  <meta property="og:description"        content="<?php echo $curso->descricao;?>" />
+  <meta property="og:title"              content="<?php echo $curso->nome;?>" />
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+        <link href="<?= base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img<?= base_url(); ?>assets/img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url(); ?>assets/img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="<?= base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.png">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <title></title>
+</head>
+<body>
+    <div class="container">
+	<div class="row clearfix">
+            <div class="col-md-2 column nosso_logo    ">
+            <a href="<?= base_url(); ?>/inicio">
+            <img  class="img-responsive" alt="" src="<?= base_url(); ?>assets/img/cantinho.png" >
+            </a>
+            </div>
+            <div class="col-md-6 column">
+			<h3 id="logo">
+				Cantinho do Voluntário
+			</h3>
+            </div>
+            <div class="col-md-4 column">
+			<div class="login" >
+				<a href="<?= base_url(); ?>login" >
+					Faça Login ou
+				</a> 
+				<a href="<?= base_url(); ?>cadastro_voluntario/cadastro" ><button type="button" class="btn btn-primary btn-sm">
+                                        Cadastre-se</button></a>
+			</div>
+            </div>
+	</div>
+	<div class="row clearfix">
+		<!-- [INI]Menu[/INI] -->
+		<div class="col-md-12 column">
+			<div id="mapa">
+			   <a href="<?= base_url(); ?>cadastro_entidade/cadastro">Instituições</a>
+			   <a href="<?= base_url(); ?>pesquisa_vaga/index">Vagas</a>
+                           <a href="<?= base_url(); ?>pesquisa_campanha/index">Campanhas</a>
+                           <a href="<?= base_url(); ?>pesquisa_curso/index">Cursos</a>
+			   <a href="<?= base_url(); ?>testemunhos">Depoimentos</a>
+			   <a href="<?= base_url(); ?>entidades/index">Instituições Reg.</a>
+			   <a href="<?= base_url(); ?>sobre">Sobre</a>	
+			</div>
+                </div>
+        </div>  
+    
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=475771712587276";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <body onload="carregar()">
         <!-- [INI]Imagem instituição[/INI] -->
     <div class="row clearfix">
@@ -48,8 +128,11 @@
                             <div style="float: left; font-weight: bold; font-size: 24px;">Descrição do Curso</div>
                             <div style="float: left; margin-left: 20px; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Inscrever-se</button></div>
                             <div style="float: left; margin-right: 20px;"><button type="button" class="btn btn-primary btn-sm">Imprimir</button></div>
-                            <strong>Divulgue </strong>
-                            <div style="float: left;"><img src="<?php echo base_url()?>assets/img/facebook.png" alt="Facebook" style="width: 32px" /></div>
+                            
+                            <div class="fb-like" style="float: left;" data-layout="button_count" data-show-faces="true" data-href="http://tcc-voluntario.rhcloud.com/pesquisa_curso/curso/<?php echo $curso->id_curso;?>" data-ref="noone" data-kid-directed-site="false" data-share="false"></div>
+                            <div class="fb-share-button" style="float: left;"
+                     data-href="http://tcc-voluntario.rhcloud.com/pesquisa_curso/curso/<?php echo $curso->id_curso;?>" data-layout="button">
+                        </div>
                         </div> 
                         <br /><br />
                         <div>

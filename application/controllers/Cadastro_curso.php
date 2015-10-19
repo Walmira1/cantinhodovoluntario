@@ -23,9 +23,9 @@ class Cadastro_curso extends CI_Controller {
 		$mensagem = "Curso cadastrado com Sucesso";
                 
                 $id_entidade = $this->session->userdata('id_entidade');
-                $data['entidade'] = $this->entidade->get_id($id_entidade)->row();
+                $data['entidade'] = $this->entidade->get_id($id_entidade);
                 $data['cursos'] = $this->curso->get_curso_by_entidade_id_entidade($id_entidade); 
-                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();
+                $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade);
         //           $data['msg'] = "Curso Cadastrado com Sucesso";
         //           $this->load->view('includes/msg_sucesso',$data); 
                 if($id_entidade==2){

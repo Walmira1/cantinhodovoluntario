@@ -13,7 +13,8 @@
 	
         <link href="<?= base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet">
-
+        <link href="<?= base_url(); ?>assets/css/tablesaw.css" rel="stylesheet">
+        
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -27,6 +28,7 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.png">
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= base_url(); ?>assets/js/tablesaw.js"></script>
     <script src="<?= base_url(); ?>assets/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
         function confirma() {
