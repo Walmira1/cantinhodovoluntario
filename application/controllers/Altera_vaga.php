@@ -38,47 +38,40 @@ class Altera_vaga extends CI_Controller {
             $alerta = NULL;
             $cod_mensagem = null;
             $mensagem = null;
-            if ($id_vaga != null){
+            if ($id_vaga != NULL){
                 $query = $this->vaga->select_vaga($id_vaga) ;
                 if ($query->num_rows() == 1){
                     $data['vaga'] = $query->row(0,'vaga') ;
+         //           var_dump($data['vagas']);
+        //        exit;
+                    $id_entidade = $data['vaga']->entidade_id_entidade;
+                    $tabela = 1;
+                    $query = $this->turno->select_turno_vaga($id_vaga,$tabela);
+            
+                    if ($query->num_rows() > 0){
+                        $data['turno'] = $query->result();
+           //     var_dump($data['turno']);
+           //     exit;
+                    }else{
+                         $data['turno'] = NULL;
+                    }
+                    $query = $this->entidade->get_id($id_entidade);
+                    if ($query->num_rows() == 1){
+                        $data['entidade'] = $query->row(0,'entidade') ;
+                    }
+                    $data['sum_vaga'] = $this->vaga->select_sum_vaga($id_entidade)->row();  
+             //var_dump($data['sum_vaga']);
+             //exit;
                 }else {
                     $alerta = array(
                           "class"=>"danger",
                             "mensagem" => "Vaga não identificada <br>" 
                              );
                     $data['alerta'] =  $alerta;
-                    $this->load->view('includes/html_header');
-                    $this->load->view('includes/html_menu_entidade');
-                    $this->load->view('alterar_vaga',$data);
-                    $this->load->view('includes/html_rodape_entidade');
+                    // ver depois erro;
+                   
                 }
-            }else{
-                $alerta = array(
-                          "class"=>"danger",
-                            "mensagem" => "Vaga não identificada <br>" 
-                             );
-            } 
-            $tabela = 1;
-            $query = $this->turno->select_turno_vaga($id_vaga,$tabela);
-            
-            if ($query->num_rows() > 0){
-            /*    foreach ($turno as $turno){
-                    $dados = array(
-                            'id_entidade' => $query->id_entidade,
-                            'logotipo_entidade' => $query->logotipo_entidade,
-                            'upload_foto' => $query->upload_foto,
-                            'site_entidade' => $query->site_entidade,
-                            'user_nome' => $query->nome,
-                            'user_logado' => TRUE
-                           
-                        );
-                }*/
-                $data['turno'] = $query->result();
-           //     var_dump($data['turno']);
-           //     exit;
-            }else{
-                $data['turno'] = NULL;
+                
             }
             $data['alerta'] =  $alerta;
             $data['cod_mensagem'] =  $cod_mensagem;

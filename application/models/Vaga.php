@@ -52,7 +52,7 @@ class Vaga extends CI_Model {
         }
     }
      public function get_atividade($id_area=NULL,$id_atividade_projeto=NULL){
-        if ($id_area != NULL){
+        if (($id_area != NULL)&&($id_atividade_projeto !=NULL)){
             $this->db->where('id_area', $id_area);
             $this->db->where('id_atividade_projeto', $id_atividade_projeto);
             $query = $this->db->get('atividade');
@@ -124,14 +124,20 @@ class Vaga extends CI_Model {
         }
         
     }
-    public function select_vaga($id_vaga=NULL){
+     public function select_vaga($id_vaga=NULL){
         //Busca com condição
+		echo "id-vaga = ".$id_vaga;
         if ($id_vaga != NULL){
+			$this->db->select('*');
             $this->db->where('id_vaga', $id_vaga);
-            return  $this->db->get('vaga');
-        }
-        
-    }
+			$query = $this->db->get('vaga')->result();
+			var_dump($query);
+            return  $query;
+			
+        }else{
+			return FALSE;
+		}
+     }
     public function select_all_vaga(){
         //Busca sem condição
         $this->db->select('vaga.id_vaga, vaga.vaga_de, vaga.entidade_id_entidade, entidade.logotipo_entidade, entidade.nome, entidade.endereco,entidade.site_entidade,entidade.cidade');
